@@ -72,20 +72,24 @@ public class CardController : MonoBehaviour
     {
         if (cardName == "Slash")
         {
-            Enemy.Health -= cardPower;
-            Debug.Log("You dealt " + cardPower + " damage");
+            float damageToDeal = cardPower - Enemy.Shield;
+            if (damageToDeal < 0) { damageToDeal = 0; }
+            Enemy.Health -= damageToDeal; 
+            Debug.Log("You dealt " + damageToDeal + " damage");
             Debug.Log("The enemy now has " + Enemy.Health + " health");
         }
-        else if (cardName == "Block")
+        if (cardName == "Block")
         {
             Player.Shield += cardPower;
             Debug.Log("You shielded for " + cardPower);
         }
-        else if (cardName == "Siphon")
+        if (cardName == "Siphon")
         {
-            Enemy.Health -= cardPower;
+            float damageToDeal = cardPower - Enemy.Shield;
+            if (damageToDeal < 0) { damageToDeal = 0; }
+            Enemy.Health -= damageToDeal;
             Player.Health += cardPower;
-            Debug.Log("You dealt " + cardPower + " damage");
+            Debug.Log("You dealt " + damageToDeal + " damage");
             Debug.Log("The enemy now has " + Enemy.Health + " health");
             Debug.Log("You healed for " + cardPower + " health");
         }

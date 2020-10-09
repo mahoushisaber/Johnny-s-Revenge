@@ -54,6 +54,7 @@ public class EnemyController : MonoBehaviour
 
         if (EnemyTurn)
         {
+            this.Shield = 0;
             var cardToUse = EnemyDeck.deck[0].cardName;
             Debug.Log("Card to use = " + cardToUse);
             int cardPower = EnemyDeck.deck[0].power;
@@ -88,6 +89,7 @@ public class EnemyController : MonoBehaviour
                 PlayerDeck.initialDraw();
             }
             EnemyTurn = false;
+            Player.Shield = 0;
             }
     }
 }
