@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfItem: 0
+  Hand: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1045,7 @@ MonoBehaviour:
   x: 0
   deckSize: 0
   EnemyHand: {fileID: 1597341335}
-  cardPrefab: {fileID: 7728109489979733833, guid: ae3aed3bdb62e124f856c7ebd43a03f3, type: 3}
+  cardPrefab: {fileID: 1319549070741509351, guid: 42916b0717c81d6469f9a11f95b547af, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,13 +1122,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1098271223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1098271224}
   - component: {fileID: 1098271225}
+  - component: {fileID: 1098271226}
   m_Layer: 0
   m_Name: CardDB
   m_TagString: Untagged
@@ -1169,6 +1171,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a0f2018794339e4c9e1646074172da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1098271226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098271223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752a5823a1c179545ab5f4f6faf287b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1279277755
@@ -1223,6 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfItem: 0
+  Hand: {fileID: 0}
 --- !u!114 &1279277758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,7 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.27305093, g: 0.3055315, b: 0.9811321, a: 0.392}
+  m_Color: {r: 0.9433962, g: 0.08737757, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1272,13 +1287,13 @@ MonoBehaviour:
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
-  m_FillCenter: 1
+  m_FillCenter: 0
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.8
 --- !u!222 &1279277760
 CanvasRenderer:
   m_ObjectHideFlags: 0

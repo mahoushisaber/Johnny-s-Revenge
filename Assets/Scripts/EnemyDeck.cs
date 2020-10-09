@@ -29,7 +29,7 @@ public class EnemyDeck : MonoBehaviour
         for (int i = 0; i < deckSize; i++)
         {
             x = Random.Range(1, 4);
-            deck.Insert(i, CardDB.cardList[x]);
+            deck.Insert(i, EnemyCardDB.cardList[x]);
         }
     }
 
@@ -39,13 +39,16 @@ public class EnemyDeck : MonoBehaviour
         {
             var drawnCard = Instantiate(cardPrefab, EnemyHand.transform.position, Quaternion.identity);
             drawnCard.transform.SetParent(EnemyHand.transform);
-            drawnCard.GetComponent<CardController>().thisId = deck[i].id;
-            drawnCard.GetComponent<CardController>().id = deck[i].id;
-            drawnCard.GetComponent<CardController>().cardName = deck[i].cardName;
-            drawnCard.GetComponent<CardController>().cardDescription = deck[i].cardDescription;
-            drawnCard.GetComponent<CardController>().power = deck[i].power;
-            drawnCard.GetComponent<CardController>().enhanced = deck[i].enhanced;
-            Debug.Log("Just drew a " + drawnCard.GetComponent<CardController>().cardName);
+            drawnCard.GetComponent<EnemyCardController>().thisId = deck[i].id;
+            drawnCard.GetComponent<EnemyCardController>().id = deck[i].id;
+            drawnCard.GetComponent<EnemyCardController>().cardName = deck[i].cardName;
+            Debug.Log("SET NAME TO " + deck[i].cardName);
+            drawnCard.GetComponent<EnemyCardController>().cardDescription = deck[i].cardDescription;
+            drawnCard.GetComponent<EnemyCardController>().power = deck[i].power;
+            drawnCard.GetComponent<EnemyCardController>().enhanced = deck[i].enhanced;
+            drawnCard.gameObject.name = deck[i].cardName;
+            Debug.Log("Enemy just drew a " + drawnCard.GetComponent<EnemyCardController>().cardName);
+
         }
 
         if (deck.Count > 0 && removeFirst)

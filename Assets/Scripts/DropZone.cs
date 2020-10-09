@@ -6,10 +6,17 @@ using UnityEngine.EventSystems;
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Draggable.Slot typeOfItem = Draggable.Slot.UNIT;
+    public GameObject Hand; 
     CardController Card;
     EnemyController Enemy;
     PlayerController Player;
     PlayerDeck PlayerDeck;
+
+    public void Start()
+    {
+        Hand = GameObject.Find("Hand");
+    }
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Debug.Log("OnPointerEnter");
@@ -50,9 +57,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 return;
             }
 
-            string usedCard = eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName;
-            int cardPower = eventData.pointerDrag.gameObject.GetComponent<CardController>().power;
-
             Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName);
 
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
@@ -62,22 +66,18 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     d.parentToReturnTo = this.transform;
                 }
 
-            if (usedCard == "Slash")
+            string cardToUse = eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName;
+            int cardPower = eventData.pointerDrag.gameObject.GetComponent<CardController>().power;
+            Card.PlayCard(cardToUse, cardPower); 
+
+            foreach (Transform t in Hand.transform)
             {
-                Enemy.Health -= cardPower;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-            } else if (usedCard == "Block")
-            {
-                Player.Shield += cardPower;
-                Debug.Log("You shielded for " + cardPower);
-            } else if (usedCard == "Siphon")
-            {
-                Enemy.Health -= cardPower;
-                Player.Health += cardPower;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-                Debug.Log("You healed for " + cardPower + " health");
+                Debug.Log(t.name); 
+                if (t.name == "New Game Object")
+                {
+                    Destroy(t.gameObject);
+                    Debug.Log("REMOVED EMPTY GAME OBJECT");
+                }
             }
             Enemy.EnemyTurn = true;
             Destroy(eventData.pointerDrag.gameObject);

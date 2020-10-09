@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; 
+using UnityEngine.EventSystems;
 
-public class CardController : MonoBehaviour
+public class EnemyCardController : MonoBehaviour
 {
     public List<Card> thisCard = new List<Card>();
     public int thisId;
@@ -25,7 +25,7 @@ public class CardController : MonoBehaviour
     PlayerController Player;
     private void Start()
     {
-        thisCard[0] = CardDB.cardList[thisId];
+        thisCard[0] = EnemyCardDB.cardList[thisId];
         Enemy = FindObjectOfType<EnemyController>();
         Player = FindObjectOfType<PlayerController>();
     }
@@ -39,12 +39,12 @@ public class CardController : MonoBehaviour
 
         nameText.text = "" + cardName;
         powerText.text = "" + power;
-        descriptionText.text = "" + cardDescription; 
+        descriptionText.text = "" + cardDescription;
 
-        if(thisCard[0].colour == "Red")
+        if (thisCard[0].colour == "Red")
         {
             cardColour.GetComponent<Image>().color = new Color32(115, 15, 45, 255);
-        } 
+        }
         if (thisCard[0].colour == "Blue")
         {
             cardColour.GetComponent<Image>().color = new Color32(25, 90, 140, 255);
@@ -70,24 +70,24 @@ public class CardController : MonoBehaviour
 
     public void PlayCard(string cardName, int cardPower)
     {
-        if (cardName == "Slash")
+        if (cardName == "Slap")
         {
-            Enemy.Health -= cardPower;
-            Debug.Log("You dealt " + cardPower + " damage");
-            Debug.Log("The enemy now has " + Enemy.Health + " health");
+            Player.Health -= cardPower;
+            Debug.Log("Enemy dealt " + cardPower + " damage");
+            //Debug.Log("You have " + Player.Health + " health remaining");
         }
         else if (cardName == "Block")
         {
-            Player.Shield += cardPower;
-            Debug.Log("You shielded for " + cardPower);
+            Enemy.Shield += cardPower;
+            Debug.Log("Enemy shielded for " + cardPower);
         }
-        else if (cardName == "Siphon")
+        else if (cardName == "Drain")
         {
-            Enemy.Health -= cardPower;
-            Player.Health += cardPower;
-            Debug.Log("You dealt " + cardPower + " damage");
-            Debug.Log("The enemy now has " + Enemy.Health + " health");
-            Debug.Log("You healed for " + cardPower + " health");
+            Player.Health -= cardPower;
+            Enemy.Health += cardPower;
+            Debug.Log("Enemy dealt " + cardPower + " damage");
+            //Debug.Log("You have " + Player.Health + " health remaining");
+            Debug.Log("Enemy healed " + cardPower + " health");
         }
     }
 }

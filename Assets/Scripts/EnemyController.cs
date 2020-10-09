@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     PlayerController Player;
     PlayerDeck PlayerDeck;
     EnemyDeck EnemyDeck;
+    EnemyCardController EnemyCard;
     public GameObject EnemyHand;
     void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
         EnemyDeck = FindObjectOfType<EnemyDeck>();
         EnemyHand = GameObject.Find("Enemy Hand");
         EnemyDeck.drawCard(1, false);
+        EnemyCard = FindObjectOfType<EnemyCardController>();
     }
 
     void Update()
@@ -52,36 +54,24 @@ public class EnemyController : MonoBehaviour
 
         if (EnemyTurn)
         {
-            if (EnemyDeck.deck.Count <= 0)
-            {
-                EnemyDeck.createDeck();
-            }
-
             var cardToUse = EnemyDeck.deck[0].cardName;
             Debug.Log("Card to use = " + cardToUse);
             int cardPower = EnemyDeck.deck[0].power;
 
-            if (cardToUse == "Slash")
+            EnemyCard.PlayCard(cardToUse, cardPower);
+
+            EnemyDeck.deck.RemoveAt(0);
+
+            if (EnemyDeck.deck.Count == 0)
             {
-                Player.Health -= cardPower;
-                Debug.Log("Enemy dealt " + cardPower + " damage");
-                Debug.Log("You have " + Player.Health + " health remaining");
-            }
-            else if (cardToUse == "Block")
+                Destroy(EnemyHand.transform.GetChild(0).gameObject);
+                EnemyDeck.createDeck();
+                EnemyDeck.drawCard(1, false);
+            } else if (EnemyDeck.deck.Count > 0)
             {
-                this.Shield += cardPower;
-                Debug.Log("Enemy shielded for " + cardPower);
+                Destroy(EnemyHand.transform.GetChild(0).gameObject);
+                EnemyDeck.drawCard(1, false);
             }
-            else if (cardToUse == "Siphon")
-            {
-                Player.Health -= cardPower;
-                this.Health += cardPower;
-                Debug.Log("Enemy dealt " + cardPower + " damage");
-                Debug.Log("You have " + Player.Health + " health remaining");
-                Debug.Log("Enemy healed " + cardPower + " health");
-            }
-            EnemyDeck.drawCard(1, true);
-            Destroy(EnemyHand.transform.GetChild(0).gameObject);
 
             /*if (Player.Health <= 0)
             {
