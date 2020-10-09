@@ -57,13 +57,7 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
                 return;
             }
 
-            string usedCard = eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName;
             eventData.pointerDrag.gameObject.GetComponent<CardController>().enhanced = true;
-            int cardPower = eventData.pointerDrag.gameObject.GetComponent<CardController>().power;
-            cardPower *= 2;
-            Debug.Log("Card Enhanced, New Power = " + cardPower);
-
-            Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName);
 
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
             if (d != null)
@@ -72,28 +66,12 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
                     d.parentToReturnTo = this.transform;
                 }
 
-            if (usedCard == "Slash")
-            {
-                Enemy.Health -= cardPower;
-                Player.Mana -= 25;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-            }
-            else if (usedCard == "Block")
-            {
-                Player.Shield += cardPower;
-                Player.Mana -= 25;
-                Debug.Log("You shielded for " + cardPower);
-            }
-            else if (usedCard == "Siphon")
-            {
-                Enemy.Health -= cardPower;
-                Player.Health += cardPower;
-                Player.Mana -= 25;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-                Debug.Log("You healed for " + cardPower + " health");
-            }
+            string cardToUse = eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName;
+            int cardPower = eventData.pointerDrag.gameObject.GetComponent<CardController>().power;
+            Card.PlayCard(cardToUse, cardPower*2);
+            Player.Mana -= 25;
+
+            Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName);
             Enemy.EnemyTurn = true;
             Destroy(eventData.pointerDrag.gameObject);
         }
