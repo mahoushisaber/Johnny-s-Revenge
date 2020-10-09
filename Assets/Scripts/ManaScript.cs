@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ManaScript : MonoBehaviour
 {
     private Image ManaBar;
+    public Text ManaText;
     public float CurrentMana;
     PlayerController Player;
 
@@ -19,6 +20,6 @@ public class ManaScript : MonoBehaviour
     {
         CurrentMana = Player.Mana;
         ManaBar.fillAmount = CurrentMana / Player.MaxMana;
-            ;
+        ManaText.text = "" + CurrentMana + "/" + Player.MaxMana;
     }
 }

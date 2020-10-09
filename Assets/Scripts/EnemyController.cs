@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if (Health > MaxHealth) { Health = MaxHealth; }
         if (Health <= 0)
         {
             if (Player.CurrentStage == 3)
