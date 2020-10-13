@@ -5,15 +5,11 @@ using UnityEngine.EventSystems;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Draggable.Slot typeOfItem = Draggable.Slot.UNIT;
-    CardController Card;
-    EnemyController Enemy;
-    PlayerController Player;
-    PlayerDeck PlayerDeck;
+    public Draggable.Slot typeOfItem = Draggable.Slot.BATTLE;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Debug.Log("OnPointerEnter");
-        Card = FindObjectOfType<CardController>(); 
         if (eventData.pointerDrag == null)
             return; 
        
@@ -38,49 +34,21 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(eventData.pointerCurrentRaycast.gameObject.name == "Drop Zone")
+        if(eventData.pointerCurrentRaycast.gameObject.name == "Battle Drop Zone")
         {
-            Enemy = FindObjectOfType<EnemyController>();
-            Player = FindObjectOfType<PlayerController>();
-            PlayerDeck = FindObjectOfType<PlayerDeck>();
-
-            if (Enemy.EnemyTurn)
-            {
-                Debug.Log("Cannot play cards during the enemy's turn");
-                return;
-            }
-
-            string usedCard = eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName;
-            int cardPower = eventData.pointerDrag.gameObject.GetComponent<CardController>().power;
-
-            Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().cardName);
-
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
             if (d != null)
-                if (typeOfItem == d.typeOfItem)
+                if (d.typeOfItem == Draggable.Slot.ANY || typeOfItem == d.typeOfItem)
                 {
-                    d.parentToReturnTo = this.transform;
-                }
+                    GameController GCtrl = FindObjectOfType<GameController>();
 
-            if (usedCard == "Slash")
-            {
-                Enemy.Health -= cardPower;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-            } else if (usedCard == "Block")
-            {
-                Player.Shield += cardPower;
-                Debug.Log("You shielded for " + cardPower);
-            } else if (usedCard == "Siphon")
-            {
-                Enemy.Health -= cardPower;
-                Player.Health += cardPower;
-                Debug.Log("You dealt " + cardPower + " damage");
-                Debug.Log("The enemy now has " + Enemy.Health + " health");
-                Debug.Log("You healed for " + cardPower + " health");
-            }
-            Enemy.EnemyTurn = true;
-            Destroy(eventData.pointerDrag.gameObject);
-        } 
+                    if (GCtrl != null && GCtrl.CanDropPlayerCard(typeOfItem))
+                    {
+                        d.parentToReturnTo = this.transform;
+
+                        Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().CardName);
+                    }
+                }
+        }
     }
 }

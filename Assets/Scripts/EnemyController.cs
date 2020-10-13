@@ -1,103 +1,114 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
-
-    public float Health = 30f;
-    public float MaxHealth = 30f;
-    public float Shield = 0;
-    public bool EnemyTurn = false;
-    PlayerController Player;
-    PlayerDeck PlayerDeck;
+    public float Health;
+    public float MaxHealth;
+    public float Shield;
+    public bool IsTurn = false;
     EnemyDeck EnemyDeck;
     public GameObject EnemyHand;
+    public GameObject BattleZone;
+
+
     void Start()
     {
         Health = MaxHealth;
-        Player = FindObjectOfType<PlayerController>();
-        PlayerDeck = FindObjectOfType<PlayerDeck>();
+        if (EnemyHand == null)
+        {
+            EnemyHand = GameObject.Find("Enemy Hand");
+        }
         EnemyDeck = FindObjectOfType<EnemyDeck>();
-        EnemyHand = GameObject.Find("Enemy Hand");
-        EnemyDeck.drawCard(1, false);
+        EnemyDeck.DrawCard(1);
     }
 
     void Update()
     {
-        if (Health <= 0)
+        // Any animations or other stuff specific to Enemy controller
+        ;
+    }
+
+    public void Died()
+    {
+        MaxHealth *= 1.5f;
+        Health = MaxHealth;
+        IsTurn = false;
+    }
+
+    public void StartTurn()
+    {
+        IsTurn = EnemyDeck.PlayCard(1, BattleZone); 
+    }
+
+    public void EndTurn()
+    {
+        if (EnemyDeck.deck.Count <= 0)
         {
-            if (Player.CurrentStage == 3)
+            EnemyDeck.CreateDeck();
+        }
+
+        // TODO : Don't draw card if one already there!
+        EnemyDeck.DrawCard(1);
+
+        IsTurn = false;
+    }
+
+    public float StartBattle(float playerHealth)
+    {
+        CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
+
+        foreach (CardController UI_card in UI_Cards)
+        {
+            if (UI_card.ThisCard.cardOwner == Card.OwnerType.ENEMY)
             {
-                SceneManager.LoadScene("Menu");
-            } else
-            {
-                Player.CurrentStage += 1;
-                MaxHealth *= 1.5f;
-                Health = MaxHealth;
-                EnemyTurn = false;
-                if (Player.cardsInDeck > 0)
+                var cardToUse = UI_card.CardName;
+                Debug.Log("Card to use = " + cardToUse);
+                int cardPower = UI_card.Power;
+
+                if (cardToUse == "Slash")
                 {
-                    PlayerDeck.drawCard(1);
+                    playerHealth -= cardPower;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
                 }
-                if (Player.cardsInHand == 0)
+                else if (cardToUse == "Block")
                 {
-                    PlayerDeck.createDeck();
-                    PlayerDeck.initialDraw();
+                    Shield += cardPower;
+                    Debug.Log("Enemy shielded for " + cardPower);
                 }
-                return;
+                else if (cardToUse == "Siphon")
+                {
+                    playerHealth -= cardPower;
+                    Health += cardPower;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
+                    Debug.Log("Enemy healed " + cardPower + " health");
+                }
+                else
+                {
+                    Debug.Log("EnemyController: Can't find a battle tactic to match " + cardToUse + " played");
+                }
             }
         }
 
-        if (EnemyTurn)
+        return playerHealth;
+    }
+
+    public void EndBattle()
+    {
+        // Destroy all enemy owned cards from battle zone
+        CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
+
+        foreach (CardController UI_card in UI_Cards)
         {
-            if (EnemyDeck.deck.Count <= 0)
+            if (UI_card.ThisCard.cardOwner == Card.OwnerType.ENEMY)
             {
-                EnemyDeck.createDeck();
+                Destroy(UI_card.gameObject);
             }
-
-            var cardToUse = EnemyDeck.deck[0].cardName;
-            Debug.Log("Card to use = " + cardToUse);
-            int cardPower = EnemyDeck.deck[0].power;
-
-            if (cardToUse == "Slash")
-            {
-                Player.Health -= cardPower;
-                Debug.Log("Enemy dealt " + cardPower + " damage");
-                Debug.Log("You have " + Player.Health + " health remaining");
-            }
-            else if (cardToUse == "Block")
-            {
-                this.Shield += cardPower;
-                Debug.Log("Enemy shielded for " + cardPower);
-            }
-            else if (cardToUse == "Siphon")
-            {
-                Player.Health -= cardPower;
-                this.Health += cardPower;
-                Debug.Log("Enemy dealt " + cardPower + " damage");
-                Debug.Log("You have " + Player.Health + " health remaining");
-                Debug.Log("Enemy healed " + cardPower + " health");
-            }
-            EnemyDeck.drawCard(1, true);
-            Destroy(EnemyHand.transform.GetChild(0).gameObject);
-
-            /*if (Player.Health <= 0)
-            {
-                SceneManager.LoadScene("Menu");
-            }*/
-
-            if (Player.cardsInDeck > 0)
-            {
-                PlayerDeck.drawCard(1);
-            }
-            if (Player.cardsInHand == 0)
-            {
-                PlayerDeck.createDeck();
-                PlayerDeck.initialDraw();
-            }
-            EnemyTurn = false;
-            }
+        }
     }
 }

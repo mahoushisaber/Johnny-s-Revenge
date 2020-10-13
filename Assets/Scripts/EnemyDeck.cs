@@ -15,13 +15,16 @@ public class EnemyDeck : MonoBehaviour
 
     private void Start()
     {
-        EnemyHand = GameObject.Find("Enemy Hand");
+        if (EnemyHand == null)
+        {
+            EnemyHand = GameObject.Find("Enemy Hand");
+        }
         deck.Clear();
-        createDeck();
+        CreateDeck();
     }
 
 
-    public void createDeck()
+    public void CreateDeck()
     {
         x = 0;
         deckSize = 20;
@@ -29,28 +32,58 @@ public class EnemyDeck : MonoBehaviour
         for (int i = 0; i < deckSize; i++)
         {
             x = Random.Range(1, 4);
-            deck.Insert(i, CardDB.cardList[x]);
+
+            Card deckCard = CardDB.cardList[x];
+            deckCard.cardOwner = Card.OwnerType.ENEMY;
+            deck.Insert(i, deckCard);
         }
     }
 
-    public void drawCard(int amount, bool removeFirst)
+    public void DrawCard(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
             var drawnCard = Instantiate(cardPrefab, EnemyHand.transform.position, Quaternion.identity);
             drawnCard.transform.SetParent(EnemyHand.transform);
-            drawnCard.GetComponent<CardController>().thisId = deck[i].id;
-            drawnCard.GetComponent<CardController>().id = deck[i].id;
-            drawnCard.GetComponent<CardController>().cardName = deck[i].cardName;
-            drawnCard.GetComponent<CardController>().cardDescription = deck[i].cardDescription;
-            drawnCard.GetComponent<CardController>().power = deck[i].power;
-            drawnCard.GetComponent<CardController>().enhanced = deck[i].enhanced;
-            Debug.Log("Just drew a " + drawnCard.GetComponent<CardController>().cardName);
+
+            CardController UI_Card = drawnCard.GetComponent<CardController>();
+            UI_Card.ThisCard.cardDescription = deck[0].cardDescription;
+            UI_Card.ThisCard.cardName = deck[0].cardName;
+            UI_Card.ThisCard.cardOwner = Card.OwnerType.ENEMY;
+            UI_Card.ThisCard.colour = deck[0].colour;
+            UI_Card.ThisCard.enhanced = deck[0].enhanced;
+            UI_Card.ThisCard.id = deck[0].id;
+            UI_Card.ThisCard.power = deck[0].power;
+            UI_Card.ThisId = deck[0].id;
+            UI_Card.Id = deck[0].id;
+            UI_Card.CardName = deck[0].cardName;
+            UI_Card.CardDescription = deck[0].cardDescription;
+            UI_Card.Power = deck[0].power;
+            UI_Card.Enhanced = deck[0].enhanced;
+            Debug.Log("Enemy drew a " + UI_Card.CardName);
         }
 
-        if (deck.Count > 0 && removeFirst)
+        if (deck.Count > 0)
         {
             deck.RemoveAt(0);
         }
+    }
+
+    public bool PlayCard( int handPostion, GameObject newParent)
+    {
+        bool result = false;
+        CardController[] UI_Cards = EnemyHand.gameObject.transform.GetComponentsInChildren<CardController>();
+
+        // Valid deck card position and new parent?
+        if (handPostion > 0 && handPostion <= UI_Cards.Length && newParent != null)
+        {
+            // Cards are always in order of add so Move the card to parent
+            UI_Cards[handPostion - 1].transform.SetParent(newParent.transform);
+            result = true;
+        }
+        
+        Debug.Log(result?"Success:":"Failed" + "Playing an Enemy Card from Enemy Hand");
+        
+        return result;
     }
 }

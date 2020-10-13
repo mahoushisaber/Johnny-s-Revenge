@@ -11,11 +11,14 @@ public class Card
     public string cardDescription;
     public bool enhanced;
 
+    public enum OwnerType { UNKNOWN, ENEMY, PLAYER };
+    public OwnerType cardOwner;
+
     public string colour;
 
     public Card()
     {
-
+        cardOwner = OwnerType.UNKNOWN;
     }
 
     public Card(int Id, string CardName, int Power, string CardDescription, bool Enhanced, string Colour)
@@ -25,6 +28,8 @@ public class Card
         power = Power;
         cardDescription = CardDescription;
         enhanced = Enhanced;
+        
+        cardOwner = OwnerType.UNKNOWN;
 
         colour = Colour;
     }

@@ -5,32 +5,121 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Health = 100f;
-    public float Shield = 0;
-    public float Mana = 100f;
-    public float MaxHealth = 100f;
-    public float MaxMana = 100f;
+    public float Health;
+    public float Shield;
+    public float Mana;
+    public float MaxHealth;
+    public float MaxMana;
+    public float ManaUseCost;
     public int cardsInDeck;
     public int cardsInHand;
-    public int CurrentStage = 1;
-    public Text StageText;
     public GameObject Hand;
+    public GameObject BattleZone;
 
     PlayerDeck PlayerDeck;
+
     void Start()
     {
-        Hand = GameObject.Find("Hand");
+        if (Hand == null)
+        {
+            Hand = GameObject.Find("Hand");
+        }
         PlayerDeck = FindObjectOfType<PlayerDeck>();
         Health = MaxHealth;
         Mana = MaxMana;
         cardsInDeck = PlayerDeck.deck.Count;
-        CurrentStage = 1;
     }
 
     void Update()
     {
         cardsInHand = Hand.transform.childCount;
         cardsInDeck = PlayerDeck.deck.Count;
-        StageText.text = "Stage: " + CurrentStage.ToString();
+    }
+
+    public void Died()
+    {
+        Health = MaxHealth;
+    }
+
+    public void EndTurn()
+    {
+        if (cardsInDeck > 0)
+        {
+            PlayerDeck.DrawCard(1);
+        }
+
+        if (cardsInHand == 0)
+        {
+            PlayerDeck.CreateDeck();
+            PlayerDeck.InitialDraw();
+        }
+    }
+    public float StartBattle(float enemyHealth)
+    {
+        CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
+
+        foreach (CardController UI_card in UI_Cards)
+        {
+            if (UI_card.ThisCard.cardOwner == Card.OwnerType.PLAYER)
+            {
+                var cardToUse = UI_card.CardName;
+                int cardPower = UI_card.Power;
+
+                if (UI_card.Enhanced)
+                {
+                    Mana -= ManaUseCost;
+                    Debug.Log("Card to use " + cardToUse + " is Enhanced, New Power is " + cardPower);
+                }
+                else
+                {
+                    Debug.Log("Card to use = " + cardToUse);
+                }
+
+                if (cardToUse == "Slash")
+                {
+                    enemyHealth -= cardPower;
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("Enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Block")
+                {
+                    Shield += cardPower;
+                    Debug.Log("You shielded for " + cardPower);
+                }
+                else if (cardToUse == "Siphon")
+                {
+                    enemyHealth -= cardPower;
+                    Health += cardPower;
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("The enemy now has " + enemyHealth + " health remaining");
+                    Debug.Log("You healed for" + cardPower + " health");
+                }
+                else
+                {
+                    // Can't find a battle tactic so card no used so restore mana we took away
+                    if (UI_card.Enhanced)
+                    {
+                        Mana += ManaUseCost;
+                    }
+                    Debug.Log("PlayerController: Can't find a battle tactic to match " + cardToUse + " played");
+                }
+            }
+        }
+
+        return enemyHealth;
+    }
+
+    public void EndBattle()
+    {
+        // Destroy all player owned cards from battle zone
+        CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
+
+        foreach (CardController UI_card in UI_Cards)
+        {
+            if (UI_card.ThisCard.cardOwner == Card.OwnerType.PLAYER)
+            {
+                Destroy(UI_card.gameObject);
+            }
+        }
     }
 }

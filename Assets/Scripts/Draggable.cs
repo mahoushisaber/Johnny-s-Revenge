@@ -12,8 +12,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     GameObject placeholder = null; 
 
-    public enum Slot { UNIT, SPELL };
-    public Slot typeOfItem = Slot.UNIT; 
+    public enum Slot { ANY, BATTLE, MANA };
+    public Slot typeOfItem = Slot.ANY; 
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("OnBeginDrag");
