@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5f1601ff22ba9489b0eebba90a1468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visible: 1
+  visible: 0
   flashInSecs: 0.75
   zoomInSecs: 0
   zoomScale: 0

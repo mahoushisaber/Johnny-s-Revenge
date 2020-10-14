@@ -7,11 +7,10 @@ public class EnemyDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
 
-    public int x;
     public int deckSize;
-
     public GameObject EnemyHand;
     public GameObject cardPrefab;
+
 
     private void Start()
     {
@@ -26,12 +25,12 @@ public class EnemyDeck : MonoBehaviour
 
     public void CreateDeck()
     {
-        x = 0;
-        deckSize = 20;
+        int x = 0;
+        int randomCeiling = CardDB.cardList.Count;
 
         for (int i = 0; i < deckSize; i++)
         {
-            x = Random.Range(1, 4);
+            x = Random.Range(1, randomCeiling);
 
             Card deckCard = CardDB.cardList[x];
             deckCard.cardOwner = Card.OwnerType.ENEMY;

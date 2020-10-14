@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     public GameObject Hand;
     public GameObject BattleZone;
 
-    PlayerDeck PlayerDeck;
+    private PlayerDeck PlayerDeck;
+    private float shieldAfterBattle = 0f;
 
     void Start()
     {
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
             PlayerDeck.InitialDraw();
         }
     }
-    public float StartBattle(float enemyHealth)
+    public float StartBattle(float enemyHealth, ref float enemyShield)
     {
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
 
@@ -64,6 +65,17 @@ public class PlayerController : MonoBehaviour
             {
                 var cardToUse = UI_card.CardName;
                 int cardPower = UI_card.Power;
+
+                // Copy over our plyare shield to use and clear the playerShield as it gets used up
+                float useEnemyShield = enemyShield;
+                enemyShield = 0;
+
+                // Is the player shield to use greater than card power?
+                if (useEnemyShield.CompareTo(cardPower) > 0)
+                {
+                    // Have to reduce the shield so it can only use as much as the card power
+                    useEnemyShield = cardPower;
+                }
 
                 if (UI_card.Enhanced)
                 {
@@ -77,18 +89,18 @@ public class PlayerController : MonoBehaviour
 
                 if (cardToUse == "Slash")
                 {
-                    enemyHealth -= cardPower;
+                    enemyHealth -= cardPower - useEnemyShield;
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
                 }
                 else if (cardToUse == "Block")
                 {
-                    Shield += cardPower;
+                    shieldAfterBattle += cardPower;
                     Debug.Log("You shielded for " + cardPower);
                 }
                 else if (cardToUse == "Siphon")
                 {
-                    enemyHealth -= cardPower;
+                    enemyHealth -= cardPower - useEnemyShield;
                     Health += cardPower;
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("The enemy now has " + enemyHealth + " health remaining");
@@ -111,6 +123,10 @@ public class PlayerController : MonoBehaviour
 
     public void EndBattle()
     {
+        // Update the Shield with earnings from battle to apply on next turn
+        Shield += shieldAfterBattle;
+        shieldAfterBattle = 0f;
+
         // Destroy all player owned cards from battle zone
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
 

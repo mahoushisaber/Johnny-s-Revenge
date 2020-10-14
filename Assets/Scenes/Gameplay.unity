@@ -1032,7 +1032,6 @@ MonoBehaviour:
     cardOwner: 0
     colour: 
   storeDeck: []
-  x: 0
   deckSize: 20
   PlayerHand: {fileID: 573388320}
   cardPrefab: {fileID: 7728109489979733833, guid: ae3aed3bdb62e124f856c7ebd43a03f3, type: 3}
@@ -1063,8 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck: []
-  x: 0
-  deckSize: 0
+  deckSize: 20
   EnemyHand: {fileID: 1597341335}
   cardPrefab: {fileID: 7728109489979733833, guid: ae3aed3bdb62e124f856c7ebd43a03f3, type: 3}
 --- !u!1 &963194225
@@ -1663,8 +1661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8358fd7c18265e40b1e205ee709bdb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 50
-  MaxHealth: 50
+  Health: 40
+  MaxHealth: 40
   Shield: 0
   IsTurn: 0
   EnemyHand: {fileID: 1597341335}

@@ -23,10 +23,7 @@ public class CardController : MonoBehaviour
 
     private void Start()
     {
-        // The owner of card was assigned during the creation so save and restore during load of defaults
-//        Card.OwnerType cardOwner = ThisCard.cardOwner;
-//        ThisCard = CardDB.cardList[ThisId];
-//        ThisCard.cardOwner = cardOwner;
+        ;
     }
 
     private void Update()

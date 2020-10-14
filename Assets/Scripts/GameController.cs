@@ -128,8 +128,8 @@ public class GameController : MonoBehaviour
     void Execute_Battle()
     {
         // Start the card battle by analyzing who won and apply results
-        Player.Health = Enemy.StartBattle(Player.Health);
-        Enemy.Health = Player.StartBattle(Enemy.Health);
+        Player.Health = Enemy.StartBattle(Player.Health, ref Player.Shield);
+        Enemy.Health = Player.StartBattle(Enemy.Health, ref Enemy.Shield);
 
         // Clean up the battle cards and anything else
         Enemy.EndBattle();
