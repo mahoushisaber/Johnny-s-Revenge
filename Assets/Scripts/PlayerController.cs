@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public int cardsInHand;
     public GameObject Hand;
     public GameObject BattleZone;
+    public GameObject PlayerShield;
 
     private PlayerDeck PlayerDeck;
     private float shieldAfterBattle = 0f;
@@ -55,15 +56,16 @@ public class PlayerController : MonoBehaviour
             PlayerDeck.InitialDraw();
         }
     }
+
     public float StartBattle(float enemyHealth, ref float enemyShield)
     {
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
 
         foreach (CardController UI_card in UI_Cards)
         {
-            if (UI_card.ThisCard.cardOwner == Card.OwnerType.PLAYER)
+            if (UI_card.Owner == Card.OwnerType.PLAYER)
             {
-                var cardToUse = UI_card.CardName;
+                var cardToUse = UI_card.Name;
                 int cardPower = UI_card.Power;
 
                 // Copy over our plyare shield to use and clear the playerShield as it gets used up
@@ -118,6 +120,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Update Player Shield if assigned
+        if (PlayerShield != null)
+        {
+            PlayerShield.GetComponent<ShieldScript>().CurrentShield = Shield;
+        }
+
         return enemyHealth;
     }
 
@@ -126,13 +134,17 @@ public class PlayerController : MonoBehaviour
         // Update the Shield with earnings from battle to apply on next turn
         Shield += shieldAfterBattle;
         shieldAfterBattle = 0f;
+        if (PlayerShield != null)
+        {
+            PlayerShield.GetComponent<ShieldScript>().CurrentShield = Shield;
+        }
 
         // Destroy all player owned cards from battle zone
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
 
         foreach (CardController UI_card in UI_Cards)
         {
-            if (UI_card.ThisCard.cardOwner == Card.OwnerType.PLAYER)
+            if (UI_card.Owner == Card.OwnerType.PLAYER)
             {
                 Destroy(UI_card.gameObject);
             }

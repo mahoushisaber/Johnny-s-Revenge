@@ -6,62 +6,49 @@ using UnityEngine.EventSystems;
 
 public class CardController : MonoBehaviour
 {
-    public Card ThisCard = new Card();
-    public int ThisId;
+    public int Id { get { return ThisCard.Id; } } // To set use InitWithCard(Card)
+    public string Name { get { return ThisCard.Name; } }
+    public int Power { get { return Enhanced ? ThisCard.Power * EnhancedMultiplier : ThisCard.Power; } }
+    public string Description { get { return ThisCard.Description; } }
+    public bool Enhanced { get { return ThisCard.Enhanced; } set { ThisCard.Enhanced = value; } }
+    public Card.OwnerType Owner { get { return ThisCard.Owner; } set { ThisCard.Owner = value; } }
 
-    public int Id;
-    public string CardName;
-    public int Power;
-    public string CardDescription;
-    public bool Enhanced;
+    public int EnhancedMultiplier { get { return EnhanceMulti; } set { EnhanceMulti = (value > 1) ? value : 1; } }
 
+    public Image ImageToColour;
     public Text NameText;
     public Text PowerText;
     public Text DescriptionText;
 
-    public Image CardColour;
-
-    private void Start()
-    {
-        ;
-    }
+    private Card ThisCard = new Card();
+    private int EnhanceMulti = 2;
 
     private void Update()
     {
-        Id = ThisCard.id;
-        CardName = ThisCard.cardName;
-        Power = ThisCard.power;
-        CardDescription = ThisCard.cardDescription;
-
-        if (Enhanced)
-        {
-            Power *= 2;
-        }
-
-        NameText.text = CardName;
+        NameText.text = Name;
         PowerText.text = Power.ToString();
-        DescriptionText.text = CardDescription; 
+        DescriptionText.text = Description; 
 
-        if (ThisCard.colour == "Red")
+        if (ThisCard.Colour == "Red")
         {
-            CardColour.GetComponent<Image>().color = new Color32(115, 15, 45, 255);
+            ImageToColour.GetComponent<Image>().color = new Color32(115, 15, 45, 255);
         } 
-        if (ThisCard.colour == "Blue")
+        if (ThisCard.Colour == "Blue")
         {
-            CardColour.GetComponent<Image>().color = new Color32(25, 90, 140, 255);
+            ImageToColour.GetComponent<Image>().color = new Color32(25, 90, 140, 255);
         }
-        if (ThisCard.colour == "Green")
+        if (ThisCard.Colour == "Green")
         {
-            CardColour.GetComponent<Image>().color = new Color32(30, 125, 20, 255);
+            ImageToColour.GetComponent<Image>().color = new Color32(30, 125, 20, 255);
         }
-        if (ThisCard.colour == "None")
+        if (ThisCard.Colour == "None")
         {
-            CardColour.GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+            ImageToColour.GetComponent<Image>().color = new Color32(0, 0, 0, 255);
         }
     }
 
-    public int GetPower()
+    public void InitWithCard(Card ToLoad)
     {
-        return Enhanced ? Power*2 : Power;
+        ThisCard.Copy(ToLoad);
     }
 }

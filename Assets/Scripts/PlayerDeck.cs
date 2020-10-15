@@ -6,10 +6,8 @@ using UnityEngine;
 public class PlayerDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
-    public List<Card> storeDeck = new List<Card>();
-
+//    public List<Card> storeDeck = new List<Card>();
     public int deckSize;
-
     public GameObject PlayerHand;
     public GameObject cardPrefab;
 
@@ -26,16 +24,24 @@ public class PlayerDeck : MonoBehaviour
 
     public void CreateDeck()
     {
-        int x = 0;
+        int x;
         int randomCeiling = CardDB.cardList.Count;
 
         for (int i = 0; i < deckSize; i++)
         {
             x = Random.Range(1, randomCeiling);
 
-            Card deckCard = CardDB.cardList[x];
-            deckCard.cardOwner = Card.OwnerType.PLAYER;
-            deck.Insert(i, deckCard);
+            // Sanity check because Random.Range is not working the way it is advertised
+            if (x >= randomCeiling)
+            {
+                x = randomCeiling - 1;
+            }
+
+            Card deckCard = new Card(CardDB.cardList[x])
+            {
+                Owner = Card.OwnerType.PLAYER
+            };
+            deck.Add(deckCard);
         }
     }
 
@@ -53,20 +59,8 @@ public class PlayerDeck : MonoBehaviour
             drawnCard.transform.SetParent(PlayerHand.transform);
 
             CardController UI_Card = drawnCard.GetComponent<CardController>();
-            UI_Card.ThisCard.cardDescription = deck[0].cardDescription;
-            UI_Card.ThisCard.cardName = deck[0].cardName;
-            UI_Card.ThisCard.cardOwner = Card.OwnerType.PLAYER;
-            UI_Card.ThisCard.colour = deck[0].colour;
-            UI_Card.ThisCard.enhanced = deck[0].enhanced;
-            UI_Card.ThisCard.id = deck[0].id;
-            UI_Card.ThisCard.power = deck[0].power;
-            UI_Card.ThisId = deck[0].id;
-            UI_Card.Id = deck[0].id;
-            UI_Card.CardName = deck[0].cardName;
-            UI_Card.CardDescription = deck[0].cardDescription;
-            UI_Card.Power = deck[0].power;
-            UI_Card.Enhanced = deck[0].enhanced;
-            Debug.Log("Player drew a " + UI_Card.CardName);
+            UI_Card.InitWithCard(deck[0]);
+            Debug.Log("Player drew a " + UI_Card.Name);
 
             if (deck.Count > 0)
             {

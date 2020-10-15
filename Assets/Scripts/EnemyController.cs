@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public bool IsTurn = false;
     public GameObject EnemyHand;
     public GameObject BattleZone;
+    public GameObject EnemyShield;
 
     private EnemyDeck EnemyDeck;
     private float shieldAfterBattle = 0f;
@@ -64,9 +65,9 @@ public class EnemyController : MonoBehaviour
 
         foreach (CardController UI_card in UI_Cards)
         {
-            if (UI_card.ThisCard.cardOwner == Card.OwnerType.ENEMY)
+            if (UI_card.Owner == Card.OwnerType.ENEMY)
             {
-                var cardToUse = UI_card.CardName;
+                var cardToUse = UI_card.Name;
                 Debug.Log("Card to use = " + cardToUse);
                 int cardPower = UI_card.Power;
 
@@ -107,6 +108,12 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        // Update Player Shield if assigned
+        if (EnemyShield != null)
+        {
+            EnemyShield.GetComponent<ShieldScript>().CurrentShield = Shield;
+        }
+
         return playerHealth;
     }
 
@@ -115,13 +122,17 @@ public class EnemyController : MonoBehaviour
         // Update the Shield with earnings from battle to apply on next turn
         Shield += shieldAfterBattle;
         shieldAfterBattle = 0f;
+        if (EnemyShield != null)
+        {
+            EnemyShield.GetComponent<ShieldScript>().CurrentShield = Shield;
+        }
 
         // Destroy all enemy owned cards from battle zone
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
 
         foreach (CardController UI_card in UI_Cards)
         {
-            if (UI_card.ThisCard.cardOwner == Card.OwnerType.ENEMY)
+            if (UI_card.Owner == Card.OwnerType.ENEMY)
             {
                 Destroy(UI_card.gameObject);
             }

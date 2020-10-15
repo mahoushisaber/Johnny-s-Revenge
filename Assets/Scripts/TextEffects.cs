@@ -15,6 +15,7 @@ public class TextEffects : MonoBehaviour
 
     private Text textObj;
     private RectTransform recTrans;
+    private string origText;
 
     private float flashTmr = 0.0f;
     private bool flashOn = false;
@@ -29,6 +30,7 @@ public class TextEffects : MonoBehaviour
     {
         textObj = gameObject.GetComponent<Text>() as Text;
         recTrans = gameObject.GetComponent<RectTransform>() as RectTransform;
+        origText = textObj.text;
         scaleChange = new Vector3(0.005f, 0.005f, 0f);
         origVal = recTrans.localScale;
         oldVisible = !visible;

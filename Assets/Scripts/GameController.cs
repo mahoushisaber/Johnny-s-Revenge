@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public Text StageText;
+    public int TotalStages;
+    public int CurrentStage = 1;
     public Text DeckUI;
     public float SecondsToBattle;
 
-    public int CurrentStage = 1;
-    
     private EnemyController Enemy;
     private PlayerController Player;
 
@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour
         Player = FindObjectOfType<PlayerController>();
 
         CurrentStage = 1;
-        SecondsToBattle = 2;
     }
 
     // Update is called once per frame
@@ -58,8 +57,8 @@ public class GameController : MonoBehaviour
                 Execute_BattleEvaluate();
                 break;
         }
-
-        StageText.text = "Stage: " + CurrentStage.ToString();
+        
+        StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
 
@@ -142,7 +141,7 @@ public class GameController : MonoBehaviour
     {
         if (Enemy.Health <= 0)
         {
-            if (CurrentStage == 3)
+            if (CurrentStage >= TotalStages)
             {
                 // TODO: Show a game won action
 

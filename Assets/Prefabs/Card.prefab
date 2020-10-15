@@ -377,24 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910dd6be936bd214e97e3969ecbbc340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisCard:
-    id: 0
-    cardName: 
-    power: 0
-    cardDescription: 
-    enhanced: 0
-    cardOwner: 0
-    colour: 
-  ThisId: 0
-  Id: 0
-  CardName: 
-  Power: 0
-  CardDescription: 
-  Enhanced: 0
+  ImageToColour: {fileID: 7728109489979733844}
   NameText: {fileID: 7728109489683498709}
   PowerText: {fileID: 1938994532153777352}
   DescriptionText: {fileID: 7728109490056718396}
-  CardColour: {fileID: 7728109489979733844}
 --- !u!1 &7728109490056718386
 GameObject:
   m_ObjectHideFlags: 0
