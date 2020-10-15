@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthScript : MonoBehaviour
 {
     private Image HealthBar;
+    public Text PlayerHealthText;
     public float CurrentHealth;
     PlayerController Player;
 
@@ -19,5 +20,6 @@ public class HealthScript : MonoBehaviour
     {
         CurrentHealth = Player.Health;
         HealthBar.fillAmount = CurrentHealth / Player.MaxHealth;
+        PlayerHealthText.text = "" + CurrentHealth + "/" + Player.MaxHealth;
     }
 }

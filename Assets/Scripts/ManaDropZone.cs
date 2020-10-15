@@ -35,7 +35,7 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerCurrentRaycast.gameObject.name == "Mana Drop Zone")
+        if (eventData.pointerCurrentRaycast.gameObject.name == "Player Mana Drop Zone")
         {
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
             if (d != null)
@@ -56,7 +56,7 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
                     {
                         d.parentToReturnTo = BattleZone.transform;
 
-                        Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().CardName);
+                        Debug.Log("You used " + eventData.pointerDrag.gameObject.GetComponent<CardController>().Name);
                     }
                     else
                     {
