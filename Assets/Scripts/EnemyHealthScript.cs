@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EnemyHealthScript : MonoBehaviour
 {
     private Image HealthBar;
+    public Text EnemyHealthText;
     public float CurrentHealth;
     EnemyController Enemy;
 
@@ -19,5 +20,6 @@ public class EnemyHealthScript : MonoBehaviour
     {
         CurrentHealth = Enemy.Health;
         HealthBar.fillAmount = CurrentHealth / Enemy.MaxHealth;
+        EnemyHealthText.text = "" + CurrentHealth + "/" + Enemy.MaxHealth;
     }
 }

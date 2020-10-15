@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public float Shield;
     public bool IsTurn = false;
     EnemyDeck EnemyDeck;
+    EnemyCardController EnemyCard;
     public GameObject EnemyHand;
     public GameObject BattleZone;
 

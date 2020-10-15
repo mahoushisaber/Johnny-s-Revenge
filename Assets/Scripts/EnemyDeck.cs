@@ -33,7 +33,7 @@ public class EnemyDeck : MonoBehaviour
         {
             x = Random.Range(1, 4);
 
-            Card deckCard = CardDB.cardList[x];
+            Card deckCard = EnemyCardDB.cardList[x];
             deckCard.cardOwner = Card.OwnerType.ENEMY;
             deck.Insert(i, deckCard);
         }

@@ -21,12 +21,18 @@ public class CardController : MonoBehaviour
 
     public Image CardColour;
 
+    EnemyController Enemy;
+    PlayerController Player;
     private void Start()
     {
         // The owner of card was assigned during the creation so save and restore during load of defaults
 //        Card.OwnerType cardOwner = ThisCard.cardOwner;
 //        ThisCard = CardDB.cardList[ThisId];
 //        ThisCard.cardOwner = cardOwner;
+
+        thisCard[0] = CardDB.cardList[thisId];
+        Enemy = FindObjectOfType<EnemyController>();
+        Player = FindObjectOfType<PlayerController>();
     }
 
     private void Update()
@@ -66,5 +72,32 @@ public class CardController : MonoBehaviour
     public int GetPower()
     {
         return Enhanced ? Power*2 : Power;
+    }
+
+    public void PlayCard(string cardName, int cardPower)
+    {
+        if (cardName == "Slash")
+        {
+            float damageToDeal = cardPower - Enemy.Shield;
+            if (damageToDeal < 0) { damageToDeal = 0; }
+            Enemy.Health -= damageToDeal; 
+            Debug.Log("You dealt " + damageToDeal + " damage");
+            Debug.Log("The enemy now has " + Enemy.Health + " health");
+        }
+        if (cardName == "Block")
+        {
+            Player.Shield += cardPower;
+            Debug.Log("You shielded for " + cardPower);
+        }
+        if (cardName == "Siphon")
+        {
+            float damageToDeal = cardPower - Enemy.Shield;
+            if (damageToDeal < 0) { damageToDeal = 0; }
+            Enemy.Health -= damageToDeal;
+            Player.Health += cardPower;
+            Debug.Log("You dealt " + damageToDeal + " damage");
+            Debug.Log("The enemy now has " + Enemy.Health + " health");
+            Debug.Log("You healed for " + cardPower + " health");
+        }
     }
 }

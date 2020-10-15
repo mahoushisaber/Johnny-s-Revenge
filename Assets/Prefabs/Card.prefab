@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 7728109489979733835}
   - component: {fileID: 2168266824873360501}
   - component: {fileID: 6846626940412895876}
-  - component: {fileID: 75675803904763852}
+  - component: {fileID: 7217843490676772050}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -365,7 +365,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &75675803904763852
+--- !u!114 &7217843490676772050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,16 +385,16 @@ MonoBehaviour:
     enhanced: 0
     cardOwner: 0
     colour: 
-  ThisId: 0
-  Id: 0
-  CardName: 
-  Power: 0
-  CardDescription: 
-  Enhanced: 0
-  NameText: {fileID: 7728109489683498709}
-  PowerText: {fileID: 1938994532153777352}
-  DescriptionText: {fileID: 7728109490056718396}
-  CardColour: {fileID: 7728109489979733844}
+  thisId: 2
+  id: 2
+  cardName: 
+  power: 0
+  cardDescription: 
+  enhanced: 0
+  nameText: {fileID: 7728109489683498709}
+  powerText: {fileID: 1938994532153777352}
+  descriptionText: {fileID: 7728109490056718396}
+  cardColour: {fileID: 7728109489979733844}
 --- !u!1 &7728109490056718386
 GameObject:
   m_ObjectHideFlags: 0
