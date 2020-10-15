@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Health > MaxHealth) { Health = MaxHealth; }
         cardsInHand = Hand.transform.childCount;
         cardsInDeck = PlayerDeck.deck.Count;
     }
