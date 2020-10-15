@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class EnemyHealthScript : MonoBehaviour
 {
-    private Image HealthBar;
+    public Text EnemyHealthText;
+    public GameObject SheildControl;
     public float CurrentHealth;
-    EnemyController Enemy;
+    public float CurrentShield;
+
+    private EnemyController Enemy;
+    private Image HealthBar;
 
     private void Start()
     {
@@ -18,6 +22,9 @@ public class EnemyHealthScript : MonoBehaviour
     private void Update()
     {
         CurrentHealth = Enemy.Health;
+        CurrentShield = Enemy.Shield;
         HealthBar.fillAmount = CurrentHealth / Enemy.MaxHealth;
+        EnemyHealthText.text = string.Format("{0}/{1}", CurrentHealth, Enemy.MaxHealth);
+        SheildControl.GetComponent<ShieldScript>().CurrentShield = CurrentShield;
     }
 }
