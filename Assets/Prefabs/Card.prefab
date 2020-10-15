@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 7728109489979733835}
   - component: {fileID: 2168266824873360501}
   - component: {fileID: 6846626940412895876}
-  - component: {fileID: 75675803904763852}
+  - component: {fileID: 7217843490676772050}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -365,7 +365,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &75675803904763852
+--- !u!114 &7217843490676772050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
