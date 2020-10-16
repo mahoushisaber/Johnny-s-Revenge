@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3120674377476131451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3120674377476131449}
+  - component: {fileID: 3120674377476131448}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3120674377476131449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120674377476131451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3120674377476131448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120674377476131451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ee8a607c8100f47a38ee96b7cf3b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: DrawCard
+    clip: {fileID: 8300000, guid: 33a57096e3f11b04aa8aeae18f99fb03, type: 3}
+    volume: 1
+    volumeVariance: 0.44
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: FlipCard
+    clip: {fileID: 8300000, guid: a4a74d6f546bbbc4993138926160c88c, type: 3}
+    volume: 0.9
+    volumeVariance: 0.47
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: ShufflingCards
+    clip: {fileID: 8300000, guid: 2367279916d08e446b095eaf702ac398, type: 3}
+    volume: 0.82
+    volumeVariance: 0.46
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: DealingCard
+    clip: {fileID: 8300000, guid: 8217c5951a5839b4ea73e6e695e1fc76, type: 3}
+    volume: 0.84
+    volumeVariance: 0.34
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Sword
+    clip: {fileID: 8300000, guid: 62309c0b441467d41a6ef02a02180983, type: 3}
+    volume: 0.946
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: CardFlipRepeat
+    clip: {fileID: 8300000, guid: d4c90370ad8eda046bc3af4c7b19ef49, type: 3}
+    volume: 0.9
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 614dcc41bcae11b4a89cd4481d613bc2, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 1
+    source: {fileID: 0}
+  - name: Upgrade
+    clip: {fileID: 8300000, guid: 0b46d8cdcff866a428343625a3357295, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}

@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerDeck PlayerDeck;
     private float shieldAfterBattle = 0f;
+    public static int attackCardCount = 0;
+    public static int blockCardCount = 0;
 
     void Start()
     {
@@ -48,10 +50,12 @@ public class PlayerController : MonoBehaviour
         if (cardsInDeck > 0)
         {
             PlayerDeck.DrawCard(1);
+            FindObjectOfType<AudioManager>().Play("DealingCard");
         }
 
         if (cardsInHand == 0)
         {
+            FindObjectOfType<AudioManager>().Play("ShufflingCards");
             PlayerDeck.CreateDeck();
             PlayerDeck.InitialDraw();
         }
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 var cardToUse = UI_card.Name;
                 int cardPower = UI_card.Power;
 
-                // Copy over our plyare shield to use and clear the playerShield as it gets used up
+                // Copy over our player shield to use and clear the playerShield as it gets used up
                 float useEnemyShield = enemyShield;
                 enemyShield = 0;
 
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 if (UI_card.Enhanced)
                 {
                     Mana -= ManaUseCost;
+                    FindObjectOfType<AudioManager>().Play("Upgrade");
                     Debug.Log("Card to use " + cardToUse + " is Enhanced, New Power is " + cardPower);
                 }
                 else
@@ -92,22 +97,72 @@ public class PlayerController : MonoBehaviour
                 if (cardToUse == "Slash")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
+                    FindObjectOfType<AudioManager>().Play("Sword");
+
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
                 }
                 else if (cardToUse == "Block")
                 {
                     shieldAfterBattle += cardPower;
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+
                     Debug.Log("You shielded for " + cardPower);
                 }
                 else if (cardToUse == "Siphon")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
                     Health += cardPower;
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("The enemy now has " + enemyHealth + " health remaining");
                     Debug.Log("You healed for" + cardPower + " health");
                 }
+                else if (cardToUse == "Dagger Throw")
+                {
+                    // +3 attack each time 
+                    int damageIncrease = 3;
+                    cardPower = (cardPower + (attackCardCount * damageIncrease));
+                    enemyHealth -= cardPower - useEnemyShield;
+                    attackCardCount++;
+                    FindObjectOfType<AudioManager>().Play("Sword");
+
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("Enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Saber Attack")
+                {
+                    enemyHealth -= cardPower - useEnemyShield;
+                    Health -= 3;
+                    FindObjectOfType<AudioManager>().Play("Sword");
+
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("Enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Retreat")
+                {
+                    int blockIncrease = 2;
+                    cardPower = (cardPower + (blockCardCount * blockIncrease));
+                    shieldAfterBattle += cardPower;
+                    blockCardCount++;
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+
+                    Debug.Log("You shielded for " + cardPower);
+                }
+                else if (cardToUse == "Power Strike")
+                {
+                    enemyHealth -= cardPower - useEnemyShield;
+                    if (Mana >= 50 && Mana <= 75)
+                    {
+                        Mana += 25;
+                    }
+                    FindObjectOfType<AudioManager>().Play("Sword");
+
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("Enemy now has " + enemyHealth + " health remaining");
+                }
+
                 else
                 {
                     // Can't find a battle tactic so card no used so restore mana we took away
@@ -141,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
         // Destroy all player owned cards from battle zone
         CardController[] UI_Cards = BattleZone.transform.GetComponentsInChildren<CardController>();
-
+        
         foreach (CardController UI_card in UI_Cards)
         {
             if (UI_card.Owner == Card.OwnerType.PLAYER)

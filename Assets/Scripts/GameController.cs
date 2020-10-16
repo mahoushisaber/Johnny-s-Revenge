@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameController : MonoBehaviour
     public int CurrentStage = 1;
     public Text DeckUI;
     public float SecondsToBattle;
+    public Sprite BossSprite, BossSprite2, BossSprite3;
 
     private EnemyController Enemy;
     private PlayerController Player;
@@ -29,13 +31,14 @@ public class GameController : MonoBehaviour
         Enemy = FindObjectOfType<EnemyController>();
         Player = FindObjectOfType<PlayerController>();
         gameSettings = FindObjectOfType<PersistentGameSettings>();
-
+        
         CurrentStage = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        RenderBossSprites();
         switch (gameState)
         {
             case StateType.UNKNOWN:
@@ -59,11 +62,29 @@ public class GameController : MonoBehaviour
                 Execute_BattleEvaluate();
                 break;
         }
-        
+       
         StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
 
+    void RenderBossSprites()
+    {
+        if (CurrentStage == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite;
+
+        }
+        if (CurrentStage == 2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite2;
+
+        }
+        if (CurrentStage == 3)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite3;
+
+        }
+    }
     void Execute_EnemyTurn()
     {
         if (!Enemy.IsTurn)

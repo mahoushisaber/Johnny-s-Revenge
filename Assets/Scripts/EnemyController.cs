@@ -16,6 +16,9 @@ public class EnemyController : MonoBehaviour
 
     private EnemyDeck EnemyDeck;
     private float shieldAfterBattle = 0f;
+    // Counting number of times played for dagger and retreat 
+    public static int attackCardCount = 0;
+    public static int blockCardCount = 0;
 
     void Start()
     {
@@ -43,7 +46,7 @@ public class EnemyController : MonoBehaviour
 
     public void StartTurn()
     {
-        IsTurn = EnemyDeck.PlayCard(1, BattleZone); 
+        IsTurn = EnemyDeck.PlayCard(1, BattleZone);
     }
 
     public void EndTurn()
@@ -100,6 +103,36 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("Enemy dealt " + cardPower + " damage");
                     Debug.Log("You have " + playerHealth + " health remaining");
                     Debug.Log("Enemy healed " + cardPower + " health");
+                }
+                else if (cardToUse == "Dagger Throw")
+                {
+                    int damageIncrease = 3;
+                    cardPower = (cardPower + (attackCardCount * damageIncrease));
+                    playerHealth -= (cardPower) - usePlayerShield;
+                    attackCardCount++;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
+                }
+                else if (cardToUse == "Saber Attack")
+                {
+                    playerHealth -= cardPower - usePlayerShield;
+                    Health -= 3;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
+                }
+                else if (cardToUse == "Retreat")
+                {
+                    int blockIncrease = 2;
+                    cardPower = (cardPower + (blockCardCount * blockIncrease));
+                    shieldAfterBattle += cardPower;
+                    blockCardCount++;
+                    Debug.Log("Enemy shielded for " + cardPower);
+                }
+                else if (cardToUse == "Power Strike")
+                {
+                    playerHealth -= cardPower - usePlayerShield;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
                 }
                 else
                 {
