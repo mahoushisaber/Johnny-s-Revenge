@@ -18,6 +18,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("OnBeginDrag");
+        FindObjectOfType<AudioManager>().Play("PaperFlip");
 
         placeholder = new GameObject();
         placeholder.transform.SetParent( this.transform.parent );
@@ -69,6 +70,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnEndDrag(PointerEventData eventData)
     {
         //Debug.Log("OnEndDrag");
+        FindObjectOfType<AudioManager>().Play("CardDrop");
+
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
         GetComponent<CanvasGroup>().blocksRaycasts = true;
