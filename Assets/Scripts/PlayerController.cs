@@ -162,7 +162,17 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
                 }
-
+                else if (cardToUse == "Pierce")
+                {
+                    enemyHealth -= cardPower;
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("The enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Heal")
+                {
+                    Health += cardPower;
+                    Debug.Log("You healed for" + cardPower + " health");
+                }
                 else
                 {
                     // Can't find a battle tactic so card no used so restore mana we took away
@@ -172,6 +182,7 @@ public class PlayerController : MonoBehaviour
                     }
                     Debug.Log("PlayerController: Can't find a battle tactic to match " + cardToUse + " played");
                 }
+                if (Health > MaxHealth) Health = MaxHealth;
             }
         }
 

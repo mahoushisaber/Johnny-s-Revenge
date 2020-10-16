@@ -31,6 +31,10 @@ public class CardDB : MonoBehaviour
             Resources.Load<Sprite>("010-hook")));
         cardList.Add(new Card(7, "Power Strike", 5, "Deal 5 damage,  if your mana is above 50%, gain 25% mana", false, "Red", Card.OwnerType.UNKNOWN,
             Resources.Load<Sprite>("010-hook")));
+        cardList.Add(new Card(8, "Pierce", 6, "Deal 6 damage ignore shield", false, "Red", Card.OwnerType.UNKNOWN,
+            Resources.Load<Sprite>("010-hook")));
+        cardList.Add(new Card(9, "Heal", 5, "Restore 5 health", false, "Green", Card.OwnerType.UNKNOWN,
+            Resources.Load<Sprite>("010-hook")));
         //cardList.Add(new Card(7, "Rifles", 8, "Deal 8 damage, deal 25 damage when upgraded", false, "Red", Card.OwnerType.UNKNOWN));
         //cardList.Add(new Card(10, "Anger", 0, "gain 20% of your mana", false, "Green", Card.OwnerType.UNKNOWN));
 

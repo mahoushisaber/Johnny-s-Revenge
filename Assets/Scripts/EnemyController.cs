@@ -134,10 +134,22 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("Enemy dealt " + cardPower + " damage");
                     Debug.Log("You have " + playerHealth + " health remaining");
                 }
+                else if (cardToUse == "Pierce")
+                {
+                    playerHealth -= cardPower;
+                    Debug.Log("Enemy dealt " + cardPower + " damage");
+                    Debug.Log("You have " + playerHealth + " health remaining");
+                }
+                else if (cardToUse == "Heal")
+                {
+                    Health += cardPower;
+                    Debug.Log("Enemy healed " + cardPower + " health");
+                }
                 else
                 {
                     Debug.Log("EnemyController: Can't find a battle tactic to match " + cardToUse + " played");
                 }
+                if (Health > MaxHealth) Health = MaxHealth;
             }
         }
 
