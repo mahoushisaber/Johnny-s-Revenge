@@ -1,11 +1,8 @@
-﻿using Microsoft.Unity.VisualStudio.Editor;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[System.Serializable]
-[CreateAssetMenu(fileName = "New Card", menuName = "Card")]
 public class Card
 {
     public int Id;
@@ -14,7 +11,7 @@ public class Card
     public string Description;
     public bool Enhanced;
     public string Colour;
-    public Sprite ImageSprite;
+    public string ImageName;
 
     public enum OwnerType { UNKNOWN, ENEMY, PLAYER };
     public OwnerType Owner;
@@ -24,7 +21,7 @@ public class Card
         Owner = OwnerType.UNKNOWN;
     }
 
-    public Card(int ID, string AName, int PowerLevel, string ADescription, bool IsEnhanced, string AColour, OwnerType AOwner, Sprite AImage)
+    public Card(int ID, string AName, int PowerLevel, string ADescription, bool IsEnhanced, string AColour, OwnerType AOwner, string AImageName)
     {
         Id = ID;
         Name = AName;
@@ -33,7 +30,7 @@ public class Card
         Enhanced = IsEnhanced;
         Colour = AColour;
         Owner = AOwner;
-        ImageSprite = AImage;
+        ImageName = AImageName;
     }
 
     public Card(Card ToCopy)
@@ -45,7 +42,7 @@ public class Card
         Enhanced = ToCopy.Enhanced;
         Colour = ToCopy.Colour;
         Owner = ToCopy.Owner;
-        ImageSprite = ToCopy.ImageSprite;
+        ImageName = ToCopy.ImageName;
     }
 
     public void Copy(Card ToCopy)
@@ -57,6 +54,6 @@ public class Card
         Enhanced = ToCopy.Enhanced;
         Colour = ToCopy.Colour;
         Owner = ToCopy.Owner;
-        ImageSprite = ToCopy.ImageSprite;
+        ImageName = ToCopy.ImageName;
     }
 }
