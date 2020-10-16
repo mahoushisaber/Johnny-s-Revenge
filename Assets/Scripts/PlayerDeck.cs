@@ -7,9 +7,13 @@ public class PlayerDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
 //    public List<Card> storeDeck = new List<Card>();
-    public int deckSize;
     public GameObject PlayerHand;
     public GameObject cardPrefab;
+
+    private int deckSize = 20;
+    private int redLimit = 10;
+    private int blueLimit = 5;
+    private int greenLimit = 5;
 
     private void Start()
     {
@@ -26,8 +30,10 @@ public class PlayerDeck : MonoBehaviour
     {
         int x;
         int randomCeiling = CardDB.cardList.Count;
+        int redCount = 0, blueCount = 0, greenCount = 0;
+        int i = 0;
 
-        for (int i = 0; i < deckSize; i++)
+        while (i < deckSize)
         {
             x = Random.Range(1, randomCeiling);
 
@@ -41,7 +47,31 @@ public class PlayerDeck : MonoBehaviour
             {
                 Owner = Card.OwnerType.PLAYER
             };
+
+            if (deckCard.Colour == "Red")
+            {
+                if (redCount >= redLimit) continue;
+                else
+                {
+                    redCount++;
+                }
+            }
+            if (deckCard.Colour == "Blue")
+            {
+                if (blueCount >= blueLimit) continue;
+                else
+                {
+                    blueCount++;
+                }
+            }
+            if (deckCard.Colour == "Green")
+            {
+                if (greenCount >= greenLimit) continue;
+                else greenCount++;
+
+            }
             deck.Add(deckCard);
+            i++;
         }
     }
 
