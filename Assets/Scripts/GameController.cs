@@ -21,12 +21,14 @@ public class GameController : MonoBehaviour
     enum PTurnState { WAIT_FOR_CARD_PLAY, DELAY_TO_END_TURN };
     private PTurnState playerState = PTurnState.WAIT_FOR_CARD_PLAY;
 
+    private PersistentGameSettings gameSettings;
 
     // Start is called before the first frame update
     void Start()
     {
         Enemy = FindObjectOfType<EnemyController>();
         Player = FindObjectOfType<PlayerController>();
+        gameSettings = FindObjectOfType<PersistentGameSettings>();
 
         CurrentStage = 1;
     }
@@ -143,8 +145,8 @@ public class GameController : MonoBehaviour
         {
             if (CurrentStage >= TotalStages)
             {
-                // TODO: Show a game won action
-
+                // Game Over Player Won
+                gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.WON;
                 SceneManager.LoadScene("Menu");
             }
             Enemy.Health = Enemy.MaxHealth;
@@ -152,10 +154,15 @@ public class GameController : MonoBehaviour
         }
         if (Player.Health <= 0)
         {
-            // TODO: Show a game lost action
-
-            // Game Over
+            // Game Over Player LOST
+            gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.LOST;
             SceneManager.LoadScene("Menu");
+        }
+
+        if ( gameSettings.RequiresSave )
+        {
+            // Requires a save so we can use the values over game instances or between scenes
+            gameSettings.SaveProperties();
         }
 
         gameState = StateType.ENEMY_TURN;
