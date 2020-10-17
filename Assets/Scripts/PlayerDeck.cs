@@ -6,14 +6,12 @@ using UnityEngine;
 public class PlayerDeck : MonoBehaviour
 {
     public List<Card> deck = new List<Card>();
-//    public List<Card> storeDeck = new List<Card>();
     public GameObject PlayerHand;
     public GameObject cardPrefab;
-
-    private int deckSize = 20;
-    private int redLimit = 10;
-    private int blueLimit = 5;
-    private int greenLimit = 5;
+    public int deckSize;
+    public int redLimit;
+    public int blueLimit;
+    public int greenLimit;
 
     private void Start()
     {

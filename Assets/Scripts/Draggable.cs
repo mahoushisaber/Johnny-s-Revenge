@@ -17,21 +17,28 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (this.transform.parent.name == "Battle Drop Zone")
+        {
+            eventData.pointerDrag = null;
+            Debug.Log("OnBeginDrag - Stopping drag of anything from battle zone");
+            return;
+        }
+
         //Debug.Log("OnBeginDrag");
         FindObjectOfType<AudioManager>().Play("PaperFlip");
 
         placeholder = new GameObject();
-        placeholder.transform.SetParent( this.transform.parent );
+        placeholder.transform.SetParent(this.transform.parent);
         LayoutElement le = placeholder.AddComponent<LayoutElement>();
         le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
         le.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
         le.flexibleWidth = 0;
         le.flexibleHeight = 0;
 
-        placeholder.transform.SetSiblingIndex( this.transform.GetSiblingIndex() );
+        placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
 
         parentToReturnTo = this.transform.parent;
-        placeholderParent = parentToReturnTo; 
+        placeholderParent = parentToReturnTo;
         this.transform.SetParent(this.transform.parent.parent);
 
         GetComponent<CanvasGroup>().blocksRaycasts = false;
