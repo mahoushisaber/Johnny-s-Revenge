@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[System.Serializable]
-
 public class Card
 {
     public int Id;
@@ -13,6 +11,7 @@ public class Card
     public string Description;
     public bool Enhanced;
     public string Colour;
+    public string ImageName;
 
     public enum OwnerType { UNKNOWN, ENEMY, PLAYER };
     public OwnerType Owner;
@@ -22,7 +21,7 @@ public class Card
         Owner = OwnerType.UNKNOWN;
     }
 
-    public Card(int ID, string AName, int PowerLevel, string ADescription, bool IsEnhanced, string AColour, OwnerType AOwner)
+    public Card(int ID, string AName, int PowerLevel, string ADescription, bool IsEnhanced, string AColour, OwnerType AOwner, string AImageName)
     {
         Id = ID;
         Name = AName;
@@ -31,6 +30,7 @@ public class Card
         Enhanced = IsEnhanced;
         Colour = AColour;
         Owner = AOwner;
+        ImageName = AImageName;
     }
 
     public Card(Card ToCopy)
@@ -42,6 +42,7 @@ public class Card
         Enhanced = ToCopy.Enhanced;
         Colour = ToCopy.Colour;
         Owner = ToCopy.Owner;
+        ImageName = ToCopy.ImageName;
     }
 
     public void Copy(Card ToCopy)
@@ -53,5 +54,6 @@ public class Card
         Enhanced = ToCopy.Enhanced;
         Colour = ToCopy.Colour;
         Owner = ToCopy.Owner;
+        ImageName = ToCopy.ImageName;
     }
 }

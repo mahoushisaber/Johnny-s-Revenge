@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Draggable.Slot typeOfItem = Draggable.Slot.MANA;
+    public Draggable.Slot typeOfSlot;
     public GameObject BattleZone;
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -39,11 +39,11 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
         {
             Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
             if (d != null)
-                if (d.typeOfItem == Draggable.Slot.ANY || typeOfItem == d.typeOfItem)
+                if (d.typeOfItem == Draggable.Slot.ANY || typeOfSlot == d.typeOfItem)
                 {
                     GameController GCtrl = FindObjectOfType<GameController>();
 
-                    if (GCtrl == null || !GCtrl.CanDropPlayerCard(typeOfItem))
+                    if (GCtrl == null || !GCtrl.CanDropPlayerCard(typeOfSlot))
                     {
                         Debug.Log("Cannot drop on Mana right now");
                         return;
