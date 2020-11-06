@@ -214,6 +214,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 573388321}
+  - {fileID: 1183470308}
   - {fileID: 1597341336}
   - {fileID: 1279277756}
   - {fileID: 555286710}
@@ -263,8 +264,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 406.49393, y: 122.94946}
+  m_AnchoredPosition: {x: -0.00022888, y: 0}
+  m_SizeDelta: {x: 140.72055, y: 122.94946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &252310002
 MonoBehaviour:
@@ -343,8 +344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 60}
+  m_AnchoredPosition: {x: -0.00010681, y: 0.000068665}
+  m_SizeDelta: {x: 140.71988, y: 347.99936}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &314042165
 MonoBehaviour:
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfSlot: 2
-  BattleZone: {fileID: 1279277755}
+  BattleZone: {fileID: 1183470307}
 --- !u!114 &314042166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 100.00006, y: -47.5}
+  m_AnchoredPosition: {x: 100, y: -12.5}
   m_SizeDelta: {x: 100, y: 95}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &406046416
@@ -480,7 +481,7 @@ RectTransform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 229213574}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -644,7 +645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.25, y: 122}
+  m_AnchoredPosition: {x: 0.25, y: 64}
   m_SizeDelta: {x: 0.5001221, y: 348}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &573388322
@@ -913,7 +914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 99.999855, y: -46.5}
+  m_AnchoredPosition: {x: 100, y: -49}
   m_SizeDelta: {x: 100, y: 95}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &684679562
@@ -1226,11 +1227,11 @@ RectTransform:
   - {fileID: 705790409}
   - {fileID: 1280330358}
   m_Father: {fileID: 229213574}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00003171, y: -450.05}
+  m_AnchoredPosition: {x: -0.00003171, y: -508.05}
   m_SizeDelta: {x: 1500, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &846733349
@@ -1297,17 +1298,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852574622}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1317834210}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207, y: -0.000061035156}
-  m_SizeDelta: {x: 1500, y: 60}
+  m_AnchoredPosition: {x: -0.1, y: 0.5}
+  m_SizeDelta: {x: 345.82812, y: 137.7978}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852574624
 MonoBehaviour:
@@ -1721,6 +1722,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0f2018794339e4c9e1646074172da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1183470307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1183470308}
+  - component: {fileID: 1183470312}
+  - component: {fileID: 1183470311}
+  - component: {fileID: 1183470310}
+  - component: {fileID: 1183470309}
+  m_Layer: 5
+  m_Name: Battle Drop Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1183470308
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183470307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 229213574}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -30.6, y: -124}
+  m_SizeDelta: {x: 375.964, y: 348}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1183470309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183470307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018e31e1d6ec84845a9f21789bdebff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfSlot: 1
+--- !u!114 &1183470310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183470307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 115
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1183470311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183470307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.27305093, g: 0.3055315, b: 0.9811321, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 0
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1183470312
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183470307}
+  m_CullTransparentMesh: 0
 --- !u!1 &1279277755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,7 +1852,7 @@ GameObject:
   - component: {fileID: 1279277758}
   - component: {fileID: 1279277757}
   m_Layer: 5
-  m_Name: Battle Drop Zone
+  m_Name: Battle Enemy Drop Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1753,12 +1870,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 229213574}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -66}
-  m_SizeDelta: {x: 775, y: 348}
+  m_AnchoredPosition: {x: 278.27, y: -123.99998}
+  m_SizeDelta: {x: 226.9198, y: 348}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1279277757
 MonoBehaviour:
@@ -1812,7 +1929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.27305093, g: 0.3055315, b: 0.9811321, a: 0.392}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1949,12 +2066,12 @@ RectTransform:
   - {fileID: 252310001}
   - {fileID: 314042164}
   m_Father: {fileID: 229213574}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -510.05}
-  m_SizeDelta: {x: 1500, y: 60}
+  m_AnchoredPosition: {x: -310.60004, y: 50.00004}
+  m_SizeDelta: {x: 140.7201, y: 347.99927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317834211
 MonoBehaviour:
@@ -2124,7 +2241,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 229213574}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2233,8 +2350,8 @@ MonoBehaviour:
   cardsInDeck: 0
   cardsInHand: 0
   Hand: {fileID: 573388320}
-  BattleZone: {fileID: 1279277755}
-  PlayerShield: {fileID: 0}
+  BattleZone: {fileID: 1183470307}
+  PlayerShield: {fileID: 406046414}
 --- !u!4 &1613669371
 Transform:
   m_ObjectHideFlags: 0
@@ -2452,7 +2569,7 @@ MonoBehaviour:
   IsTurn: 0
   EnemyHand: {fileID: 1597341335}
   BattleZone: {fileID: 1279277755}
-  EnemyShield: {fileID: 0}
+  EnemyShield: {fileID: 684679560}
 --- !u!1 &1714503858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,11 +2871,11 @@ RectTransform:
   m_Children:
   - {fileID: 1713179877}
   m_Father: {fileID: 229213574}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 31.19}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -94, y: 398}
+  m_AnchoredPosition: {x: -94, y: 340}
   m_SizeDelta: {x: 123.98489, y: 77.7101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1927765527
@@ -2831,7 +2948,7 @@ RectTransform:
   - {fileID: 1787582358}
   - {fileID: 842827357}
   m_Father: {fileID: 229213574}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

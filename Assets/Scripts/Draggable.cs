@@ -17,7 +17,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (this.transform.parent.name == "Battle Drop Zone")
+        if (   this.transform.parent.name == "Battle Drop Zone"
+            || this.transform.parent.name == "Battle Enemy Drop Zone")
         {
             eventData.pointerDrag = null;
             Debug.Log("OnBeginDrag - Stopping drag of anything from battle zone");
