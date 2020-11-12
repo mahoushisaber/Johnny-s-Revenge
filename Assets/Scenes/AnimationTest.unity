@@ -170,8 +170,8 @@ MonoBehaviour:
   daggerThrow: {fileID: 2681368124409835153, guid: 347b4f901b77988449c3523c86c8c3a3, type: 3}
   siphon: {fileID: 1965336238595741454, guid: c1b375ad4e3906440a7fe2506329c7c2, type: 3}
   potionHeal: {fileID: 5162539454906231446, guid: 1b34ed4852085464399ee39d38b0bf0f, type: 3}
-  powerStrike: {fileID: 19833294415716490, guid: 28d037d4c6241a54393f45c787bcadcc, type: 3}
-  saberAttack: {fileID: 6255049537560261650, guid: cf1b522e3d15bc74d8316cbba85425f4, type: 3}
+  powerStrike: {fileID: 6255049537560261650, guid: cf1b522e3d15bc74d8316cbba85425f4, type: 3}
+  saberAttack: {fileID: 19833294415716490, guid: 28d037d4c6241a54393f45c787bcadcc, type: 3}
   pierce: {fileID: 630563402872974346, guid: 351f74429299579498c1df646569b609, type: 3}
 --- !u!1 &921291681
 GameObject:

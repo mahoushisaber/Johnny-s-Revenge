@@ -51,17 +51,17 @@ public class AnimationController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            GameObject strike = Instantiate(powerStrike, new Vector3(50, 15, 30), powerStrike.transform.rotation);
+            GameObject strike = Instantiate(powerStrike, new Vector3(51, -16, 65), powerStrike.transform.rotation);
             strike.GetComponent<Animator>().Play("powerStrike");
-            Destroy(strike, 3.0f);
+            Destroy(strike, 1.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
  
-            GameObject saber = Instantiate(saberAttack, new Vector3(51, -16, 65), saberAttack.transform.rotation);
+            GameObject saber = Instantiate(saberAttack, new Vector3(50, 15, 30), saberAttack.transform.rotation);
             saber.GetComponent<Animator>().Play("saberAttack");
-            Destroy(saber, 1.5f);
+            Destroy(saber, 1.0f);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha7))
