@@ -25,13 +25,16 @@ public class GameController : MonoBehaviour
 
     private PersistentGameSettings gameSettings;
 
+    private ScoreSystem ScoreSystem;
+
     // Start is called before the first frame update
     void Start()
     {
         Enemy = FindObjectOfType<EnemyController>();
         Player = FindObjectOfType<PlayerController>();
         gameSettings = FindObjectOfType<PersistentGameSettings>();
-        
+        ScoreSystem = FindObjectOfType<ScoreSystem>();
+
         CurrentStage = 1;
     }
 
@@ -164,14 +167,7 @@ public class GameController : MonoBehaviour
     {
         if (Enemy.Health <= 0)
         {
-            if (CurrentStage >= TotalStages)
-            {
-                // Game Over Player Won
-                gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.WON;
-                SceneManager.LoadScene("Menu");
-            }
-            Enemy.Health = Enemy.MaxHealth;
-            CurrentStage += 1;
+            ScoreSystem.showResult();
         }
         if (Player.Health <= 0)
         {
@@ -228,5 +224,17 @@ public class GameController : MonoBehaviour
         }
 
         return canDrop;
+    }
+
+    public void nextStage()
+    {
+        if (CurrentStage >= TotalStages)
+        {
+            // Game Over Player Won
+            gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.WON;
+            SceneManager.LoadScene("Menu");
+        }
+        Enemy.Health = Enemy.MaxHealth;
+        CurrentStage += 1;
     }
 }
