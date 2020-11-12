@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
+    public Text stageResultText;
     public Text timeText;
     public Text timeSpentText;
     public Text damageTakenText;
     public Text manaUsedText;
     public Text cardsUsedText;
+    public Text stageScoreText;
     public Text totalScoreText;
+    public Image chestOpenImage;
     public GameObject ResultScreen;
     
     private float healthBefore;
@@ -21,21 +24,40 @@ public class ScoreSystem : MonoBehaviour
     private float manaUsed;
     private int cardsUsed;
     private float currentTime;
+    private int gameScore;
     private PlayerController player;
     private GameController game;
+    private BattleResults CtrlObj;
+
+    private float chestTmr;
+    private float currentHealthReward = 0f;
+    private float currentManaReward = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
         game = FindObjectOfType<GameController>();
+        gameScore = 0;
         setStageStartStatus();
         ResultScreen.SetActive(false);
+        CtrlObj = ResultScreen.GetComponent<BattleResults>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!enemyDefeated)
+        if (ResultScreen.activeSelf == true)
+        {
+            chestTmr += Time.deltaTime;
+
+            if (chestTmr > 3.0f)
+            {
+                chestTmr -= 3.0f;
+                chestOpenImage.gameObject.SetActive(!chestOpenImage.gameObject.activeSelf);
+            }
+        }
+        else if (!enemyDefeated)
         {
             currentTime += Time.deltaTime;
             timeText.text = DisplayTime(currentTime);
@@ -46,7 +68,6 @@ public class ScoreSystem : MonoBehaviour
     public void showResult()
     {
         Debug.Log("RESULT PRINTED");
-        Time.timeScale = 0;
         enemyDefeated = true;
         damageTaken = healthBefore - player.Health;
         manaUsed = manaBefore - player.Mana;
@@ -58,8 +79,15 @@ public class ScoreSystem : MonoBehaviour
         timeSpentText.text = timeText.text;
 
         int totalScore = (int)calculateTotalScore();
+        gameScore += totalScore;
 
-        totalScoreText.text = "Total Score: " + totalScore.ToString();
+        stageScoreText.text = "Stage Score: " + totalScore.ToString();
+        totalScoreText.text = "Total Score: " + gameScore.ToString();
+
+        currentManaReward = manaUsed * totalScore / 1000;
+        currentHealthReward = damageTaken * totalScore / 1000;
+        CtrlObj.SetRewards(currentHealthReward, currentManaReward);
+        Debug.LogFormat("health reward = {00:0}  mana reward = {00:0}", currentHealthReward, currentManaReward);
 
         ResultScreen.SetActive(true);
     }
@@ -74,17 +102,29 @@ public class ScoreSystem : MonoBehaviour
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    public void nextStage()
+    public void nextStageRewardHealth()
+    {
+        player.Health += Mathf.Round(currentHealthReward);
+        startNextStage();
+    }
+
+    public void nextStageRewardMana()
+    {
+        player.Mana += Mathf.Round(currentManaReward);
+        startNextStage();
+    }
+
+    void startNextStage()
     {
         setStageStartStatus();
         ResultScreen.SetActive(false);
-        Time.timeScale = 1;
         game.nextStage();
     }
 
     void setStageStartStatus()
     {
         currentTime = 0;
+        chestTmr = 0.0f;
         healthBefore = player.Health;
         manaBefore = player.Mana;
         cardsUsedBefore = player.cardsUsed;

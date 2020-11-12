@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameController : MonoBehaviour
     public int CurrentStage = 1;
     public Text DeckUI;
     public float SecondsToBattle;
+    public Image BattleZoneArea;
+    public Image PlayerManaBarHighlightImage;
     public Sprite BossSprite, BossSprite2, BossSprite3;
 
     private EnemyController Enemy;
@@ -24,6 +27,8 @@ public class GameController : MonoBehaviour
     private PTurnState playerState = PTurnState.WAIT_FOR_CARD_PLAY;
 
     private PersistentGameSettings gameSettings;
+    private Sprite BZAreaArtwork;
+    private Sprite PMBarArtwork;
 
     private ScoreSystem ScoreSystem;
 
@@ -34,6 +39,8 @@ public class GameController : MonoBehaviour
         Player = FindObjectOfType<PlayerController>();
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         ScoreSystem = FindObjectOfType<ScoreSystem>();
+        BZAreaArtwork = BattleZoneArea.sprite;
+        PMBarArtwork = PlayerManaBarHighlightImage.sprite;
 
         CurrentStage = 1;
     }
@@ -183,6 +190,26 @@ public class GameController : MonoBehaviour
         }
 
         gameState = StateType.ENEMY_TURN;
+    }
+
+    public void PlayerHandDragBegin(PointerEventData eventData)
+    {
+        // Turn on highlight for available drop zones. Don't forget to save current to restore
+        Sprite artwork = Resources.Load<Sprite>("Sprites/BZ-Highlight");
+
+        BattleZoneArea.sprite = artwork;
+        Color PMBOrigColor = PlayerManaBarHighlightImage.color;
+        PMBOrigColor.a = 255f;
+        PlayerManaBarHighlightImage.color = PMBOrigColor;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        // TODO : Play it safe turn off highlight for available drop zones
+        BattleZoneArea.sprite = BZAreaArtwork;
+        Color PMBOrigColor = PlayerManaBarHighlightImage.color;
+        PMBOrigColor.a = 0f;
+        PlayerManaBarHighlightImage.color = PMBOrigColor;
     }
 
     public bool CanDropPlayerCard(Draggable.Slot slot)

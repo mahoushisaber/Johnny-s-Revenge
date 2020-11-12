@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
 
     public Transform parentToReturnTo = null;
-    public Transform placeholderParent = null; 
+    public Transform placeholderParent = null;
 
     GameObject placeholder = null; 
 
@@ -23,6 +23,17 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             eventData.pointerDrag = null;
             Debug.Log("OnBeginDrag - Stopping drag of anything from battle zone");
             return;
+        }
+
+        if (this.transform.parent.name == "Player Hand")
+        {
+            GameController GCtrl = FindObjectOfType<GameController>();
+
+            if (GCtrl != null)
+            {
+                // Notify game controller so it can do what ever it needs
+                GCtrl.PlayerHandDragBegin(eventData);
+            }
         }
 
         //Debug.Log("OnBeginDrag");
@@ -83,6 +94,14 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
         GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        GameController GCtrl = FindObjectOfType<GameController>();
+
+        if (GCtrl != null)
+        {
+            // Notify game controller so it can do what ever it needs
+            GCtrl.OnEndDrag(eventData);
+        }
 
         Destroy(placeholder);
     }
