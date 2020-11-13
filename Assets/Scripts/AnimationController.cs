@@ -96,17 +96,25 @@ public class AnimationController : MonoBehaviour
 
     public void PlayPowerStrike()
     {
-        if (Player.Mana >= 50 && Player.Mana < 100)
+        if (Player != null)
+        {
+            if (Player.Mana >= 50 && Player.Mana < 100)
+            {
+                GameObject strike = Instantiate(powerStrike, new Vector3(51, -16, 65), powerStrike.transform.rotation);
+                strike.GetComponent<Animator>().Play("powerStrike");
+                Destroy(strike, 2.5f);
+            }
+            else
+            {
+                GameObject strike = Instantiate(powerStrikeNoMana, new Vector3(51, -16, 65), powerStrike.transform.rotation);
+                strike.GetComponent<Animator>().Play("powerStrike");
+                Destroy(strike, 1.5f);
+            }
+        } else
         {
             GameObject strike = Instantiate(powerStrike, new Vector3(51, -16, 65), powerStrike.transform.rotation);
             strike.GetComponent<Animator>().Play("powerStrike");
             Destroy(strike, 2.5f);
-        }
-        else
-        {
-            GameObject strike = Instantiate(powerStrikeNoMana, new Vector3(51, -16, 65), powerStrike.transform.rotation);
-            strike.GetComponent<Animator>().Play("powerStrike");
-            Destroy(strike, 1.5f);
         }
     }
 
