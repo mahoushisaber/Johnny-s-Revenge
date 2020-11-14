@@ -13,6 +13,8 @@ public class AnimationController : MonoBehaviour
     public GameObject powerStrikeNoMana;
     public GameObject saberAttack;
     public GameObject pierce;
+    public GameObject shield;
+    public GameObject run;
 
     private PlayerController Player;
 
@@ -29,41 +31,50 @@ public class AnimationController : MonoBehaviour
     void ProcessInputs() // For testing purposes
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             PlaySlash();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             PlayDaggerThrow();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             PlayHeal();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             PlaySiphon();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             PlayPowerStrike();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             PlaySaberAttack();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha7))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             PlayPierce();
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            PlayShield();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            PlayRun();
+        }
     }
 
     public void PlaySlash()
@@ -130,5 +141,19 @@ public class AnimationController : MonoBehaviour
         GameObject spawnedPierce = Instantiate(pierce, new Vector3(50, 110, 70), pierce.transform.rotation);
         spawnedPierce.GetComponent<Animator>().Play("pierce redo");
         Destroy(spawnedPierce, 2.0f);
+    }
+
+    public void PlayShield()
+    {
+        GameObject spawnedShield = Instantiate(shield, new Vector3(50, 0, 30), potionHeal.transform.rotation);
+        spawnedShield.GetComponent<Animator>().Play("shield");
+        Destroy(spawnedShield, 2.25f);
+    }
+
+    public void PlayRun()
+    {
+        GameObject playRun = Instantiate(run, new Vector3(50, 0, 30), potionHeal.transform.rotation);
+        playRun.GetComponent<Animator>().Play("run");
+        Destroy(playRun, 2.25f);
     }
 }
