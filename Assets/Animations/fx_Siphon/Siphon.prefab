@@ -5037,6 +5037,14 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.ctime2
       value: 65342
       objectReference: {fileID: 0}
+    - target: {fileID: 1624531959, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624531959, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1537473918797360033, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5117,6 +5125,14 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1794761785389083994, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794761785389083994, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1829380981745530343, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
       value: 0.003782494
@@ -5184,6 +5200,14 @@ PrefabInstance:
     - target: {fileID: 1829380981745530343, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829380981745530343, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829380981745530343, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2510723913480987832, guid: af18b580724dedc4f9ed30d77ea60803, type: 3}
       propertyPath: m_Materials.Array.data[0]
