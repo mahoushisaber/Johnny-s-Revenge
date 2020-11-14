@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 0165bd801180f9743a59ca1e6f19c141
   - enabled: 1
+    path: Assets/Scenes/HighScores.unity
+    guid: e65c202ba3595264a893a223c639ab2c
+  - enabled: 1
     path: Assets/Scenes/AdventureMap.unity
     guid: 5a44f655f940a1240bbc29482f13dff7
   - enabled: 1
