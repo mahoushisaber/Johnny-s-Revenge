@@ -49,6 +49,8 @@ public class EnemyDeck : MonoBehaviour
         {
             var drawnCard = Instantiate(cardPrefab, EnemyHand.transform.position, Quaternion.identity);
             drawnCard.transform.SetParent(EnemyHand.transform);
+            drawnCard.transform.localScale = new Vector3(1.6f, 1.6f, 1);
+            //drawnCard.transform.Rotate(65, 0, 0); 
 
             CardController UI_Card = drawnCard.GetComponent<CardController>();
             UI_Card.InitWithCard(deck[0]);

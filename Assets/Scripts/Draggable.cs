@@ -13,7 +13,25 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     GameObject placeholder = null; 
 
     public enum Slot { ANY, BATTLE, MANA };
-    public Slot typeOfItem = Slot.ANY; 
+    public Slot typeOfItem = Slot.ANY;
+
+    private Vector3 p;
+    private Vector3 pos;
+    private Camera cam;
+
+    private void Start()
+    {
+        cam = Camera.main;
+        p = Input.mousePosition;
+        p.z = 71.6f;
+    }
+
+    private void Update()
+    {
+        p = Input.mousePosition;
+        p.z = 71.6f;
+        pos = Camera.main.ScreenToWorldPoint(p);
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -49,7 +67,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         //Debug.Log("OnDrag");
 
-        this.transform.position = eventData.position;
+        //use below for gameplay scene
+        //this.transform.position = eventData.position; 
+        //use below for test scene
+        this.transform.position = pos;
 
         if (placeholder.transform.parent != placeholderParent)
         {

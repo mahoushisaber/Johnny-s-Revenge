@@ -333,6 +333,7 @@ MonoBehaviour:
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
   typeOfItem: 0
+  cameraCanvas: {fileID: 0}
 --- !u!114 &2168266824873360501
 MonoBehaviour:
   m_ObjectHideFlags: 0
