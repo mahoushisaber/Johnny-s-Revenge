@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 0165bd801180f9743a59ca1e6f19c141
   - enabled: 1
+    path: Assets/Scenes/AdventureMap.unity
+    guid: 5a44f655f940a1240bbc29482f13dff7
+  - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

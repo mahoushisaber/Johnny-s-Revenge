@@ -17,6 +17,9 @@ public class LoadScene : MonoBehaviour
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         GameResultTextEffects = GameResultText.GetComponent<TextEffects>();
 
+        // Start out new games by clearing level one of properties NOT high scores
+        gameSettings.DeleteProperties();
+
         if (LevelCount > 0)
         {
             // We have played a level so now that we are back display the results of last game
@@ -44,8 +47,12 @@ public class LoadScene : MonoBehaviour
     {
         // Init property so we know what is going on
         GameResultTextEffects.visible = false;
-        gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.UNKNOWN;
         LevelCount++;
+
+        gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.UNKNOWN;
+        gameSettings.CurrentLevel = 0;
+        gameSettings.ActiveLevel = LevelCount;
+        gameSettings.SaveProperties();
 
         SceneManager.LoadScene(theLevel);
     }

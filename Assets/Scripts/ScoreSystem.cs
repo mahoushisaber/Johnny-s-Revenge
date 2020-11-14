@@ -12,10 +12,12 @@ public class ScoreSystem : MonoBehaviour
     public Text manaUsedText;
     public Text cardsUsedText;
     public Text stageScoreText;
-    public Text totalScoreText;
+    public Text gameScoreText;
     public Image chestOpenImage;
     public GameObject ResultScreen;
-    
+    public int gameScore;
+    public int levelScore;
+
     private float healthBefore;
     private float manaBefore;
     private int cardsUsedBefore;
@@ -24,7 +26,6 @@ public class ScoreSystem : MonoBehaviour
     private float manaUsed;
     private int cardsUsed;
     private float currentTime;
-    private int gameScore;
     private PlayerController player;
     private GameController game;
     private BattleResults CtrlObj;
@@ -68,6 +69,7 @@ public class ScoreSystem : MonoBehaviour
     public void showResult()
     {
         Debug.Log("RESULT PRINTED");
+        stageResultText.text = string.Format("Stage {0} Result", game.CurrentStage);
         enemyDefeated = true;
         damageTaken = healthBefore - player.Health;
         manaUsed = manaBefore - player.Mana;
@@ -78,14 +80,14 @@ public class ScoreSystem : MonoBehaviour
         cardsUsedText.text = cardsUsed.ToString();
         timeSpentText.text = timeText.text;
 
-        int totalScore = (int)calculateTotalScore();
-        gameScore += totalScore;
+        levelScore = (int)calculatelevelScore();
+        gameScore += levelScore;
 
-        stageScoreText.text = "Stage Score: " + totalScore.ToString();
-        totalScoreText.text = "Total Score: " + gameScore.ToString();
+        stageScoreText.text = "Stage Score: " + levelScore.ToString();
+        gameScoreText.text = "Total Score: " + gameScore.ToString();
 
-        currentManaReward = manaUsed * totalScore / 1000;
-        currentHealthReward = damageTaken * totalScore / 1000;
+        currentManaReward = manaUsed * levelScore / 1000;
+        currentHealthReward = damageTaken * levelScore / 1000;
         CtrlObj.SetRewards(currentHealthReward, currentManaReward);
         Debug.LogFormat("health reward = {00:0}  mana reward = {00:0}", currentHealthReward, currentManaReward);
 
@@ -131,7 +133,7 @@ public class ScoreSystem : MonoBehaviour
         enemyDefeated = false;
     }
 
-    float calculateTotalScore()
+    float calculatelevelScore()
     {
         float timeScore, healthScore, manaScore, cardScore;
 

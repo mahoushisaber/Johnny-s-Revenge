@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    public Text StageText;
-    public int TotalStages;
+    public readonly int TotalLevels = 3;
+    public readonly int TotalStages = 3;
+    public int CurrentLevel = 1;
     public int CurrentStage = 1;
-    public Text DeckUI;
     public float SecondsToBattle;
+    public Text LevelText;
+    public Text StageText;
+    public Text DeckUI;
     public Image BattleZoneArea;
     public Image PlayerManaBarHighlightImage;
     public Sprite BossSprite, BossSprite2, BossSprite3;
@@ -31,6 +34,7 @@ public class GameController : MonoBehaviour
     private Sprite PMBarArtwork;
 
     private ScoreSystem ScoreSystem;
+    private int ActiveLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,14 @@ public class GameController : MonoBehaviour
         PMBarArtwork = PlayerManaBarHighlightImage.sprite;
 
         CurrentStage = 1;
+        CurrentLevel = gameSettings.CurrentLevel;
+        ActiveLevel = gameSettings.ActiveLevel;
+
+        if (CurrentLevel != ActiveLevel)
+        {
+            // Upon return they are not the same so we are starting a new level
+            NextLevel();
+        }
     }
 
     // Update is called once per frame
@@ -72,7 +84,8 @@ public class GameController : MonoBehaviour
                 Execute_BattleEvaluate();
                 break;
         }
-       
+
+        LevelText.text = string.Format("Level: {0} of {1}", CurrentLevel, TotalLevels);
         StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
@@ -176,17 +189,33 @@ public class GameController : MonoBehaviour
         {
             ScoreSystem.showResult();
         }
+
         if (Player.Health <= 0)
         {
-            // Game Over Player LOST
-            gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.LOST;
-            SceneManager.LoadScene("Menu");
-        }
+            // Game Over Player LOST save the result and move to menu screen
+            if (CurrentLevel == 1)
+            {
+                gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.LOST;
+                gameSettings.Level1Score = ScoreSystem.levelScore;
+            }
+            else if (CurrentLevel == 2)
+            {
+                gameSettings.Level2Outcome = PersistentGameSettings.OutcomeType.LOST;
+                gameSettings.Level2Score = ScoreSystem.levelScore;
+            }
+            else if (CurrentLevel == 3)
+            {
+                gameSettings.Level3Outcome = PersistentGameSettings.OutcomeType.LOST;
+                gameSettings.Level3Score = ScoreSystem.levelScore;
+            }
 
-        if ( gameSettings.RequiresSave )
-        {
-            // Requires a save so we can use the values over game instances or between scenes
-            gameSettings.SaveProperties();
+            if (gameSettings.RequiresSave)
+            {
+                // Requires a save so we can use the values over game instances or between scenes
+                gameSettings.SaveProperties();
+            }
+
+            SceneManager.LoadScene("Menu");
         }
 
         gameState = StateType.ENEMY_TURN;
@@ -257,11 +286,52 @@ public class GameController : MonoBehaviour
     {
         if (CurrentStage >= TotalStages)
         {
-            // Game Over Player Won
-            gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.WON;
-            SceneManager.LoadScene("Menu");
+            string nextScene = "AdventureMap";
+
+            // Level Over Player WON save the result and move to menu screen
+            if (CurrentLevel == 1)
+            {
+                gameSettings.Level1Outcome = PersistentGameSettings.OutcomeType.WON;
+                gameSettings.Level1Score = ScoreSystem.levelScore;
+                gameSettings.ActiveLevel = 2;
+            }
+            else if (CurrentLevel == 2)
+            {
+                gameSettings.Level2Outcome = PersistentGameSettings.OutcomeType.WON;
+                gameSettings.Level2Score = ScoreSystem.levelScore;
+                gameSettings.ActiveLevel = 3;
+            }
+            else if (CurrentLevel == 3)
+            {
+                gameSettings.Level3Outcome = PersistentGameSettings.OutcomeType.WON;
+                gameSettings.Level3Score = ScoreSystem.levelScore;
+                gameSettings.ActiveLevel = 0;
+                nextScene = "Menu";
+            }
+
+            if (gameSettings.RequiresSave)
+            {
+                // Requires a save so we can use the values over game instances or between scenes
+                gameSettings.SaveProperties();
+            }
+
+            SceneManager.LoadScene(nextScene);
         }
         Enemy.Health = Enemy.MaxHealth;
         CurrentStage += 1;
+    }
+
+    public void NextLevel()
+    {
+        // Must save the change locally and to persistent data so progression
+        // of stages and levels are picked up here and in other scenes.
+        CurrentLevel = ActiveLevel;
+        gameSettings.CurrentLevel = CurrentLevel;
+        gameSettings.SaveProperties();
+
+        // Load new settings for the CurrentLevel to play
+
+        // !!!! NOTE NOR SURE HOW TO CHANGE SETTINGS BACK TO NEW GAME AFTER WIN !!!!
+        Debug.LogFormat("New Level {0} Achieved", CurrentLevel);
     }
 }
