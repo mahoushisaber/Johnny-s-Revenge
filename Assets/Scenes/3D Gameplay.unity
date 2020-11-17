@@ -795,7 +795,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1365374829}
         m_TargetAssemblyTypeName: ScoreSystem, Assembly-CSharp
         m_MethodName: nextStageRewardHealth
         m_Mode: 1
@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1365374829}
         m_TargetAssemblyTypeName: ScoreSystem, Assembly-CSharp
         m_MethodName: nextStageRewardMana
         m_Mode: 1
@@ -3299,7 +3299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Level1: {fileID: 21300000, guid: e33e0324302433c41b9ac6690c874f87, type: 3}
   Level2: {fileID: 21300000, guid: ee070f47d54168e43b95d537d36839cc, type: 3}
-  Level3: {fileID: 21300000, guid: d5cdbfeeeb1a2c04aaeb1d753c375296, type: 3}
+  Level3: {fileID: 21300000, guid: 53eb46f3033863041bcee9e8941d959a, type: 3}
   BackgroundSprite: {fileID: 1258626235}
 --- !u!114 &1258626238
 MonoBehaviour:
@@ -5970,7 +5970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3120674377476131448, guid: e20f0823f1ff13846897da3d1d0652c5, type: 3}
       propertyPath: sounds.Array.data[6].volume
-      value: 0
+      value: 0.042
       objectReference: {fileID: 0}
     - target: {fileID: 3120674377476131448, guid: e20f0823f1ff13846897da3d1d0652c5, type: 3}
       propertyPath: sounds.Array.data[8].name
