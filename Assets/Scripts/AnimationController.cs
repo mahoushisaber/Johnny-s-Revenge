@@ -145,14 +145,14 @@ public class AnimationController : MonoBehaviour
 
     public void PlayShield()
     {
-        GameObject spawnedShield = Instantiate(shield, new Vector3(50, 0, 30), potionHeal.transform.rotation);
+        GameObject spawnedShield = Instantiate(shield, new Vector3(50, 0, 30), shield.transform.rotation);
         spawnedShield.GetComponent<Animator>().Play("shield");
         Destroy(spawnedShield, 2.25f);
     }
 
     public void PlayRun()
     {
-        GameObject playRun = Instantiate(run, new Vector3(50, 0, 30), potionHeal.transform.rotation);
+        GameObject playRun = Instantiate(run, new Vector3(50, 0, 30), run.transform.rotation);
         playRun.GetComponent<Animator>().Play("run");
         Destroy(playRun, 2.25f);
     }

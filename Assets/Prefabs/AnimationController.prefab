@@ -51,3 +51,5 @@ MonoBehaviour:
   powerStrikeNoMana: {fileID: 6255049537560261650, guid: e0dd1fe02db7388468cbf7e4add71dec, type: 3}
   saberAttack: {fileID: 19833294415716490, guid: 28d037d4c6241a54393f45c787bcadcc, type: 3}
   pierce: {fileID: 630563402872974346, guid: 351f74429299579498c1df646569b609, type: 3}
+  shield: {fileID: 4484401790273667670, guid: 1aba2f7ff22011c49a7735a1bc973135, type: 3}
+  run: {fileID: 2155757698322115850, guid: 906d88b1d8c12384fab74876467c259d, type: 3}
