@@ -101,6 +101,6 @@ public class LoadScene : MonoBehaviour
         gameSettings.ActiveLevel = LevelCount;
         gameSettings.SaveProperties();
 
-        SceneManager.LoadScene(theLevel);
+        SceneManager.LoadScene(theLevel, LoadSceneMode.Single);
     }
 }

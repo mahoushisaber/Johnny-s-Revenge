@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 229213573}
   - component: {fileID: 229213572}
   - component: {fileID: 229213571}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 252310001}
   - component: {fileID: 252310003}
   - component: {fileID: 252310002}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Mana Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 314042167}
   - component: {fileID: 314042166}
   - component: {fileID: 314042165}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Mana Drop Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 349819324}
   - component: {fileID: 349819325}
   - component: {fileID: 349819326}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1016,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &393837140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,7 +1126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406046415}
   - component: {fileID: 406046416}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 555286710}
   - component: {fileID: 555286712}
   - component: {fileID: 555286711}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 563838969}
   - component: {fileID: 563838971}
   - component: {fileID: 563838970}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Shield Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 573388323}
   - component: {fileID: 573388322}
   - component: {fileID: 573388325}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 607664247}
   - component: {fileID: 607664249}
   - component: {fileID: 607664248}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Shield Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,7 +1607,7 @@ GameObject:
   - component: {fileID: 678521240}
   - component: {fileID: 678521242}
   - component: {fileID: 678521241}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Shield Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,7 +1682,7 @@ GameObject:
   - component: {fileID: 678678939}
   - component: {fileID: 678678941}
   - component: {fileID: 678678940}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1756,7 +1756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 684679561}
   - component: {fileID: 684679562}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 705790412}
   - component: {fileID: 705790411}
   - component: {fileID: 705790410}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player HP Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 830904747}
   - component: {fileID: 830904749}
   - component: {fileID: 830904748}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2314,7 +2314,7 @@ GameObject:
   - component: {fileID: 842827357}
   - component: {fileID: 842827359}
   - component: {fileID: 842827358}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy HP Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2393,7 +2393,7 @@ GameObject:
   - component: {fileID: 846733348}
   - component: {fileID: 846733350}
   - component: {fileID: 846733349}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player HP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2471,7 +2471,7 @@ GameObject:
   - component: {fileID: 852574625}
   - component: {fileID: 852574624}
   - component: {fileID: 852574626}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Mana Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3238,7 +3238,7 @@ GameObject:
   - component: {fileID: 1183470311}
   - component: {fileID: 1183470310}
   - component: {fileID: 1183470309}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Battle Drop Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3565,7 +3565,7 @@ GameObject:
   - component: {fileID: 1279277759}
   - component: {fileID: 1279277758}
   - component: {fileID: 1279277757}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Battle Enemy Drop Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3679,7 +3679,7 @@ GameObject:
   - component: {fileID: 1280330358}
   - component: {fileID: 1280330360}
   - component: {fileID: 1280330359}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player HP Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3837,7 +3837,7 @@ GameObject:
   - component: {fileID: 1317834210}
   - component: {fileID: 1317834212}
   - component: {fileID: 1317834211}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Player Mana Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4323,7 +4323,7 @@ GameObject:
   - component: {fileID: 1597341340}
   - component: {fileID: 1597341339}
   - component: {fileID: 1597341338}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4712,7 +4712,7 @@ GameObject:
   - component: {fileID: 1688346989}
   - component: {fileID: 1688346991}
   - component: {fileID: 1688346990}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4791,7 +4791,7 @@ GameObject:
   - component: {fileID: 1713179877}
   - component: {fileID: 1713179879}
   - component: {fileID: 1713179878}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Card Left UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5200,7 +5200,7 @@ GameObject:
   - component: {fileID: 1787582361}
   - component: {fileID: 1787582360}
   - component: {fileID: 1787582359}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy HP Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5485,7 +5485,7 @@ GameObject:
   - component: {fileID: 1927765526}
   - component: {fileID: 1927765528}
   - component: {fileID: 1927765527}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Deck UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5562,7 +5562,7 @@ GameObject:
   - component: {fileID: 2022153634}
   - component: {fileID: 2022153637}
   - component: {fileID: 2022153636}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy HP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5705,7 +5705,7 @@ GameObject:
   - component: {fileID: 2074011736}
   - component: {fileID: 2074011738}
   - component: {fileID: 2074011737}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Shiled Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

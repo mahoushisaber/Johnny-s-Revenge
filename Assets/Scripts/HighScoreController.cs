@@ -27,7 +27,6 @@ public class HighScoreController : MonoBehaviour
 
         if (gCtrl == null)
         {
-            DontDestroyOnLoad(gameObject);
             gCtrl = this;
             LoadHighScore();
         }

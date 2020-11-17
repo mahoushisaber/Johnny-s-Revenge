@@ -32,6 +32,6 @@ public class HighScores : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }

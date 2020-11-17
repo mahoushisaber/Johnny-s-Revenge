@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour
                 gameSettings.SaveProperties();
             }
 
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         }
 
         gameState = StateType.ENEMY_TURN;
@@ -328,7 +328,7 @@ public class GameController : MonoBehaviour
                 gameSettings.SaveProperties();
             }
 
-            SceneManager.LoadScene(nextScene);
+            SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
         }
         Enemy.Health = Enemy.MaxHealth;
         CurrentStage += 1;
