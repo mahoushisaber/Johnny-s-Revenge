@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Hand;
     public GameObject BattleZone;
     public GameObject PlayerShield;
+    public int cardsUsed;
 
     private PlayerDeck PlayerDeck;
     private float shieldAfterBattle = 0f;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        cardsUsed = 0;
         if (Hand == null)
         {
             Hand = GameObject.Find("Hand");
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
             {
                 var cardToUse = UI_card.Name;
                 int cardPower = UI_card.Power;
+
+                cardsUsed += 1;
 
                 // Copy over our player shield to use and clear the playerShield as it gets used up
                 float useEnemyShield = enemyShield;

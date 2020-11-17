@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
 
     public Transform parentToReturnTo = null;
-    public Transform placeholderParent = null; 
+    public Transform placeholderParent = null;
 
     GameObject placeholder = null; 
 
@@ -17,11 +17,23 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (this.transform.parent.name == "Battle Drop Zone")
+        if (   this.transform.parent.name == "Battle Drop Zone"
+            || this.transform.parent.name == "Battle Enemy Drop Zone")
         {
             eventData.pointerDrag = null;
             Debug.Log("OnBeginDrag - Stopping drag of anything from battle zone");
             return;
+        }
+
+        if (this.transform.parent.name == "Player Hand")
+        {
+            GameController GCtrl = FindObjectOfType<GameController>();
+
+            if (GCtrl != null)
+            {
+                // Notify game controller so it can do what ever it needs
+                GCtrl.PlayerHandDragBegin(eventData);
+            }
         }
 
         //Debug.Log("OnBeginDrag");
@@ -55,6 +67,17 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             placeholder.transform.SetParent(placeholderParent); 
         }
 
+        Debug.Log(placeholder.transform.parent.name);
+
+        if (placeholder.transform.parent.name == "Battle Drop Zone" || placeholder.transform.parent.name == "Player Mana Drop Zone")
+        {
+            this.transform.rotation = Quaternion.Euler(30,0,0);
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Euler(0,0,0);
+        }
+
         int newSiblingIndex = placeholderParent.childCount; 
 
         for (int i = 0; i < placeholderParent.childCount; i++)
@@ -81,7 +104,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+        this.transform.rotation = Quaternion.Euler(0,0,0);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        GameController GCtrl = FindObjectOfType<GameController>();
+
+        if (GCtrl != null)
+        {
+            // Notify game controller so it can do what ever it needs
+            GCtrl.OnEndDrag(eventData);
+        }
 
         Destroy(placeholder);
     }

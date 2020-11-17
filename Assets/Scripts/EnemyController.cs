@@ -13,8 +13,19 @@ public class EnemyController : MonoBehaviour
     public GameObject EnemyHand;
     public GameObject BattleZone;
     public GameObject EnemyShield;
+    public Sprite Level1Stage1;
+    public Sprite Level1Stage2;
+    public Sprite Level1Stage3;
+    public Sprite Level2Stage1;
+    public Sprite Level2Stage2;
+    public Sprite Level2Stage3;
+    public Sprite Level3Stage1;
+    public Sprite Level3Stage2;
+    public Sprite Level3Stage3;
+    public GameObject GameManager;
 
     private EnemyDeck EnemyDeck;
+    private Sprite[] EnemySprites;
     private float shieldAfterBattle = 0f;
     // Counting number of times played for dagger and retreat 
     public static int attackCardCount = 0;
@@ -22,6 +33,17 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        EnemySprites = new Sprite[9];
+        EnemySprites[0] = Level1Stage1;
+        EnemySprites[1] = Level1Stage2;
+        EnemySprites[2] = Level1Stage3;
+        EnemySprites[3] = Level2Stage1;
+        EnemySprites[4] = Level2Stage2;
+        EnemySprites[5] = Level2Stage3;
+        EnemySprites[6] = Level3Stage1;
+        EnemySprites[7] = Level3Stage2;
+        EnemySprites[8] = Level3Stage3;
+
         Health = MaxHealth;
         if (EnemyHand == null)
         {
@@ -36,14 +58,14 @@ public class EnemyController : MonoBehaviour
         // Any animations or other stuff specific to Enemy controller
         ;
     }
-
+    /*
     public void Died()
     {
         MaxHealth *= 1.5f;
         Health = MaxHealth;
         IsTurn = false;
     }
-
+    */
     public void StartTurn()
     {
         IsTurn = EnemyDeck.PlayCard(1, BattleZone);
@@ -182,5 +204,22 @@ public class EnemyController : MonoBehaviour
                 Destroy(UI_card.gameObject);
             }
         }
+    }
+
+    public void setEnemy(int levelNum, int stageNum)
+    {
+        setEnemySprite(levelNum, stageNum);
+        setEnemyDifficulty(levelNum, stageNum);
+    }
+
+    void setEnemySprite(int levelNum, int stageNum)
+    {
+        GameManager.GetComponent<SpriteRenderer>().sprite = EnemySprites[ stageNum - 1 + (levelNum - 1) * 3 ];
+    }
+
+    void setEnemyDifficulty(int levelNum, int stageNum)
+    {
+        MaxHealth = levelNum*10 + stageNum*10;
+        Health = levelNum*10 + stageNum*10;
     }
 }
