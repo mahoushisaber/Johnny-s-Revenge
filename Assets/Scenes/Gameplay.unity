@@ -3917,6 +3917,7 @@ GameObject:
   - component: {fileID: 1369551098}
   - component: {fileID: 1369551097}
   - component: {fileID: 1369551096}
+  - component: {fileID: 1369551100}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4004,6 +4005,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1369551100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369551095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0179681b91e8894a944a762e2745783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level1: {fileID: 21300000, guid: 050359dcf7194044aaf934c222b9ed88, type: 3}
+  Level2: {fileID: 21300000, guid: ee070f47d54168e43b95d537d36839cc, type: 3}
+  Level3: {fileID: 21300000, guid: e504b653612329d4ba66f58fc8511568, type: 3}
+  BackgroundImage: {fileID: 1644586861}
 --- !u!1 &1462751478
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,7 +4346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.25024414, y: 1171}
+  m_AnchoredPosition: {x: -0.25048828, y: 1171}
   m_SizeDelta: {x: 0.5001221, y: 328.46777}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1597341338
@@ -4892,6 +4909,16 @@ MonoBehaviour:
   EnemyHand: {fileID: 1597341335}
   BattleZone: {fileID: 1279277755}
   EnemyShield: {fileID: 684679560}
+  Level1Stage1: {fileID: 21300000, guid: 8004e1257c745624b9da1717aa389a3f, type: 3}
+  Level1Stage2: {fileID: 21300000, guid: 73bb69197270ad545b9f54a18f7b2aec, type: 3}
+  Level1Stage3: {fileID: 21300000, guid: 61128c220978b8d418fa13d053f64a53, type: 3}
+  Level2Stage1: {fileID: 21300000, guid: cdef510c7c96c6a40a10fc4f9d6671fb, type: 3}
+  Level2Stage2: {fileID: 21300000, guid: a96c2ba1745528546864e82b4caeefbe, type: 3}
+  Level2Stage3: {fileID: 21300000, guid: bf4287c994b761e43bc1d680f053bd3e, type: 3}
+  Level3Stage1: {fileID: 21300000, guid: 561ea71f0657fb14188fc61e16c0dde0, type: 3}
+  Level3Stage2: {fileID: 21300000, guid: a2237b393c87fd6428f8f92f51c9ff87, type: 3}
+  Level3Stage3: {fileID: 21300000, guid: 3512352e30a18a44183553e1e8711f95, type: 3}
+  GameManager: {fileID: 1714503858}
 --- !u!1 &1714503858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4926,8 +4953,8 @@ MonoBehaviour:
   CurrentLevel: 1
   CurrentStage: 1
   SecondsToBattle: 1.5
-  StageText: {fileID: 555286711}
   LevelText: {fileID: 349819326}
+  StageText: {fileID: 555286711}
   DeckUI: {fileID: 1713179878}
   BattleZoneArea: {fileID: 1183470311}
   PlayerManaBarHighlightImage: {fileID: 678678940}
@@ -5483,7 +5510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -64.4, y: 322.6}
+  m_AnchoredPosition: {x: -64.3999, y: 322.6001}
   m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1927765527

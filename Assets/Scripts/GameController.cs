@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
 
     private EnemyController Enemy;
     private PlayerController Player;
+    private BackgroundController Background;
 
     enum StateType { UNKNOWN, ENEMY_TURN, PLAYER_TURN, BATTLE, BATTLE_EVALUATE };
     private StateType gameState = StateType.ENEMY_TURN;
@@ -43,6 +44,7 @@ public class GameController : MonoBehaviour
         Player = FindObjectOfType<PlayerController>();
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         ScoreSystem = FindObjectOfType<ScoreSystem>();
+        Background = FindObjectOfType<BackgroundController>();
         BZAreaArtwork = BattleZoneArea.sprite;
         PMBarArtwork = PlayerManaBarHighlightImage.sprite;
 
@@ -60,7 +62,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RenderBossSprites();
+        //RenderBossSprites();
         switch (gameState)
         {
             case StateType.UNKNOWN:
@@ -89,7 +91,7 @@ public class GameController : MonoBehaviour
         StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
-
+    /*
     void RenderBossSprites()
     {
         if (CurrentStage == 1)
@@ -108,6 +110,7 @@ public class GameController : MonoBehaviour
 
         }
     }
+    */
     void Execute_EnemyTurn()
     {
         if (!Enemy.IsTurn)
@@ -173,12 +176,22 @@ public class GameController : MonoBehaviour
     void Execute_Battle()
     {
         // Start the card battle by analyzing who won and apply results
-        Player.Health = Enemy.StartBattle(Player.Health, ref Player.Shield);
         Enemy.Health = Player.StartBattle(Enemy.Health, ref Enemy.Shield);
-
+        
+        if (Enemy.Health <= 0)
+        {
+            Enemy.Health = 0;
+            Enemy.EndBattle();
+            Player.EndBattle();
+        }
+        else
+        {
+            Player.Health = Enemy.StartBattle(Player.Health, ref Player.Shield);
+            Enemy.EndBattle();
+            Player.EndBattle();
+        }
+        
         // Clean up the battle cards and anything else
-        Enemy.EndBattle();
-        Player.EndBattle();
 
         gameState = StateType.BATTLE_EVALUATE;
     }
@@ -319,6 +332,7 @@ public class GameController : MonoBehaviour
         }
         Enemy.Health = Enemy.MaxHealth;
         CurrentStage += 1;
+        Enemy.setEnemy(CurrentLevel, CurrentStage);
     }
 
     public void NextLevel()
@@ -330,6 +344,8 @@ public class GameController : MonoBehaviour
         gameSettings.SaveProperties();
 
         // Load new settings for the CurrentLevel to play
+        Background.setBackground(CurrentLevel);
+        Enemy.setEnemy(CurrentLevel, CurrentStage);
 
         // !!!! NOTE NOR SURE HOW TO CHANGE SETTINGS BACK TO NEW GAME AFTER WIN !!!!
         Debug.LogFormat("New Level {0} Achieved", CurrentLevel);

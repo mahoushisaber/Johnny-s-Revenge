@@ -67,6 +67,17 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             placeholder.transform.SetParent(placeholderParent); 
         }
 
+        Debug.Log(placeholder.transform.parent.name);
+
+        if (placeholder.transform.parent.name == "Battle Drop Zone" || placeholder.transform.parent.name == "Player Mana Drop Zone")
+        {
+            this.transform.rotation = Quaternion.Euler(30,0,0);
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Euler(0,0,0);
+        }
+
         int newSiblingIndex = placeholderParent.childCount; 
 
         for (int i = 0; i < placeholderParent.childCount; i++)
@@ -93,6 +104,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+        this.transform.rotation = Quaternion.Euler(0,0,0);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
         GameController GCtrl = FindObjectOfType<GameController>();

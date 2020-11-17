@@ -138,7 +138,14 @@ public class ScoreSystem : MonoBehaviour
         float timeScore, healthScore, manaScore, cardScore;
 
         // Time - Maximum score is 250, every 30 seconds loses 50 points
-        timeScore = 250 - (currentTime/30)*50; 
+        if (currentTime >= 150)
+        {
+            timeScore = 0;
+        }
+        else
+        {
+            timeScore = 250 - (currentTime/30)*50; 
+        }
         
         // Health - Maximum score is 250, 1 health loses 2 points
         healthScore = 250 - damageTaken*2;
