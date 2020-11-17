@@ -266,7 +266,7 @@ RectTransform:
   m_GameObject: {fileID: 7728109489979733833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 7728109489430281541}
   - {fileID: 7728109489683498708}
@@ -333,6 +333,7 @@ MonoBehaviour:
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
   typeOfItem: 0
+  cameraCanvas: {fileID: 0}
 --- !u!114 &2168266824873360501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,8 +351,8 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: 125
   m_PreferredHeight: 200
-  m_FlexibleWidth: 0
-  m_FlexibleHeight: 0
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!225 &6846626940412895876
 CanvasGroup:
