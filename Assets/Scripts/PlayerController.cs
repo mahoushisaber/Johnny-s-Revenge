@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 {
                     shieldAfterBattle += cardPower;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
-
+                    AC.PlayShield();
                     Debug.Log("You shielded for " + cardPower);
                 }
                 else if (cardToUse == "Siphon")
