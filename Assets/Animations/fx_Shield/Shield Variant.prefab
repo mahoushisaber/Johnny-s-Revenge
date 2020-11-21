@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4484401790273667670}
   m_LocalRotation: {x: -0.5766784, y: 0.023390817, z: 0.0077057225, w: -0.8166}
-  m_LocalPosition: {x: 36, y: 0, z: 29.8}
+  m_LocalPosition: {x: 50, y: 50, z: 70}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 8969704854414903791}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 2.8998563, y: 178.79993, z: 179.99998}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 269.7}
 --- !u!95 &7631400524873548625
 Animator:
   serializedVersion: 3
@@ -44,7 +44,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 95e5112f5b8b0cd4093ac5b16aae2215, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -91,14 +91,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7631400525302134536}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
-  prewarm: 1
+  looping: 0
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -5031,7 +5031,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5040,7 +5040,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8274133419916619345, guid: f23b888e796354a46a700b7a67440ab4, type: 3}
+  - {fileID: 2100000, guid: e2353d2d5dd1bda488266ba53a7e83ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
