@@ -242,7 +242,11 @@ public class GameController : MonoBehaviour
         BattleZoneArea.sprite = artwork;
         Color PMBOrigColor = PlayerManaBarHighlightImage.color;
         PMBOrigColor.a = 255f;
-        PlayerManaBarHighlightImage.color = PMBOrigColor;
+        //Only highlight area if enough mana to enhance card
+        if (Player.Mana >= 25)
+        {
+            PlayerManaBarHighlightImage.color = PMBOrigColor;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
