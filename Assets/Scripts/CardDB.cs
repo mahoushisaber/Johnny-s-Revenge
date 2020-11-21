@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CardDB : MonoBehaviour
 {
     public static List<Card> cardList = new List<Card>();
-
+    public static List<Card> enemyCardList = new List<Card>();
     private void Awake()
     {
         // Clear must be called because Awake is called on each scene change. Consequently, anytime 
@@ -25,6 +25,13 @@ public class CardDB : MonoBehaviour
         //cardList.Add(new Card(4, "Dagger Throw", 3, "Deal 3 damage. Every time this card is played, increase its damage by 3 for this combat", false, "Red", Card.OwnerType.UNKNOWN, "dagger (1)"));
         //cardList.Add(new Card(7, "Rifles", 8, "Deal 8 damage, deal 25 damage when upgraded", false, "Red", Card.OwnerType.UNKNOWN));
         //cardList.Add(new Card(10, "Anger", 0, "gain 20% of your mana", false, "Green", Card.OwnerType.UNKNOWN));
+        enemyCardList.Clear();
 
+        enemyCardList.Add(new Card(0, "None", 0, "None", false, "None", Card.OwnerType.UNKNOWN, "0 (3)"));
+        enemyCardList.Add(new Card(1, "Slash", 8, "Deal 8 damage", false, "Red", Card.OwnerType.UNKNOWN, "0 (3)"));
+        enemyCardList.Add(new Card(2, "Block", 6, "Block 6 damage from the next enemy attack", false, "Blue", Card.OwnerType.UNKNOWN, "shield"));
+        enemyCardList.Add(new Card(3, "Siphon", 2, "Deal 2 damage and Restore 2 health", false, "Green", Card.OwnerType.UNKNOWN, "010-hook"));
+        enemyCardList.Add(new Card(4, "Pierce", 6, "Deal 6 damage ignoring shield", false, "Red", Card.OwnerType.UNKNOWN, "saber (1)"));
+        enemyCardList.Add(new Card(5, "Heal", 5, "Restore 5 health", false, "Green", Card.OwnerType.UNKNOWN, "014-rum"));
     }
 }

@@ -23,7 +23,7 @@ public class EnemyDeck : MonoBehaviour
     public void CreateDeck()
     {
         int x;
-        int randomCeiling = CardDB.cardList.Count;
+        int randomCeiling = CardDB.enemyCardList.Count;
 
         for (int i = 0; i < deckSize; i++)
         {
@@ -35,7 +35,7 @@ public class EnemyDeck : MonoBehaviour
                 x = randomCeiling - 1;
             }
 
-            Card deckCard = new Card(CardDB.cardList[x])
+            Card deckCard = new Card(CardDB.enemyCardList[x])
             {
                 Owner = Card.OwnerType.ENEMY
             };
