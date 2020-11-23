@@ -142,7 +142,7 @@ public class AdventureMapCtrl : MonoBehaviour
             // Note: Scene strings are zero based where level buttons are 1 based representing level
             // Save the new selected level to be picked up by next scene
             gameSettings.CurrentLevel = BtnId - 1;
-            SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
+            SceneManager.LoadScene("3D Gameplay", LoadSceneMode.Single);
         }
     }
 }

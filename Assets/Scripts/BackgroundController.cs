@@ -9,7 +9,7 @@ public class BackgroundController : MonoBehaviour
     public Sprite Level2;
     public Sprite Level3;
     
-    public Image BackgroundImage;
+    public SpriteRenderer BackgroundSprite;
 
     private Sprite[] StageSprites;
     // Start is called before the first frame update
@@ -29,6 +29,6 @@ public class BackgroundController : MonoBehaviour
 
     public void setBackground(int levelNum)
     {
-        BackgroundImage.sprite = StageSprites[ levelNum - 1 ];
+        BackgroundSprite.sprite = StageSprites[ levelNum - 1 ];
     }
 }

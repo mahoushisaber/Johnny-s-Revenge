@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float shieldAfterBattle = 0f;
     public static int attackCardCount = 0;
     public static int blockCardCount = 0;
+    private AnimationController AC;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
             Hand = GameObject.Find("Hand");
         }
         PlayerDeck = FindObjectOfType<PlayerDeck>();
+        AC = FindObjectOfType<AnimationController>();
         Health = MaxHealth;
         Mana = MaxMana;
         cardsInDeck = PlayerDeck.deck.Count;
@@ -102,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 {
                     enemyHealth -= cardPower - useEnemyShield;
                     FindObjectOfType<AudioManager>().Play("Sword");
+                    AC.PlaySlash();
 
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
@@ -110,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 {
                     shieldAfterBattle += cardPower;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
-
+                    AC.PlayShield();
                     Debug.Log("You shielded for " + cardPower);
                 }
                 else if (cardToUse == "Siphon")
@@ -118,6 +121,7 @@ public class PlayerController : MonoBehaviour
                     enemyHealth -= cardPower - useEnemyShield;
                     Health += cardPower;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+                    AC.PlaySiphon();
 
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("The enemy now has " + enemyHealth + " health remaining");
@@ -131,6 +135,7 @@ public class PlayerController : MonoBehaviour
                     enemyHealth -= cardPower - useEnemyShield;
                     attackCardCount++;
                     FindObjectOfType<AudioManager>().Play("Sword");
+                    AC.PlayDaggerThrow();
 
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
@@ -140,6 +145,7 @@ public class PlayerController : MonoBehaviour
                     enemyHealth -= cardPower - useEnemyShield;
                     Health -= 3;
                     FindObjectOfType<AudioManager>().Play("Sword");
+                    AC.PlaySaberAttack();
 
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
@@ -162,6 +168,7 @@ public class PlayerController : MonoBehaviour
                         Mana += 25;
                     }
                     FindObjectOfType<AudioManager>().Play("Sword");
+                    AC.PlayPowerStrike();
 
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("Enemy now has " + enemyHealth + " health remaining");
@@ -169,12 +176,14 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Pierce")
                 {
                     enemyHealth -= cardPower;
+                    AC.PlayPierce();
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("The enemy now has " + enemyHealth + " health remaining");
                 }
                 else if (cardToUse == "Heal")
                 {
                     Health += cardPower;
+                    AC.PlayHeal();
                     Debug.Log("You healed for" + cardPower + " health");
                 }
                 else

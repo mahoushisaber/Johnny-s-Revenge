@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
     public int CurrentStage = 1;
     public float SecondsToBattle;
     public Text LevelText;
-    public Text StageText;
     public Text DeckUI;
     public Image BattleZoneArea;
     public Image PlayerManaBarHighlightImage;
@@ -88,8 +87,7 @@ public class GameController : MonoBehaviour
                 break;
         }
 
-        LevelText.text = string.Format("Level: {0} of {1}", CurrentLevel, TotalLevels);
-        StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
+        LevelText.text = string.Format("Level: {0}.{1}", CurrentLevel, CurrentStage);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
 
