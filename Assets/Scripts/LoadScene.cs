@@ -19,6 +19,7 @@ public class LoadScene : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Theme5");
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         GameResultTextEffects = GameResultText.GetComponent<TextEffects>();
         scoreCntrl = FindObjectOfType<HighScoreController>();

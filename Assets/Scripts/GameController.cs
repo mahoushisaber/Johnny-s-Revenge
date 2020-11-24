@@ -57,6 +57,19 @@ public class GameController : MonoBehaviour
             // Upon return they are not the same so we are starting a new level
             NextLevel();
         }
+        if (gameSettings.CurrentLevel == 1)
+        {
+            FindObjectOfType<AudioManager>().Play("EpicString");
+        }
+        if (gameSettings.CurrentLevel == 2)
+        {
+            FindObjectOfType<AudioManager>().Play("Theme2");
+        }
+        if (gameSettings.CurrentLevel == 3)
+        {
+            FindObjectOfType<AudioManager>().Play("Theme4");
+        }
+       
     }
 
     // Update is called once per frame

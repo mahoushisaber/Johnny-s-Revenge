@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3120674377476131451
+--- !u!1 &396789439386259393
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3120674377476131449}
-  - component: {fileID: 3120674377476131448}
+  - component: {fileID: 396789439386259395}
+  - component: {fileID: 396789439386259394}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: AudioManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3120674377476131449
+--- !u!4 &396789439386259395
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120674377476131451}
+  m_GameObject: {fileID: 396789439386259393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3120674377476131448
+--- !u!114 &396789439386259394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3120674377476131451}
+  m_GameObject: {fileID: 396789439386259393}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09ee8a607c8100f47a38ee96b7cf3b1e, type: 3}
@@ -63,7 +63,7 @@ MonoBehaviour:
     playOnAwake: 0
     source: {fileID: 0}
   - name: ShufflingCards
-    clip: {fileID: 8300000, guid: 2367279916d08e446b095eaf702ac398, type: 3}
+    clip: {fileID: 8300000, guid: d7d2943f4cbf871428e3d832bc027d63, type: 3}
     volume: 0.82
     volumeVariance: 0.46
     pitch: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Theme
     clip: {fileID: 8300000, guid: 614dcc41bcae11b4a89cd4481d613bc2, type: 3}
-    volume: 0.12
+    volume: 0.09
     volumeVariance: 0.2
     pitch: 1
     pitchVariance: 0
@@ -109,10 +109,100 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Upgrade
     clip: {fileID: 8300000, guid: 0b46d8cdcff866a428343625a3357295, type: 3}
+    volume: 0.09
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Button
+    clip: {fileID: 8300000, guid: 0e7c045091a11194296bd3a696038eff, type: 3}
     volume: 0.12
     volumeVariance: 0.2
     pitch: 1
     pitchVariance: 0
     loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Beat
+    clip: {fileID: 8300000, guid: b378a19ee0309a8478ad4e28f8b7cd86, type: 3}
+    volume: 0.09
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: EpicString
+    clip: {fileID: 8300000, guid: fd2e9568f1987b1498767eed1f4ac3a9, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme2
+    clip: {fileID: 8300000, guid: 677b30048b750994198e05363795d11a, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme3
+    clip: {fileID: 8300000, guid: c83089c37c0af3249864df5511d6f66e, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme4
+    clip: {fileID: 8300000, guid: 32ac89f69de39e140bb04cf33d229be0, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme5
+    clip: {fileID: 8300000, guid: a6398c4ed00db4146824f375d24069f6, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme6
+    clip: {fileID: 8300000, guid: 42bc5b0621dc8f54fa2f92e57aa3501d, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Theme7
+    clip: {fileID: 8300000, guid: 984422e770036da40b5f7d7f422f7281, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: Pistol
+    clip: {fileID: 8300000, guid: e523b2d660a05fc48b1699ef35f6e5f4, type: 3}
+    volume: 0.12
+    volumeVariance: 0.2
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
     playOnAwake: 0
     source: {fileID: 0}

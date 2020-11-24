@@ -18,6 +18,7 @@ public class HighScores : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Theme6");
         HighScore1Text.text = HighScoreController.gCtrl.highScores[0].ToString();
         HighScore1PlayerText.text = HighScoreController.gCtrl.players[0];
         HighScore2Text.text = HighScoreController.gCtrl.highScores[1].ToString();
@@ -32,6 +33,7 @@ public class HighScores : MonoBehaviour
 
     public void OnClick_Exit()
     {
+        FindObjectOfType<AudioManager>().Play("Button");
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }
