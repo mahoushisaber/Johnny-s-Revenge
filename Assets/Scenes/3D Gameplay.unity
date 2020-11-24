@@ -2394,9 +2394,6 @@ MonoBehaviour:
   PlayerHand: {fileID: 573388320}
   cardPrefab: {fileID: 7728109489979733833, guid: ae3aed3bdb62e124f856c7ebd43a03f3, type: 3}
   deckSize: 20
-  redLimit: 10
-  blueLimit: 5
-  greenLimit: 5
 --- !u!4 &895192866
 Transform:
   m_ObjectHideFlags: 0
@@ -4733,15 +4730,15 @@ MonoBehaviour:
   EnemyHand: {fileID: 1597341335}
   BattleZone: {fileID: 1279277755}
   EnemyShield: {fileID: 684679560}
-  Level1Stage1: {fileID: 21300000, guid: 8004e1257c745624b9da1717aa389a3f, type: 3}
-  Level1Stage2: {fileID: 21300000, guid: 73bb69197270ad545b9f54a18f7b2aec, type: 3}
-  Level1Stage3: {fileID: 21300000, guid: 61128c220978b8d418fa13d053f64a53, type: 3}
-  Level2Stage1: {fileID: 21300000, guid: cdef510c7c96c6a40a10fc4f9d6671fb, type: 3}
-  Level2Stage2: {fileID: 21300000, guid: a96c2ba1745528546864e82b4caeefbe, type: 3}
-  Level2Stage3: {fileID: 21300000, guid: bf4287c994b761e43bc1d680f053bd3e, type: 3}
-  Level3Stage1: {fileID: 21300000, guid: 3512352e30a18a44183553e1e8711f95, type: 3}
-  Level3Stage2: {fileID: 21300000, guid: bd4ca1fabd74dd04db23652a0d8c62d4, type: 3}
-  Level3Stage3: {fileID: 21300000, guid: 15012cf4dfc089747a7041e62ddbcec0, type: 3}
+  Level1Stage1: {fileID: 21300000, guid: 9569f6be2fe8a274bb1bea331374b56b, type: 3}
+  Level1Stage2: {fileID: 21300000, guid: 62c85b1d900d3fa46a8c1dde569267f8, type: 3}
+  Level1Stage3: {fileID: 21300000, guid: ecdd01080abc9094a9e9f462e0e5dae6, type: 3}
+  Level2Stage1: {fileID: 21300000, guid: fbc479f4f9e686d49a21712e538b8066, type: 3}
+  Level2Stage2: {fileID: 21300000, guid: 408af3655a94eac42aefa4eabc4c1f65, type: 3}
+  Level2Stage3: {fileID: 21300000, guid: e532c560f1ba30b46ab907fd79af09e8, type: 3}
+  Level3Stage1: {fileID: 21300000, guid: e22c301ae54bb124f91a881e206714ee, type: 3}
+  Level3Stage2: {fileID: 21300000, guid: 890283f317630994895d10e985bad2ad, type: 3}
+  Level3Stage3: {fileID: 21300000, guid: 07e49edb1eea11344ac243bc4c8cf145, type: 3}
   GameManager: {fileID: 1714503858}
 --- !u!1 &1714503858
 GameObject:
