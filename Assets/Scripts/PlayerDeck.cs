@@ -9,12 +9,15 @@ public class PlayerDeck : MonoBehaviour
     public GameObject PlayerHand;
     public GameObject cardPrefab;
     public int deckSize;
-    public int redLimit;
-    public int blueLimit;
-    public int greenLimit;
+    private int redLimit;
+    private int blueLimit;
+    private int greenLimit;
 
     private void Start()
     {
+        redLimit = 14;
+        blueLimit = 2;
+        greenLimit = 4;
         if (PlayerHand == null)
         {
             PlayerHand = GameObject.Find("Player Hand");

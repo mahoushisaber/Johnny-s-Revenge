@@ -15,6 +15,7 @@ public class ScoreSystem : MonoBehaviour
     public Text gameScoreText;
     public Image chestOpenImage;
     public GameObject ResultScreen;
+    public bool ResultScreenShowing;
     public int gameScore;
     public int levelScore;
 
@@ -37,6 +38,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResultScreenShowing = false;
         player = FindObjectOfType<PlayerController>();
         game = FindObjectOfType<GameController>();
         gameScore = 0;
@@ -91,6 +93,7 @@ public class ScoreSystem : MonoBehaviour
         CtrlObj.SetRewards(currentHealthReward, currentManaReward);
         Debug.LogFormat("health reward = {00:0}  mana reward = {00:0}", currentHealthReward, currentManaReward);
 
+        ResultScreenShowing = true;
         ResultScreen.SetActive(true);
     }
 
@@ -120,6 +123,7 @@ public class ScoreSystem : MonoBehaviour
     {
         setStageStartStatus();
         ResultScreen.SetActive(false);
+        ResultScreenShowing = false;
         game.nextStage();
     }
 
