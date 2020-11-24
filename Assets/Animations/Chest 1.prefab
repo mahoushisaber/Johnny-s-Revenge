@@ -102,6 +102,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.880001
       objectReference: {fileID: 0}
+    - target: {fileID: 4643723454955668665, guid: 04722441391659e46a0e70a21a1d543a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6093637743959878255, guid: 04722441391659e46a0e70a21a1d543a, type: 3}
       propertyPath: m_Name
       value: chest

@@ -15,6 +15,8 @@ public class AnimationController : MonoBehaviour
     public GameObject pierce;
     public GameObject shield;
     public GameObject run;
+    public GameObject doubleShot;
+    public GameObject anger;
 
     private PlayerController Player;
 
@@ -73,7 +75,12 @@ public class AnimationController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            PlayRun();
+            PlayDoubleShot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayAnger();
         }
     }
 
@@ -155,5 +162,19 @@ public class AnimationController : MonoBehaviour
         GameObject playRun = Instantiate(run, new Vector3(50, 0, 30), run.transform.rotation);
         playRun.GetComponent<Animator>().Play("run");
         Destroy(playRun, 2.25f);
+    }
+
+    public void PlayDoubleShot()
+    {
+        GameObject spawnedDoubleShot = Instantiate(doubleShot, new Vector3(50, 0, 30), doubleShot.transform.rotation);
+        spawnedDoubleShot.GetComponent<Animator>().Play("doubleShot");
+        Destroy(spawnedDoubleShot, 2.0f);
+    }
+
+    public void PlayAnger()
+    {
+        GameObject spawnedAnger = Instantiate(anger, new Vector3(32, 47.8f, 67.4f), anger.transform.rotation);
+        spawnedAnger.GetComponent<Animator>().Play("anger");
+        Destroy(spawnedAnger, 2.0f);
     }
 }
