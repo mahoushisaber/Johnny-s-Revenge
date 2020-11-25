@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &143863826315249064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143863826315249065}
+  - component: {fileID: 143863826315249078}
+  m_Layer: 0
+  m_Name: AnimationController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &143863826315249065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143863826315249064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -464.97913, y: -219.36584, z: -68.043274}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143863826315249078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143863826315249064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb92387ae169474b89273b9cde43234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slash: {fileID: 7404675478820088117, guid: d7139b03760bec746b092db34b1ed5c9, type: 3}
+  daggerThrow: {fileID: 2681368124409835153, guid: 347b4f901b77988449c3523c86c8c3a3, type: 3}
+  siphon: {fileID: 1965336238595741454, guid: c1b375ad4e3906440a7fe2506329c7c2, type: 3}
+  potionHeal: {fileID: 5162539454906231446, guid: 1b34ed4852085464399ee39d38b0bf0f, type: 3}
+  powerStrike: {fileID: 6255049537560261650, guid: cf1b522e3d15bc74d8316cbba85425f4, type: 3}
+  powerStrikeNoMana: {fileID: 6255049537560261650, guid: e0dd1fe02db7388468cbf7e4add71dec, type: 3}
+  saberAttack: {fileID: 19833294415716490, guid: 28d037d4c6241a54393f45c787bcadcc, type: 3}
+  pierce: {fileID: 630563402872974346, guid: 351f74429299579498c1df646569b609, type: 3}
+  shield: {fileID: 4484401790273667670, guid: 1aba2f7ff22011c49a7735a1bc973135, type: 3}
+  run: {fileID: 2155757698322115850, guid: 906d88b1d8c12384fab74876467c259d, type: 3}
