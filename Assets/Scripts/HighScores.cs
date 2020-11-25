@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -34,6 +35,12 @@ public class HighScores : MonoBehaviour
     public void OnClick_Exit()
     {
         FindObjectOfType<AudioManager>().Play("Button");
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        
+        StartCoroutine(DelaySceneLoad("Menu"));
+    }
+    IEnumerator DelaySceneLoad(string menu)
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene(menu, LoadSceneMode.Single);
     }
 }

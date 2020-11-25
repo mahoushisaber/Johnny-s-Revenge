@@ -82,6 +82,8 @@ public class LoadScene : MonoBehaviour
 
     public void OnClick_OK_HSPlayerEntry()
     {
+        FindObjectOfType<AudioManager>().Play("Button");
+        
         scoreCntrl.SaveHighScore(newGameHighScore, NewPlayerName.text);
         HighScoreDialog.SetActive(false);
         GameResultText.text = "HIGH SCORE! - Try Again";
@@ -101,7 +103,12 @@ public class LoadScene : MonoBehaviour
         gameSettings.CurrentLevel = 0;
         gameSettings.ActiveLevel = LevelCount;
         gameSettings.SaveProperties();
-
+        StartCoroutine(DelaySceneLoad(theLevel));
+        
+    }
+    IEnumerator DelaySceneLoad(string theLevel)
+    {
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene(theLevel, LoadSceneMode.Single);
     }
 }
