@@ -349,9 +349,13 @@ public class GameController : MonoBehaviour
 
             SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
         }
+        else
+        {
+            Enemy.setEnemy(CurrentLevel, CurrentStage+1);
+        }
         Enemy.Health = Enemy.MaxHealth;
         CurrentStage += 1;
-        Enemy.setEnemy(CurrentLevel, CurrentStage);
+        
     }
 
     public void NextLevel()
