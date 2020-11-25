@@ -22,11 +22,13 @@ public class AnimationController : MonoBehaviour
 
     private PlayerController Player;
     private Shake Shake;
+    private Process Process;
 
     void Start()
     {
         Player = FindObjectOfType<PlayerController>();
         Shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        Process = GameObject.FindGameObjectWithTag("Processing").GetComponent<Process>();
     }
 
     void Update()
@@ -210,6 +212,7 @@ public class AnimationController : MonoBehaviour
     {
         GameObject spawnedVision = Instantiate(vision, new Vector3(50, 50, 65), vision.transform.rotation);
         spawnedVision.GetComponent<Animator>().Play("vision");
+        Process.ProcessScreen("vision");
         Destroy(spawnedVision, 1.5f);
     }
 }
