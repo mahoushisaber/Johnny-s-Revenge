@@ -55,3 +55,5 @@ MonoBehaviour:
   run: {fileID: 2155757698322115850, guid: 906d88b1d8c12384fab74876467c259d, type: 3}
   doubleShot: {fileID: 7766512911988353148, guid: 21017f9d5f3b813419a22e5c56b67225, type: 3}
   anger: {fileID: 2623806444232535686, guid: b00d6ced3e4040d4fa5eecf59a69f7af, type: 3}
+  rifle: {fileID: 3433467179741337708, guid: 7b7ec95c8410b4149b9100c972d78a24, type: 3}
+  vision: {fileID: 8005846827328709985, guid: 621db6b39135a784b9b596c5893f6743, type: 3}
