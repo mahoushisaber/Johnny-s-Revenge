@@ -11,6 +11,11 @@ public class Process : MonoBehaviour
         if (animation == "vision")
         {
             volumeAnim.SetTrigger("vision");
+        } 
+
+        if (animation == "lowHP")
+        {
+            volumeAnim.SetTrigger("lowHP");
         }
     }
 }

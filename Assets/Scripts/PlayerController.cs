@@ -23,9 +23,12 @@ public class PlayerController : MonoBehaviour
     public static int attackCardCount = 0;
     public static int blockCardCount = 0;
     private AnimationController AC;
+    private Process Process;
 
     void Start()
     {
+        Process = GameObject.FindGameObjectWithTag("Processing").GetComponent<Process>();
+
         cardsUsed = 0;
         if (Hand == null)
         {
@@ -42,6 +45,11 @@ public class PlayerController : MonoBehaviour
     {
         cardsInHand = Hand.transform.childCount;
         cardsInDeck = PlayerDeck.deck.Count;
+
+        if (Health <= 20)
+        {
+            Process.ProcessScreen("lowHP");
+        }
     }
 
     public void Died()
@@ -123,6 +131,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (cardToUse == "Vision")
                 {
+                    AC.PlayVision();
                     shieldAfterBattle += cardPower;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
                     Debug.Log("You shield for next is " + cardPower);
@@ -174,7 +183,7 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Power Strike")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
-                    if (Mana >= 50 && Mana <= 75)
+                    if (Mana + 25 >= 50 && Mana <= 100)
                     {
                         Mana += 25;
                     }
@@ -194,6 +203,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (cardToUse == "Rifles")
                 {
+                    AC.PlayRifle();
                     enemyHealth -= cardPower - useEnemyShield;
                     FindObjectOfType<AudioManager>().Play("Pistol");
 
@@ -202,6 +212,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (cardToUse == "Double Shot")
                 {
+                    AC.PlayDoubleShot();
                     cardPower *= 2;
                     enemyHealth -= cardPower - useEnemyShield;
                     FindObjectOfType<AudioManager>().Play("DoubleShot");
@@ -218,6 +229,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (cardToUse == "Anger")
                 {
+                    AC.PlayAnger();
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
                     Mana += cardPower;
                     Debug.Log("You healed for" + cardPower + " mana");
