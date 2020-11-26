@@ -12,23 +12,23 @@ public class GameController : MonoBehaviour
     public int CurrentStage = 1;
     public float SecondsToBattle;
     public Text LevelText;
-    public Text StageText;
     public Text DeckUI;
     public Image BattleZoneArea;
     public Image PlayerManaBarHighlightImage;
-    public Sprite BossSprite, BossSprite2, BossSprite3;
 
     private EnemyController Enemy;
     private PlayerController Player;
     private BackgroundController Background;
+    private ArrowSignifiers GameSignifiers;
 
     enum StateType { UNKNOWN, ENEMY_TURN, PLAYER_TURN, BATTLE, BATTLE_EVALUATE };
     private StateType gameState = StateType.ENEMY_TURN;
     private bool cardDropped = false;
     private float waitToBatTmr = 0.0f;
+    private bool manaUsedThisTurn = false;
 
-    enum PTurnState { WAIT_FOR_CARD_PLAY, DELAY_TO_END_TURN };
-    private PTurnState playerState = PTurnState.WAIT_FOR_CARD_PLAY;
+    enum PTurnState { START_TURN_INIT, WAIT_FOR_CARD_PLAY, DELAY_TO_END_TURN };
+    private PTurnState playerState = PTurnState.START_TURN_INIT;
 
     private PersistentGameSettings gameSettings;
     private Sprite BZAreaArtwork;
@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         ScoreSystem = FindObjectOfType<ScoreSystem>();
         Background = FindObjectOfType<BackgroundController>();
+        GameSignifiers = FindObjectOfType<ArrowSignifiers>();
         BZAreaArtwork = BattleZoneArea.sprite;
         PMBarArtwork = PlayerManaBarHighlightImage.sprite;
 
@@ -57,12 +58,24 @@ public class GameController : MonoBehaviour
             // Upon return they are not the same so we are starting a new level
             NextLevel();
         }
+        if (gameSettings.CurrentLevel == 1)
+        {
+            FindObjectOfType<AudioManager>().Play("EpicString");
+        }
+        if (gameSettings.CurrentLevel == 2)
+        {
+            FindObjectOfType<AudioManager>().Play("Theme2");
+        }
+        if (gameSettings.CurrentLevel == 3)
+        {
+            FindObjectOfType<AudioManager>().Play("Theme4");
+        }
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        //RenderBossSprites();
         switch (gameState)
         {
             case StateType.UNKNOWN:
@@ -87,30 +100,10 @@ public class GameController : MonoBehaviour
                 break;
         }
 
-        LevelText.text = string.Format("Level: {0} of {1}", CurrentLevel, TotalLevels);
-        StageText.text = string.Format("Stage: {0} of {1}", CurrentStage, TotalStages);
+        LevelText.text = string.Format("Level: {0}.{1}", CurrentLevel, CurrentStage);
         DeckUI.text = Player.cardsInDeck.ToString();
     }
-    /*
-    void RenderBossSprites()
-    {
-        if (CurrentStage == 1)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite;
 
-        }
-        if (CurrentStage == 2)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite2;
-
-        }
-        if (CurrentStage == 3)
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = BossSprite3;
-
-        }
-    }
-    */
     void Execute_EnemyTurn()
     {
         if (!Enemy.IsTurn)
@@ -128,6 +121,19 @@ public class GameController : MonoBehaviour
     {
         switch (playerState)
         {
+            case PTurnState.START_TURN_INIT:
+                // Do not move on to next turn until the score screen has disappeared!
+                if (ScoreSystem.ResultScreenShowing == false)
+                { 
+                    // Set up the signifiers so they will properly manage
+                    GameSignifiers.StartTurn(Player.Mana >= Player.ManaUseCost);
+                    manaUsedThisTurn = false;
+
+                    // Goto the new state
+                    playerState = PTurnState.WAIT_FOR_CARD_PLAY;
+                }
+                break;
+
             // Waiting for a card to be dropped in the dropzone
             case PTurnState.WAIT_FOR_CARD_PLAY:
                 if (cardDropped)
@@ -137,6 +143,10 @@ public class GameController : MonoBehaviour
                     // Set timer to wait perioid
                     waitToBatTmr = 0.0f;
 
+                    // Stop signifiers
+                    GameSignifiers.EndTurn(manaUsedThisTurn);
+
+                    // Goto the new state
                     playerState = PTurnState.DELAY_TO_END_TURN;
                 }
                 break;
@@ -151,7 +161,7 @@ public class GameController : MonoBehaviour
                     {
                         // Timer done reset player state machine move to battle state
                         waitToBatTmr = 0.0f;
-                        playerState = PTurnState.WAIT_FOR_CARD_PLAY;
+                        playerState = PTurnState.START_TURN_INIT;
                         gameState = StateType.BATTLE;
                         Player.EndTurn();
                     }
@@ -159,13 +169,13 @@ public class GameController : MonoBehaviour
                 else
                 {
                     // No Seconds to Battle set so immediately move to battle state
-                    playerState = PTurnState.WAIT_FOR_CARD_PLAY;
+                    playerState = PTurnState.START_TURN_INIT;
                     gameState = StateType.BATTLE;
                 }
                 break;
 
             default:
-                playerState = PTurnState.WAIT_FOR_CARD_PLAY;
+                playerState = PTurnState.START_TURN_INIT;
                 gameState = StateType.BATTLE;
                 Debug.Log("Game Controller - PlayerTurn State INVALID");
                 break;
@@ -238,13 +248,13 @@ public class GameController : MonoBehaviour
     {
         // Turn on highlight for available drop zones. Don't forget to save current to restore
         Sprite artwork = Resources.Load<Sprite>("Sprites/BZ-Highlight");
-
         BattleZoneArea.sprite = artwork;
-        Color PMBOrigColor = PlayerManaBarHighlightImage.color;
-        PMBOrigColor.a = 255f;
-        //Only highlight area if enough mana to enhance card
-        if (Player.Mana >= 25)
+
+        // Don't turn on mana if there is not enough to use.
+        if (Player.Mana >= Player.ManaUseCost)
         {
+            Color PMBOrigColor = PlayerManaBarHighlightImage.color;
+            PMBOrigColor.a = 255f;
             PlayerManaBarHighlightImage.color = PMBOrigColor;
         }
     }
@@ -275,6 +285,11 @@ public class GameController : MonoBehaviour
                     {
                         Debug.Log("Not enough mana to enhance");
                         canDrop = false;
+                    }
+                    else
+                    {
+                        // Are using mana so record use for signifier tracking
+                        manaUsedThisTurn = true;
                     }
                     break;
 
@@ -334,9 +349,13 @@ public class GameController : MonoBehaviour
 
             SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
         }
+        else
+        {
+            Enemy.setEnemy(CurrentLevel, CurrentStage+1);
+        }
         Enemy.Health = Enemy.MaxHealth;
         CurrentStage += 1;
-        Enemy.setEnemy(CurrentLevel, CurrentStage);
+        
     }
 
     public void NextLevel()

@@ -189,7 +189,7 @@ public class EnemyController : MonoBehaviour
 
     void setEnemyDifficulty(int levelNum, int stageNum)
     {
-        MaxHealth = levelNum*10 + stageNum*10;
-        Health = levelNum*10 + stageNum*10;
+        MaxHealth = levelNum * 10 + (levelNum - 1) * 5 + stageNum*10;
+        Health = levelNum * 10 + (levelNum - 1) * 5 + stageNum*10;
     }
 }
