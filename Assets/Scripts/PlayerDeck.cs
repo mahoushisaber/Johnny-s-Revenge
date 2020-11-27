@@ -12,6 +12,8 @@ public class PlayerDeck : MonoBehaviour
     private int redLimit;
     private int blueLimit;
     private int greenLimit;
+    private RewardDeck rewardDeck;
+    static private List<Card> rewardCards = new List<Card>();
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class PlayerDeck : MonoBehaviour
         {
             PlayerHand = GameObject.Find("Player Hand");
         }
+        rewardDeck = FindObjectOfType<RewardDeck>();
         deck.Clear();
         CreateDeck();
         InitialDraw();
@@ -30,13 +33,14 @@ public class PlayerDeck : MonoBehaviour
     public void CreateDeck()
     {
         int x;
-        int randomCeiling = CardDB.cardList.Count;
+        int randomCeiling = CardDB.cardList.Count + rewardCards.Count;
         int redCount = 0, blueCount = 0, greenCount = 0;
         int i = 0;
 
         while (i < deckSize)
         {
-            x = Random.Range(1, randomCeiling);
+            Card deckCard = null;
+            x = Random.Range((int)1, randomCeiling);
 
             // Sanity check because Random.Range is not working the way it is advertised
             if (x >= randomCeiling)
@@ -44,10 +48,19 @@ public class PlayerDeck : MonoBehaviour
                 x = randomCeiling - 1;
             }
 
-            Card deckCard = new Card(CardDB.cardList[x])
+            if (x >= CardDB.cardList.Count)
             {
-                Owner = Card.OwnerType.PLAYER
-            };
+                int y = Random.Range((int)0, (int)rewardCards.Count);
+                if (y >= rewardCards.Count)
+                {
+                    y = rewardCards.Count - 1;
+                }
+                deckCard = new Card(rewardCards[y]) { Owner = Card.OwnerType.PLAYER };
+            }
+            else
+            {
+                deckCard = new Card(CardDB.cardList[x]) { Owner = Card.OwnerType.PLAYER };
+            }
 
             if (deckCard.Colour == "Red")
             {
@@ -99,6 +112,24 @@ public class PlayerDeck : MonoBehaviour
             {
                 deck.RemoveAt(0);
             }
+        }
+    }
+
+    public void ClearRewardCards()
+    {
+        rewardCards.Clear();
+        rewardDeck.ClearRewardCardsGiven();
+    }
+
+    public void AddRewardCard(int RewardId)
+    {
+        Card rewardCard = rewardDeck.RemoveCardFromDeck(RewardId);
+
+        if (rewardCard != null)
+        {
+            deck.Add(rewardCard);
+            deckSize++;
+            rewardCards.Add(rewardCard);
         }
     }
 }
