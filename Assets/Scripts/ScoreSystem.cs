@@ -33,7 +33,6 @@ public class ScoreSystem : MonoBehaviour
     private GameController game;
     private RewardDeck rewardDeck;
     private BattleResults CtrlObj;
-    private RewardDropZone CtrlObjRewardCard;
     private bool showingLevelReward;
     private int rewardCardsTakenCount;
 
@@ -54,7 +53,6 @@ public class ScoreSystem : MonoBehaviour
         ResultScreen.SetActive(false);
         dropZoneObj.SetActive(false);
         CtrlObj = ResultScreen.GetComponent<BattleResults>();
-        CtrlObjRewardCard = dropZoneObj.GetComponent<RewardDropZone>();
         
     }
 
