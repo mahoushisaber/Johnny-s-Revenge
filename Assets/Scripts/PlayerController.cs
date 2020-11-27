@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public PlayerDeck GetAssignedDeck()
+    {
+        return PlayerDeck;
+    }
+
     public void Died()
     {
         Health = MaxHealth;
@@ -277,5 +282,10 @@ public class PlayerController : MonoBehaviour
                 Destroy(UI_card.gameObject);
             }
         }
+    }
+
+    public void EndGame()
+    {
+        PlayerDeck.ClearRewardCards();
     }
 }

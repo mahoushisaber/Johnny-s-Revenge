@@ -13,7 +13,7 @@ public class Card
     public string Colour;
     public string ImageName;
 
-    public enum OwnerType { UNKNOWN, ENEMY, PLAYER };
+    public enum OwnerType { UNKNOWN, ENEMY, PLAYER, REWARD };
     public OwnerType Owner;
 
     public Card()

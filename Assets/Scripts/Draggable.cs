@@ -12,7 +12,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     GameObject placeholder = null; 
 
-    public enum Slot { ANY, BATTLE, MANA };
+    public enum Slot { ANY, BATTLE, MANA, REWARD };
     public Slot typeOfItem = Slot.ANY;
 
     private Vector3 p;

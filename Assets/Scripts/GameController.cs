@@ -338,6 +338,7 @@ public class GameController : MonoBehaviour
                 gameSettings.Level3Outcome = PersistentGameSettings.OutcomeType.WON;
                 gameSettings.Level3Score = ScoreSystem.levelScore;
                 gameSettings.ActiveLevel = 0;
+                Player.EndGame();
                 nextScene = "Menu";
             }
 
