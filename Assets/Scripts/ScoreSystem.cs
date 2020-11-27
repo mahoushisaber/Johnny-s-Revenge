@@ -15,7 +15,9 @@ public class ScoreSystem : MonoBehaviour
     public Text gameScoreText;
     public GameObject ResultScreen;
     public GameObject RewardDropZone;
+    public GameObject dropZoneObj;
     public bool ResultScreenShowing;
+    public bool dropZoneObjShowing;
     public int gameScore;
     public int levelScore;
 
@@ -31,6 +33,7 @@ public class ScoreSystem : MonoBehaviour
     private GameController game;
     private RewardDeck rewardDeck;
     private BattleResults CtrlObj;
+    private RewardDropZone CtrlObjRewardCard;
     private bool showingLevelReward;
     private int rewardCardsTakenCount;
 
@@ -41,6 +44,7 @@ public class ScoreSystem : MonoBehaviour
     void Start()
     {
         ResultScreenShowing = false;
+        dropZoneObjShowing = false;
         showingLevelReward = false;
         player = FindObjectOfType<PlayerController>();
         game = FindObjectOfType<GameController>();
@@ -48,7 +52,10 @@ public class ScoreSystem : MonoBehaviour
         gameScore = 0;
         setStageStartStatus();
         ResultScreen.SetActive(false);
+        dropZoneObj.SetActive(false);
         CtrlObj = ResultScreen.GetComponent<BattleResults>();
+        CtrlObjRewardCard = dropZoneObj.GetComponent<RewardDropZone>();
+        
     }
 
     // Update is called once per frame
@@ -113,9 +120,22 @@ public class ScoreSystem : MonoBehaviour
         {
             showingLevelReward = false;
         }
-
+        //CtrlObjRewardCard.transform.Find("Reward Drop Zone").gameObject.SetActive(true);
+        if (game.CurrentStage == 3)
+        {
+            dropZoneObjShowing = true;
+            dropZoneObj.SetActive(true);
+            if (game.CurrentLevel == 3)
+            {
+                dropZoneObj.SetActive(false);
+                // Ideally, We can add a button to proceed instead of choosing health or mana
+            }
+        }
+       
         ResultScreenShowing = true;
         ResultScreen.SetActive(true);
+        dropZoneObjShowing = true;
+        //dropZoneObj.SetActive(true);
     }
 
 
@@ -160,6 +180,9 @@ public class ScoreSystem : MonoBehaviour
         setStageStartStatus();
         ResultScreen.SetActive(false);
         ResultScreenShowing = false;
+
+        dropZoneObj.SetActive(false);
+        dropZoneObjShowing = false;
         game.nextStage();
     }
 
