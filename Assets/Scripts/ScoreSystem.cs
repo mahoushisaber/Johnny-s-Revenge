@@ -30,6 +30,7 @@ public class ScoreSystem : MonoBehaviour
     private PlayerController player;
     private GameController game;
     private BattleResults CtrlObj;
+    private PlayerDeck PlayerDeck;
 
     private float chestTmr;
     private float currentHealthReward = 0f;
@@ -41,6 +42,7 @@ public class ScoreSystem : MonoBehaviour
         ResultScreenShowing = false;
         player = FindObjectOfType<PlayerController>();
         game = FindObjectOfType<GameController>();
+        PlayerDeck = FindObjectOfType<PlayerDeck>();
         gameScore = 0;
         setStageStartStatus();
         ResultScreen.SetActive(false);
@@ -97,16 +99,6 @@ public class ScoreSystem : MonoBehaviour
         ResultScreen.SetActive(true);
     }
 
-    string DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay += 1;
-
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
-        return string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-
     public void nextStageRewardHealth()
     {
         player.Health += Mathf.Round(currentHealthReward);
@@ -116,6 +108,34 @@ public class ScoreSystem : MonoBehaviour
     public void nextStageRewardMana()
     {
         player.Mana += Mathf.Round(currentManaReward);
+        startNextStage();
+    }
+
+    public void addLv1Card1()
+    {
+        PlayerDeck.level1completed = true;
+        PlayerDeck.rewardCard1Id = 8;
+        startNextStage();
+    }
+
+    public void addLv1Card2()
+    {
+        PlayerDeck.level1completed = true;
+        PlayerDeck.rewardCard1Id = 9;
+        startNextStage();
+    }
+
+    public void addLv2Card1()
+    {
+        PlayerDeck.level2completed = true;
+        PlayerDeck.rewardCard2Id = 10;
+        startNextStage();
+    }
+
+    public void addLv2Card2()
+    {
+        PlayerDeck.level2completed = true;
+        PlayerDeck.rewardCard2Id = 11;
         startNextStage();
     }
 
@@ -169,5 +189,15 @@ public class ScoreSystem : MonoBehaviour
 
         // Total
         return timeScore + healthScore + manaScore + cardScore;
+    }
+
+    string DisplayTime(float timeToDisplay)
+    {
+        timeToDisplay += 1;
+
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

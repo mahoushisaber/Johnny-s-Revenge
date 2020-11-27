@@ -9,9 +9,15 @@ public class PlayerDeck : MonoBehaviour
     public GameObject PlayerHand;
     public GameObject cardPrefab;
     public int deckSize;
+    
     private int redLimit;
     private int blueLimit;
     private int greenLimit;
+
+    static public bool level1completed;
+    static public bool level2completed;
+    static public int rewardCard1Id;
+    static public int rewardCard2Id;
 
     private void Start()
     {
@@ -36,6 +42,33 @@ public class PlayerDeck : MonoBehaviour
 
         while (i < deckSize)
         {
+            if (level1completed && i < 2)
+            {
+                Card rewardCard = new Card(CardDB.rewardCardList.Find(Card => Card.Id == rewardCard1Id))
+                {
+                    Owner = Card.OwnerType.PLAYER
+                };
+                if (rewardCard1Id == 8) blueCount++;
+                if (rewardCard1Id == 9) redCount++;
+                deck.Add(rewardCard);
+                i++;
+                continue;
+            }
+
+            if (level2completed && i < 4)
+            {
+                Card rewardCard = new Card(CardDB.rewardCardList.Find(Card => Card.Id == rewardCard2Id))
+                {
+                    Owner = Card.OwnerType.PLAYER
+                };
+                if (rewardCard1Id == 10) redCount++;
+                if (rewardCard1Id == 11) greenCount++;
+                deck.Add(rewardCard);
+                i++;
+                continue;
+            }
+
+
             x = Random.Range(1, randomCeiling);
 
             // Sanity check because Random.Range is not working the way it is advertised
@@ -48,7 +81,7 @@ public class PlayerDeck : MonoBehaviour
             {
                 Owner = Card.OwnerType.PLAYER
             };
-
+            
             if (deckCard.Colour == "Red")
             {
                 if (redCount >= redLimit) continue;
@@ -71,6 +104,7 @@ public class PlayerDeck : MonoBehaviour
                 else greenCount++;
 
             }
+            
             deck.Add(deckCard);
             i++;
         }
