@@ -126,36 +126,6 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("You have " + playerHealth + " health remaining");
                     Debug.Log("Enemy healed " + cardPower + " health");
                 }
-                else if (cardToUse == "Dagger Throw")
-                {
-                    int damageIncrease = 3;
-                    cardPower = (cardPower + (attackCardCount * damageIncrease));
-                    playerHealth -= (cardPower) - usePlayerShield;
-                    attackCardCount++;
-                    Debug.Log("Enemy dealt " + cardPower + " damage");
-                    Debug.Log("You have " + playerHealth + " health remaining");
-                }
-                else if (cardToUse == "Saber Attack")
-                {
-                    playerHealth -= cardPower - usePlayerShield;
-                    Health -= 3;
-                    Debug.Log("Enemy dealt " + cardPower + " damage");
-                    Debug.Log("You have " + playerHealth + " health remaining");
-                }
-                else if (cardToUse == "Retreat")
-                {
-                    int blockIncrease = 2;
-                    cardPower = (cardPower + (blockCardCount * blockIncrease));
-                    shieldAfterBattle += cardPower;
-                    blockCardCount++;
-                    Debug.Log("Enemy shielded for " + cardPower);
-                }
-                else if (cardToUse == "Power Strike")
-                {
-                    playerHealth -= cardPower - usePlayerShield;
-                    Debug.Log("Enemy dealt " + cardPower + " damage");
-                    Debug.Log("You have " + playerHealth + " health remaining");
-                }
                 else if (cardToUse == "Pierce")
                 {
                     playerHealth -= cardPower;

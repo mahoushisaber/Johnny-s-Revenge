@@ -27,9 +27,12 @@ public class AdventureMapCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Theme7");
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         GameResultTextEffects = GameResultText.GetComponent<TextEffects>();
         CurLevel = gameSettings.CurrentLevel;
+        Color nColor = Color.white;
+        Color dColor = Color.grey;
 
         if (CurLevel > 0)
         {
@@ -40,7 +43,7 @@ public class AdventureMapCtrl : MonoBehaviour
             {
                 GameResultText.text = "You WON! - Select your next level";
                 GameResultText.color = new Color32(0, 128, 0, 255); // Green
-                GameResultTextEffects.visible = true;
+                GameResultTextEffects.visible = true; 
             }
             else
             {
@@ -67,17 +70,26 @@ public class AdventureMapCtrl : MonoBehaviour
                 Level3Btn.enabled = true;
                 Level2BtnText.text = "LEVEL 2\ndone";
                 Level1BtnText.text = "LEVEL 1\ndone";
+                Level1Btn.GetComponent<Button>().image.color = nColor;
+                Level2Btn.GetComponent<Button>().image.color = nColor;
+                Level3Btn.GetComponent<Button>().image.color = nColor;
                 break;
             case 1:
                 Level2Btn.interactable = true;
                 Level2Btn.enabled = true;
                 Level1BtnText.text = "LEVEL 1\ndone";
+                Level1Btn.GetComponent<Button>().image.color = nColor;
+                Level2Btn.GetComponent<Button>().image.color = nColor;
+                Level3Btn.GetComponent<Button>().image.color = dColor;
                 break;
             case 0:
                 Level1Btn.interactable = true;
                 Level1Btn.enabled = true;
                 Level1BtnText.text = "LEVEL 1";
                 Level2BtnText.text = "LEVEL 2";
+                Level1Btn.GetComponent<Button>().image.color = nColor;
+                Level2Btn.GetComponent<Button>().image.color = dColor;
+                Level3Btn.GetComponent<Button>().image.color = dColor;
                 break;
             default:
                 break;
@@ -142,6 +154,7 @@ public class AdventureMapCtrl : MonoBehaviour
             // Note: Scene strings are zero based where level buttons are 1 based representing level
             // Save the new selected level to be picked up by next scene
             gameSettings.CurrentLevel = BtnId - 1;
+            FindObjectOfType<AudioManager>().Play("Button");
             SceneManager.LoadScene("3D Gameplay", LoadSceneMode.Single);
         }
     }

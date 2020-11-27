@@ -23,9 +23,12 @@ public class PlayerController : MonoBehaviour
     public static int attackCardCount = 0;
     public static int blockCardCount = 0;
     private AnimationController AC;
+    private Process Process;
 
     void Start()
     {
+        Process = GameObject.FindGameObjectWithTag("Processing").GetComponent<Process>();
+
         cardsUsed = 0;
         if (Hand == null)
         {
@@ -42,6 +45,11 @@ public class PlayerController : MonoBehaviour
     {
         cardsInHand = Hand.transform.childCount;
         cardsInDeck = PlayerDeck.deck.Count;
+
+        if (Health <= 20)
+        {
+            Process.ProcessScreen("lowHP");
+        }
     }
 
     public void Died()
@@ -93,6 +101,11 @@ public class PlayerController : MonoBehaviour
                 {
                     Mana -= ManaUseCost;
                     FindObjectOfType<AudioManager>().Play("Upgrade");
+                    if (cardToUse == "Rifles")
+                    {
+                        // Hardcoded the extra damage to make it deal 25 when upgraded
+                        enemyHealth -= (25 - (8 * 2)) - useEnemyShield;
+                    }
                     Debug.Log("Card to use " + cardToUse + " is Enhanced, New Power is " + cardPower);
                 }
                 else
@@ -111,16 +124,23 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (cardToUse == "Block")
                 {
-                    shieldAfterBattle += cardPower;
+                    Shield += cardPower;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
                     AC.PlayShield();
                     Debug.Log("You shielded for " + cardPower);
+                }
+                else if (cardToUse == "Vision")
+                {
+                    AC.PlayVision();
+                    shieldAfterBattle += cardPower;
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+                    Debug.Log("You shield for next is " + cardPower);
                 }
                 else if (cardToUse == "Siphon")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
                     Health += cardPower;
-                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+                    FindObjectOfType<AudioManager>().Play("Sword");
                     AC.PlaySiphon();
 
                     Debug.Log("You dealt " + cardPower + " damage");
@@ -163,7 +183,7 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Power Strike")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
-                    if (Mana >= 50 && Mana <= 75)
+                    if (Mana + 25 >= 50 && Mana <= 100)
                     {
                         Mana += 25;
                     }
@@ -176,15 +196,43 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Pierce")
                 {
                     enemyHealth -= cardPower;
+                    FindObjectOfType<AudioManager>().Play("Sword");
                     AC.PlayPierce();
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("The enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Rifles")
+                {
+                    AC.PlayRifle();
+                    enemyHealth -= cardPower - useEnemyShield;
+                    FindObjectOfType<AudioManager>().Play("Pistol");
+
+                    Debug.Log("You dealt " + cardPower + " damage");
+                    Debug.Log("The enemy now has " + enemyHealth + " health remaining");
+                }
+                else if (cardToUse == "Double Shot")
+                {
+                    AC.PlayDoubleShot();
+                    cardPower *= 2;
+                    enemyHealth -= cardPower - useEnemyShield;
+                    FindObjectOfType<AudioManager>().Play("DoubleShot");
+                  
                     Debug.Log("You dealt " + cardPower + " damage");
                     Debug.Log("The enemy now has " + enemyHealth + " health remaining");
                 }
                 else if (cardToUse == "Heal")
                 {
                     Health += cardPower;
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
                     AC.PlayHeal();
                     Debug.Log("You healed for" + cardPower + " health");
+                }
+                else if (cardToUse == "Anger")
+                {
+                    AC.PlayAnger();
+                    FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
+                    Mana += cardPower;
+                    Debug.Log("You healed for" + cardPower + " mana");
                 }
                 else
                 {
@@ -196,6 +244,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("PlayerController: Can't find a battle tactic to match " + cardToUse + " played");
                 }
                 if (Health > MaxHealth) Health = MaxHealth;
+                if (Mana > MaxMana) Mana = MaxMana;
             }
         }
 

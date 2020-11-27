@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class HighScores : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("Theme6");
         HighScore1Text.text = HighScoreController.gCtrl.highScores[0].ToString();
         HighScore1PlayerText.text = HighScoreController.gCtrl.players[0];
         HighScore2Text.text = HighScoreController.gCtrl.highScores[1].ToString();
@@ -32,6 +34,13 @@ public class HighScores : MonoBehaviour
 
     public void OnClick_Exit()
     {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        FindObjectOfType<AudioManager>().Play("Button");
+        
+        StartCoroutine(DelaySceneLoad("Menu"));
+    }
+    IEnumerator DelaySceneLoad(string menu)
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene(menu, LoadSceneMode.Single);
     }
 }

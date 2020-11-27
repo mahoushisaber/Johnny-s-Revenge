@@ -15,17 +15,31 @@ public class AnimationController : MonoBehaviour
     public GameObject pierce;
     public GameObject shield;
     public GameObject run;
+    public GameObject doubleShot;
+    public GameObject anger;
+    public GameObject rifle;
+    public GameObject vision;
 
     private PlayerController Player;
+    private Shake Shake;
+    private Process Process;
 
     void Start()
     {
         Player = FindObjectOfType<PlayerController>();
+        Shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        Process = GameObject.FindGameObjectWithTag("Processing").GetComponent<Process>();
     }
 
     void Update()
     {
         ProcessInputs();
+    }
+
+    IEnumerator WaitForShake(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Shake.CamShake();
     }
 
     void ProcessInputs() // For testing purposes
@@ -73,7 +87,22 @@ public class AnimationController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            PlayRun();
+            PlayDoubleShot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayAnger();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayRifle();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            PlayVision();
         }
     }
 
@@ -155,5 +184,35 @@ public class AnimationController : MonoBehaviour
         GameObject playRun = Instantiate(run, new Vector3(50, 0, 30), run.transform.rotation);
         playRun.GetComponent<Animator>().Play("run");
         Destroy(playRun, 2.25f);
+    }
+
+    public void PlayDoubleShot()
+    {
+        GameObject spawnedDoubleShot = Instantiate(doubleShot, new Vector3(50, 0, 30), doubleShot.transform.rotation);
+        spawnedDoubleShot.GetComponent<Animator>().Play("doubleShot");
+        Destroy(spawnedDoubleShot, 2.0f);
+    }
+
+    public void PlayAnger()
+    {
+        GameObject spawnedAnger = Instantiate(anger, new Vector3(32, 47.8f, 67.4f), anger.transform.rotation);
+        spawnedAnger.GetComponent<Animator>().Play("anger");
+        Destroy(spawnedAnger, 2.0f);
+    }
+
+    public void PlayRifle()
+    {
+        GameObject spawnedRifle = Instantiate(rifle, new Vector3(50, 0, 30), rifle.transform.rotation);
+        spawnedRifle.GetComponent<Animator>().Play("rifle");
+        Destroy(spawnedRifle, 1.5f);
+        StartCoroutine(WaitForShake(0.35f));
+    }
+
+    public void PlayVision()
+    {
+        GameObject spawnedVision = Instantiate(vision, new Vector3(50, 50, 65), vision.transform.rotation);
+        spawnedVision.GetComponent<Animator>().Play("vision");
+        Process.ProcessScreen("vision");
+        Destroy(spawnedVision, 1.5f);
     }
 }
