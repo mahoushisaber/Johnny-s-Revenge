@@ -142,6 +142,7 @@ public class EnemyController : MonoBehaviour
                     Debug.Log("EnemyController: Can't find a battle tactic to match " + cardToUse + " played");
                 }
                 if (Health > MaxHealth) Health = MaxHealth;
+                if (Health < 0) Health = 0;
             }
         }
 

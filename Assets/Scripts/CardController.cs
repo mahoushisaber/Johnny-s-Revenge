@@ -50,7 +50,41 @@ public class CardController : MonoBehaviour
             ImageToColour.GetComponent<Image>().color = new Color32(0, 0, 0, 255);
         }
 
-
+        switch (Name)
+        {
+            case "Rifles":
+                if (Enhanced == true)
+                {
+                    PowerText.text = string.Format("{0}", 25);
+                }
+                break;
+            case "Dagger Throw":
+                PowerText.text = string.Format("{0}", FindObjectOfType<PlayerController>().GetAttackCardCount() * 3 + Power);
+                break;
+// Uncomment the card name case if you need ot apply special powers
+//            case "Slash":
+//                break;
+//            case "Block":
+//                break;
+//            case "Vision":
+//                break;
+//            case "Siphon":
+//                break;
+//            case "Saber Attack":
+//                break;
+//            case "Retreat":
+//                break;
+//            case "Power Strike":
+//                break;
+//            case "Pierce":
+//                break;
+//            case "Double Shot":
+//                break;
+//            case "Heal":
+//                break;
+//            case "Anger":
+//                break;
+        }
     }
 
     public void InitWithCard(Card ToLoad)

@@ -59,6 +59,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public int GetAttackCardCount()
+    {
+        return attackCardCount;
+    }
+
+    public int GetBlockCardCount()
+    {
+        return blockCardCount;
+    }
+
     public PlayerDeck GetAssignedDeck()
     {
         return PlayerDeck;
@@ -163,7 +173,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // +3 attack each time 
                     int damageIncrease = 3;
-                    cardPower = (cardPower + (attackCardCount * damageIncrease));
+                    cardPower += (attackCardCount * damageIncrease);
                     enemyHealth -= cardPower - useEnemyShield;
                     attackCardCount++;
                     FindObjectOfType<AudioManager>().Play("Sword");
@@ -185,7 +195,7 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Retreat")
                 {
                     int blockIncrease = 2;
-                    cardPower = (cardPower + (blockCardCount * blockIncrease));
+                    cardPower += (blockCardCount * blockIncrease);
                     shieldAfterBattle += cardPower;
                     blockCardCount++;
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
@@ -195,9 +205,9 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Power Strike")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
-                    if (Mana + 25 >= 50 && Mana <= 100)
+                    if (Mana >= 50 && Mana <= 100)
                     {
-                        Mana += 25;
+                        Mana += (int)(Mana * 0.25f);
                     }
                     FindObjectOfType<AudioManager>().Play("Sword");
                     AC.PlayPowerStrike();
@@ -243,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 {
                     AC.PlayAnger();
                     FindObjectOfType<AudioManager>().Play("CardFlipRepeat");
-                    Mana += cardPower;
+                    Mana += Mana * cardPower/100;
                     Debug.Log("You healed for" + cardPower + " mana");
                 }
                 else

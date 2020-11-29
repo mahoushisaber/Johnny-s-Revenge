@@ -26,7 +26,7 @@ public class PlayerHealthScript : MonoBehaviour
         CurrentHealth = Player.Health;
         CurrentShield = Player.Shield;
         HealthBar.fillAmount = CurrentHealth / Player.MaxHealth;
-        PlayerHealthText.text = string.Format("{0}/{1}", CurrentHealth, Player.MaxHealth);
+        PlayerHealthText.text = string.Format("{0}/{1}", Mathf.RoundToInt(CurrentHealth), Player.MaxHealth);
         SheildControl.GetComponent<ShieldScript>().CurrentShield = CurrentShield;
     }
 }

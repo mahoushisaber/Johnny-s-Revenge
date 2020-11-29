@@ -12,7 +12,6 @@ public class AdventureMapCtrl : MonoBehaviour
     public Text Level2BtnText;
     public Button Level3Btn;
     public Text Level3BtnText;
-    public Text GameResultText;
 
     private Vector3 L1BtnScale;
     private Vector3 L2BtnScale;
@@ -20,36 +19,15 @@ public class AdventureMapCtrl : MonoBehaviour
 
     private PersistentGameSettings gameSettings;
     private static int CurLevel = 0;
-    private TextEffects GameResultTextEffects;
-
-    private string[] LevelNames = { "Menu", "AdventureMap", "Gameplay" };
 
     // Start is called before the first frame update
     void Start()
     {
         FindObjectOfType<AudioManager>().Play("Theme7");
         gameSettings = FindObjectOfType<PersistentGameSettings>();
-        GameResultTextEffects = GameResultText.GetComponent<TextEffects>();
         CurLevel = gameSettings.CurrentLevel;
         Color nColor = Color.white;
         Color dColor = Color.grey;
-
-        if (CurLevel > 0)
-        {
-            // We have played a level so now that we are back display the results of last game
-            if (   gameSettings.Level1Outcome == PersistentGameSettings.OutcomeType.WON
-                || gameSettings.Level2Outcome == PersistentGameSettings.OutcomeType.WON
-                || gameSettings.Level3Outcome == PersistentGameSettings.OutcomeType.WON)
-            {
-                GameResultText.text = "You WON! - Select your next level";
-                GameResultText.color = new Color32(0, 128, 0, 255); // Green
-                GameResultTextEffects.visible = true; 
-            }
-            else
-            {
-                Debug.Log("LoadScene: Unknown Game Outcome");
-            }
-        }
 
         L1BtnScale = Level1Btn.transform.localScale;
         L2BtnScale = Level2Btn.transform.localScale;

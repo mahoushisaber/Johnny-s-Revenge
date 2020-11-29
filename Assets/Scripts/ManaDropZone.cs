@@ -19,17 +19,38 @@ public class ManaDropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
         {
             d.placeholderParent = this.transform;
         }
+
+        if (eventData.pointerDrag.gameObject.GetComponent<CardController>().Owner == Card.OwnerType.PLAYER)
+        {
+            GameController GCtrl = FindObjectOfType<GameController>();
+
+            if (GCtrl != null)
+            {
+                // Notify game controller so it can do what ever it needs
+                GCtrl.CardEnteredManaDropZone(eventData.pointerDrag.gameObject.GetComponent<CardController>());
+            }
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerExit");
         if (eventData.pointerDrag == null)
             return;
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
         if (d != null && d.placeholderParent == this.transform)
         {
             d.placeholderParent = d.parentToReturnTo;
+        }
+
+        if (eventData.pointerDrag.gameObject.GetComponent<CardController>().Owner == Card.OwnerType.PLAYER)
+        {
+            GameController GCtrl = FindObjectOfType<GameController>();
+
+            if (GCtrl != null)
+            {
+                // Notify game controller so it can do what ever it needs
+                GCtrl.CardExitedManaDropZone(eventData.pointerDrag.gameObject.GetComponent<CardController>());
+            }
         }
     }
 

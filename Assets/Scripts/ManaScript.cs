@@ -18,8 +18,8 @@ public class ManaScript : MonoBehaviour
 
     private void Update()
     {
-        CurrentMana = Player.Mana;
-        ManaBar.fillAmount = CurrentMana / Player.MaxMana;
+        CurrentMana = Mathf.Round(Player.Mana);
+        ManaBar.fillAmount = Player.Mana / Player.MaxMana;
         ManaText.text = "" + CurrentMana + "/" + Player.MaxMana;
     }
 }

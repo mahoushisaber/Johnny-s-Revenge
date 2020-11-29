@@ -246,6 +246,24 @@ public class GameController : MonoBehaviour
         gameState = StateType.ENEMY_TURN;
     }
 
+    public void CardEnteredManaDropZone(CardController cardController)
+    {
+        // Don't turn on enhanced if there is not enough to use.
+        if (Player.Mana >= Player.ManaUseCost)
+        {
+            cardController.Enhanced = true;
+        }
+    }
+
+    public void CardExitedManaDropZone(CardController cardController)
+    {
+        // Don't turn on enhanced if there is not enough to use.
+        if (Player.Mana >= Player.ManaUseCost)
+        {
+            cardController.Enhanced = false;
+        }
+    }
+
     public void PlayerHandDragBegin(PointerEventData eventData)
     {
         // Turn on highlight for available drop zones. Don't forget to save current to restore
