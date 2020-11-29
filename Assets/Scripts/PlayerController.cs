@@ -24,10 +24,13 @@ public class PlayerController : MonoBehaviour
     public static int blockCardCount = 0;
     private AnimationController AC;
     private Process Process;
+    private GameController gameCtrlr;
+
 
     void Start()
     {
         Process = GameObject.FindGameObjectWithTag("Processing").GetComponent<Process>();
+        gameCtrlr = FindObjectOfType<GameController>();
 
         cardsUsed = 0;
         if (Hand == null)
@@ -44,6 +47,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         cardsInHand = Hand.transform.childCount;
+        if (gameCtrlr.IsCardBeingDragged() == true)
+        {
+            cardsInHand++;
+        }
         cardsInDeck = PlayerDeck.deck.Count;
 
         if (Health <= 20)
