@@ -150,12 +150,16 @@ public class ScoreSystem : MonoBehaviour
     public void nextStageRewardHealth()
     {
         player.Health += Mathf.Round(currentHealthReward);
+        FindObjectOfType<AudioManager>().Play("Button");
+
         startNextStage();
     }
 
     public void nextStageRewardMana()
     {
         player.Mana += Mathf.Round(currentManaReward);
+        FindObjectOfType<AudioManager>().Play("Button");
+
         startNextStage();
     }
 
