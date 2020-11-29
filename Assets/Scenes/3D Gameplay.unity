@@ -4574,6 +4574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleResult
       objectReference: {fileID: 0}
+    - target: {fileID: 8379905533427354828, guid: 01026611335f46549a4450ec603e35aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8379905533427354839, guid: 01026611335f46549a4450ec603e35aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

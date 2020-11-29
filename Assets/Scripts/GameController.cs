@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
 
     private ScoreSystem ScoreSystem;
     private int ActiveLevel;
+    private bool isCardBeingDragged;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,8 @@ public class GameController : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("Theme4");
         }
-       
+
+        isCardBeingDragged = false;
     }
 
     // Update is called once per frame
@@ -257,6 +259,8 @@ public class GameController : MonoBehaviour
             PMBOrigColor.a = 255f;
             PlayerManaBarHighlightImage.color = PMBOrigColor;
         }
+
+        isCardBeingDragged = true;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -266,7 +270,15 @@ public class GameController : MonoBehaviour
         Color PMBOrigColor = PlayerManaBarHighlightImage.color;
         PMBOrigColor.a = 0f;
         PlayerManaBarHighlightImage.color = PMBOrigColor;
+
+        isCardBeingDragged = false;
     }
+
+    public bool IsCardBeingDragged()
+    {
+        return isCardBeingDragged;
+    }
+
 
     public bool CanDropPlayerCard(Draggable.Slot slot)
     {
