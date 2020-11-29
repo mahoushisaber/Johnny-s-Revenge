@@ -119,17 +119,6 @@ public class PlayerController : MonoBehaviour
                         enemyHealth -= (25 - (8 * 2)) - useEnemyShield;
                     }
                     Debug.Log("Card to use " + cardToUse + " is Enhanced, New Power is " + cardPower);
-                    if (cardToUse == "Power Strike")
-                    {
-                        Debug.Log("You current Mana is " + Mana);
-
-                        if ((Mana >= 25) && Mana <= 100)
-                        {
-                            Mana += 25;
-                        }
-                        Debug.Log("You healed Mana is " + Mana);
-
-                    }
                 }
                 else
                 {
@@ -206,7 +195,10 @@ public class PlayerController : MonoBehaviour
                 else if (cardToUse == "Power Strike")
                 {
                     enemyHealth -= cardPower - useEnemyShield;
-
+                    if (Mana + 25 >= 50 && Mana <= 100)
+                    {
+                        Mana += 25;
+                    }
                     FindObjectOfType<AudioManager>().Play("Sword");
                     AC.PlayPowerStrike();
 
