@@ -11,7 +11,7 @@ public class LoadScene : MonoBehaviour
     public Text NewPlayerName;
 
     private PersistentGameSettings gameSettings;
-    private HighScoreController scoreCntrl;
+    private HighScoreController highScoreCntrl;
     private static int LevelCount = 0;
     private TextEffects GameResultTextEffects;
     private bool newHSFound = false;
@@ -22,7 +22,7 @@ public class LoadScene : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Theme5");
         gameSettings = FindObjectOfType<PersistentGameSettings>();
         GameResultTextEffects = GameResultText.GetComponent<TextEffects>();
-        scoreCntrl = FindObjectOfType<HighScoreController>();
+        highScoreCntrl = FindObjectOfType<HighScoreController>();
 
         // Start out new games by clearing level one of properties NOT high scores
         gameSettings.DeleteProperties();
@@ -50,8 +50,8 @@ public class LoadScene : MonoBehaviour
             switch (lastLevelOutcome)
             {
                 case PersistentGameSettings.OutcomeType.WON:
-                    newGameHighScore = gameSettings.Level1Score + gameSettings.Level2Score + gameSettings.Level3Score;
-                    newHSFound = scoreCntrl.IsThisAHighScore(newGameHighScore);
+                    newGameHighScore = gameSettings.GameScore;
+                    newHSFound = highScoreCntrl.IsThisAHighScore(newGameHighScore);
                     if (newHSFound == true)
                     {
                         // Show Dialog for collecting high score and set flag to wait for results
@@ -84,7 +84,7 @@ public class LoadScene : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Button");
         
-        scoreCntrl.SaveHighScore(newGameHighScore, NewPlayerName.text);
+        highScoreCntrl.SaveHighScore(newGameHighScore, NewPlayerName.text);
         HighScoreDialog.SetActive(false);
         GameResultText.text = "HIGH SCORE! - Try Again";
         GameResultText.color = new Color32(0, 128, 0, 255); // Green

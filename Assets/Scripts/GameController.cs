@@ -51,8 +51,13 @@ public class GameController : MonoBehaviour
         PMBarArtwork = PlayerManaBarHighlightImage.sprite;
 
         CurrentStage = 1;
+
+        // GameSettings always restored on a start
         CurrentLevel = gameSettings.CurrentLevel;
         ActiveLevel = gameSettings.ActiveLevel;
+        GameSignifiers.TimesZonesHaveShown = gameSettings.SigTimesZoneShown;
+        GameSignifiers.TimesManaShown = gameSettings.SigTimesManaShown;
+        GameSignifiers.ManaUnusedCount = gameSettings.SigManaUnusedCount;
 
         if (CurrentLevel != ActiveLevel)
         {
@@ -65,10 +70,12 @@ public class GameController : MonoBehaviour
         }
         if (gameSettings.CurrentLevel == 2)
         {
+            ScoreSystem.gameScore = gameSettings.GameScore;
             FindObjectOfType<AudioManager>().Play("Theme2");
         }
         if (gameSettings.CurrentLevel == 3)
         {
+            ScoreSystem.gameScore = gameSettings.GameScore;
             FindObjectOfType<AudioManager>().Play("Theme4");
         }
 
@@ -311,7 +318,7 @@ public class GameController : MonoBehaviour
                     break;
 
                 case Draggable.Slot.MANA:
-                    if (Player.Mana - Player.ManaUseCost < 0)
+                    if (Player.Mana - Player.ManaUseCost <= 0)
                     {
                         Debug.Log("Not enough mana to enhance");
                         canDrop = false;
@@ -349,6 +356,12 @@ public class GameController : MonoBehaviour
         if (CurrentStage >= TotalStages)
         {
             string nextScene = "AdventureMap";
+
+            // Settings saved for ALL levels
+            gameSettings.GameScore = ScoreSystem.gameScore;
+            gameSettings.SigTimesZoneShown = GameSignifiers.TimesZonesHaveShown;
+            gameSettings.SigTimesManaShown = GameSignifiers.TimesManaShown;
+            gameSettings.SigManaUnusedCount = GameSignifiers.ManaUnusedCount;
 
             // Level Over Player WON save the result and move to menu screen
             if (CurrentLevel == 1)

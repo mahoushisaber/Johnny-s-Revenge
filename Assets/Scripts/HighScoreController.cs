@@ -106,6 +106,8 @@ public class HighScoreController : MonoBehaviour
                 lastPlayer = players[i];
                 highScores[i] = currScore;
                 players[i] = currPlayer;
+                data.highScores[i] = highScores[i];
+                data.players[i] = players[i];
             }
             else if (state == StateType.SEARCHING && Score > highScores[i])
             {

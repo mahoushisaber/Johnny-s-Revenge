@@ -145,6 +145,78 @@ public class PersistentGameSettings : MonoBehaviour
         }
     }
 
+    // Property
+    public int GameScore
+    {
+        get
+        {
+            return gameScore;
+        }
+        set
+        {
+            if (gameScore != (int)value)
+            {
+                reqSave = true;
+            }
+
+            gameScore = (int)value;
+        }
+    }
+
+    // Property
+    public int SigTimesZoneShown
+    {
+        get
+        {
+            return sigTimesZoneShown;
+        }
+        set
+        {
+            if (sigTimesZoneShown != (int)value)
+            {
+                reqSave = true;
+            }
+
+            sigTimesZoneShown = (int)value;
+        }
+    }
+
+    // Property
+    public int SigTimesManaShown
+    {
+        get
+        {
+            return sigTimesManaShown;
+        }
+        set
+        {
+            if (sigTimesManaShown != (int)value)
+            {
+                reqSave = true;
+            }
+
+            sigTimesManaShown = (int)value;
+        }
+    }
+
+    // Property
+    public int SigManaUnusedCount
+    {
+        get
+        {
+            return sigManaUnusedCount;
+        }
+        set
+        {
+            if (sigManaUnusedCount != (int)value)
+            {
+                reqSave = true;
+            }
+
+            sigManaUnusedCount = (int)value;
+        }
+    }
+
     // Properties
     public bool RequiresSave { get { return reqSave; } }
     public bool HasBeenLoaded { get { return loadOnWakeDone; } }
@@ -157,6 +229,10 @@ public class PersistentGameSettings : MonoBehaviour
     private int level2Score;
     private int level3Outcome;
     private int level3Score;
+    private int gameScore;
+    private int sigTimesZoneShown;
+    private int sigTimesManaShown;
+    private int sigManaUnusedCount;
     private bool reqSave = false;
     private bool loadOnWakeDone = false;
 
@@ -169,6 +245,10 @@ public class PersistentGameSettings : MonoBehaviour
     private const string LEVEL_2_SCORE_KEY = "LEVEL_2_SCORE";
     private const string LEVEL_3_OUTCOME_KEY = "LEVEL_3_OUTCOME";
     private const string LEVEL_3_SCORE_KEY = "LEVEL_3_SCORE";
+    private const string GAME_SCORE_KEY = "GAME_SCORE";
+    private const string SIG_X_ZONE_SHOWN_KEY = "SIG_X_ZONE_SHOWN";
+    private const string SIG_X_MANA_SHOWN_KEY = "SIG_X_MANA_SHOWN";
+    private const string SIG_MANA_UNUSED_COUNT_KEY = "SIG_MANA_UNUSED_COUNT";
 
     public enum OutcomeType { LOST, WON, UNKNOWN = 255 };
 
@@ -231,6 +311,30 @@ public class PersistentGameSettings : MonoBehaviour
                 // Key exists so load the value
                 level3Score = PlayerPrefs.GetInt(LEVEL_3_SCORE_KEY);
             }
+
+            if (PlayerPrefs.HasKey(GAME_SCORE_KEY))
+            {
+                // Key exists so load the value
+                gameScore = PlayerPrefs.GetInt(GAME_SCORE_KEY);
+            }
+
+            if (PlayerPrefs.HasKey(SIG_X_ZONE_SHOWN_KEY))
+            {
+                // Key exists so load the value
+                sigTimesZoneShown = PlayerPrefs.GetInt(SIG_X_ZONE_SHOWN_KEY);
+            }
+
+            if (PlayerPrefs.HasKey(SIG_X_MANA_SHOWN_KEY))
+            {
+                // Key exists so load the value
+                sigTimesManaShown = PlayerPrefs.GetInt(SIG_X_MANA_SHOWN_KEY);
+            }
+
+            if (PlayerPrefs.HasKey(SIG_MANA_UNUSED_COUNT_KEY))
+            {
+                // Key exists so load the value
+                sigManaUnusedCount = PlayerPrefs.GetInt(SIG_MANA_UNUSED_COUNT_KEY);
+            }
         }
         catch (System.Exception e)
         {
@@ -257,6 +361,10 @@ public class PersistentGameSettings : MonoBehaviour
             PlayerPrefs.SetInt(LEVEL_2_SCORE_KEY, level2Score);
             PlayerPrefs.SetInt(LEVEL_3_OUTCOME_KEY, level2Outcome);
             PlayerPrefs.SetInt(LEVEL_3_SCORE_KEY, level2Score);
+            PlayerPrefs.SetInt(GAME_SCORE_KEY, gameScore);
+            PlayerPrefs.SetInt(SIG_X_ZONE_SHOWN_KEY, sigTimesZoneShown);
+            PlayerPrefs.SetInt(SIG_X_MANA_SHOWN_KEY, sigTimesManaShown);
+            PlayerPrefs.SetInt(SIG_MANA_UNUSED_COUNT_KEY, sigManaUnusedCount);
         }
         catch (System.Exception e)
         { 
@@ -304,6 +412,24 @@ public class PersistentGameSettings : MonoBehaviour
             if (PlayerPrefs.HasKey(LEVEL_3_SCORE_KEY))
             {
                 PlayerPrefs.DeleteKey(LEVEL_3_SCORE_KEY);
+            }
+
+            if (PlayerPrefs.HasKey(GAME_SCORE_KEY))
+            {
+                PlayerPrefs.DeleteKey(GAME_SCORE_KEY);
+            }
+
+            if (PlayerPrefs.HasKey(SIG_X_ZONE_SHOWN_KEY))
+            {
+                PlayerPrefs.DeleteKey(SIG_X_ZONE_SHOWN_KEY);
+            }
+            if (PlayerPrefs.HasKey(SIG_X_MANA_SHOWN_KEY))
+            {
+                PlayerPrefs.DeleteKey(SIG_X_MANA_SHOWN_KEY);
+            }
+            if (PlayerPrefs.HasKey(SIG_MANA_UNUSED_COUNT_KEY))
+            {
+                PlayerPrefs.DeleteKey(SIG_MANA_UNUSED_COUNT_KEY);
             }
         }
         catch (System.Exception e)

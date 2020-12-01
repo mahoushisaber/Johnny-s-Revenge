@@ -13,18 +13,19 @@ public class ArrowSignifiers : MonoBehaviour
     public int TimesManaUnsedBeforeShow;
     public Image BattleZoneSignifier;
     public Image ManaZoneSignifier;
+    public int TimesZonesHaveShown;
+    public int TimesManaShown;
+    public int ManaUnusedCount;
 
-    private int m_TimesZonesHaveShown;
     private float m_ZonesToShowTmr;
     private Animator m_BZAnimator;
     private bool m_BZAnimPlaying;
-    private int m_TimesManaShown;
     private Animator m_MZAnimator;
     private bool m_MZAnimPlaying;
     enum SigStateType { BEGIN_TURN, END_TURN, UNKNOWN };
     private SigStateType m_SignifiersState = SigStateType.UNKNOWN;
     private bool m_ManaAllowed;
-    private int m_ManaUnusedCount;
+    private bool m_OnlyManaSigShowing;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +36,14 @@ public class ArrowSignifiers : MonoBehaviour
             MaxTimesZonesCanShow = 3;
         }
 
-        m_TimesZonesHaveShown = 0;
+        TimesZonesHaveShown = 0;
         m_ZonesToShowTmr = 0.0f;
         m_BZAnimPlaying = false;
-        m_TimesManaShown = 0;
+        TimesManaShown = 0;
         m_MZAnimPlaying = false;
         m_ManaAllowed = false;
-        m_ManaUnusedCount = 0;
+        ManaUnusedCount = 0;
+        m_OnlyManaSigShowing = false;
 
         m_BZAnimator = BattleZoneSignifier.GetComponent<Animator>();
         m_MZAnimator = ManaZoneSignifier.GetComponent<Animator>();
@@ -68,7 +70,7 @@ public class ArrowSignifiers : MonoBehaviour
     void ProcessZoneSignifiers()
     {
         // check if we have shown all the maximum times
-        if (m_TimesZonesHaveShown < MaxTimesZonesCanShow)
+        if (TimesZonesHaveShown < MaxTimesZonesCanShow)
         {
             if (m_SignifiersState == SigStateType.BEGIN_TURN && m_BZAnimPlaying == false)
             {
@@ -84,12 +86,21 @@ public class ArrowSignifiers : MonoBehaviour
                     BattleZoneSignifier.gameObject.SetActive(true);
                     if (m_ManaAllowed == true)
                     {
+                        if (m_OnlyManaSigShowing == true)
+                        {
+                            // take over control by syncing what mana woud do to shut off and then take control
+                            m_MZAnimator.StopPlayback();
+                            m_MZAnimator.enabled = false;
+                            m_MZAnimPlaying = false;
+                            ManaZoneSignifier.gameObject.SetActive(false);
+                            TimesManaShown++;
+                            m_OnlyManaSigShowing = false;
+                        }
                         m_MZAnimator.enabled = true;
                         m_MZAnimator.Play("ManaZone_Signifier");
                         m_MZAnimPlaying = true;
                         ManaZoneSignifier.gameObject.SetActive(true);
                     }
-
                     m_ZonesToShowTmr -= TimeUntilZonesShows;
                 }
             }
@@ -97,15 +108,22 @@ public class ArrowSignifiers : MonoBehaviour
             else if (   m_SignifiersState == SigStateType.END_TURN 
                      && (m_BZAnimPlaying == true || m_MZAnimPlaying == true))
             {
-                m_BZAnimator.StopPlayback();
-                m_BZAnimator.enabled = false;
-                m_BZAnimPlaying = false;
-                BattleZoneSignifier.gameObject.SetActive(false);
-                m_MZAnimator.StopPlayback();
-                m_MZAnimator.enabled = false;
-                m_MZAnimPlaying = false;
-                ManaZoneSignifier.gameObject.SetActive(false);
-                m_TimesZonesHaveShown++;
+                if (m_BZAnimPlaying == true)
+                {
+                    m_BZAnimator.StopPlayback();
+                    m_BZAnimator.enabled = false;
+                    m_BZAnimPlaying = false;
+                    BattleZoneSignifier.gameObject.SetActive(false);
+                    TimesZonesHaveShown++;
+                }
+
+                if (m_MZAnimPlaying == true)
+                {
+                    m_MZAnimator.StopPlayback();
+                    m_MZAnimator.enabled = false;
+                    m_MZAnimPlaying = false;
+                    ManaZoneSignifier.gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -113,8 +131,8 @@ public class ArrowSignifiers : MonoBehaviour
     void ProcessManaArrowSignifier()
     {
         // check if we have shown all the maximum times
-        if (    m_ManaUnusedCount >= TimesManaUnsedBeforeShow 
-            &&  m_TimesManaShown < MaxTimesMZCanShow)
+        if (    ManaUnusedCount >= TimesManaUnsedBeforeShow 
+            &&  TimesManaShown < MaxTimesMZCanShow)
         {
             if (   m_SignifiersState == SigStateType.BEGIN_TURN 
                 && m_MZAnimPlaying == false && m_ManaAllowed == true)
@@ -124,17 +142,19 @@ public class ArrowSignifiers : MonoBehaviour
                 m_MZAnimator.Play("ManaZone_Signifier");
                 m_MZAnimPlaying = true;
                 ManaZoneSignifier.gameObject.SetActive(true);
-                m_ManaUnusedCount = 0;
+                ManaUnusedCount = 0;
+                m_OnlyManaSigShowing = true;
             }
             // Its playing or now end of turn so watch for the termination
             else if (   m_SignifiersState == SigStateType.END_TURN 
-                     && m_MZAnimPlaying == true)
+                     && m_MZAnimPlaying == true && m_OnlyManaSigShowing == true)
             {
                 m_MZAnimator.StopPlayback();
                 m_MZAnimator.enabled = false;
                 m_MZAnimPlaying = false;
                 ManaZoneSignifier.gameObject.SetActive(false);
-                m_TimesManaShown++;
+                TimesManaShown++;
+                m_OnlyManaSigShowing = false;
             }
         }
     }
@@ -150,11 +170,11 @@ public class ArrowSignifiers : MonoBehaviour
     {
         if (m_ManaAllowed == true && ManaWasUsed == false)
         {
-            m_ManaUnusedCount++;
+            ManaUnusedCount++;
         }
         else // (ManaWasUsed == true)
         {
-            m_ManaUnusedCount = 0;
+            ManaUnusedCount = 0;
         }
         m_ManaAllowed = false;
         m_SignifiersState = SigStateType.END_TURN;
