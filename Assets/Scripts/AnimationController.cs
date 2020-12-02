@@ -23,6 +23,7 @@ public class AnimationController : MonoBehaviour
     private PlayerController Player;
     private Shake Shake;
     private Process Process;
+    private bool testing = false;
 
     void Start()
     {
@@ -33,7 +34,10 @@ public class AnimationController : MonoBehaviour
 
     void Update()
     {
-        ProcessInputs();
+        if (testing)
+        {
+            ProcessInputs();
+        }
     }
 
     IEnumerator WaitForShake(float time)
