@@ -20,6 +20,11 @@ public class HighScores : MonoBehaviour
     void Start()
     {
         FindObjectOfType<AudioManager>().Play("Theme6");
+        RefreshUI();
+    }
+
+    public void RefreshUI()
+    {
         HighScore1Text.text = HighScoreController.gCtrl.highScores[0].ToString();
         HighScore1PlayerText.text = HighScoreController.gCtrl.players[0];
         HighScore2Text.text = HighScoreController.gCtrl.highScores[1].ToString();
@@ -38,6 +43,7 @@ public class HighScores : MonoBehaviour
         
         StartCoroutine(DelaySceneLoad("Menu"));
     }
+
     IEnumerator DelaySceneLoad(string menu)
     {
         yield return new WaitForSeconds(0.3f);

@@ -141,6 +141,7 @@ public class HighScoreController : MonoBehaviour
     public void ResetScoresPressed()
     {
         ResetScores();
+        FindObjectOfType<HighScores>().RefreshUI();
     }
 }
 
